@@ -1,0 +1,22 @@
+{
+  "name": "vampirao",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.3",
+    "handlebars": "^4.7.7",
+    "morgan": "^1.10.0",
+    "node-sass-middleware": "^0.11.0",
+    "nodemon": "^2.0.12",
+    "sass-middleware": "0.0.3"
+  }
+}
