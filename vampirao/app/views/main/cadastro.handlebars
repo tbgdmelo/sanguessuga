@@ -1,0 +1,114 @@
+<div class="container mt-4">
+    {{!-- FORMULARIO DE CADASTRO DE USUÁRIO --}}
+    <form onsubmit="">
+        <h2>Formulário de Cadastro</h2>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="form-group mt-4">
+                    <label>Nome</label>
+                    <input type="text" class="form-control" placeholder="Digite seu nome...">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group mt-4">
+                    <label>CPF:</label>
+                    <input type="text" class="form-control" placeholder="Não utilize pontos e traços">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Sobrenome:</label>
+                    <input type="text" class="form-control" placeholder="Digite seu sobrenome...">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Data de Nascimento:</label>
+                    <input type="date" class="form-control">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group mt-3">
+                <label>Email:</label>
+                <input type="email" class="form-control" placeholder="Digite seu email...">
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group mt-3">
+                <label>Senha:</label>
+                <input type="password" class="form-control">
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group mt-3">
+                <label>Confirmação de senha:</label>
+                <input type="password" class="form-control">
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group mt-3">
+                <label>Tipo Sanguíneo:</label>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="option1">
+                            <label class="form-check-label">A+</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="option2">
+                            <label class="form-check-label">A-</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="option3">
+                            <label class="form-check-label">B+</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="option3">
+                            <label class="form-check-label">B-</label>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="option3">
+                            <label class="form-check-label">AB+</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="option3">
+                            <label class="form-check-label">AB-</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="option3">
+                            <label class="form-check-label">O+</label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="option3">
+                            <label class="form-check-label">O-</label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+            <button class="btn btn-success me-md-2" type="submit">Cadastrar</button>
+            <a href="/" class="btn btn-danger">Cancelar</a>
+        </div>
+    </form>
+    <br/>
+</div>

@@ -8,5 +8,6 @@ const router = express.Router();
 
 router.get("/",mainController.index);
 router.get("/sobre",mainController.sobre);
+router.get("/cadastro",mainController.cadastro);
 
 module.exports = router;
