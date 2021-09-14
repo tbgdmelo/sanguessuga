@@ -5,43 +5,27 @@ module.exports = {
     await queryInterface.bulkInsert('Sangues', [
       {
         tipo: 'A+',
-        createdAt: new Date(),
-        updatedAt: new Date(),
       },
       {
         tipo: 'A-',
-        createdAt: new Date(),
-        updatedAt: new Date(),
       },
       {
         tipo: 'B+',
-        createdAt: new Date(),
-        updatedAt: new Date(),
       },
       {
         tipo: 'B-',
-        createdAt: new Date(),
-        updatedAt: new Date(),
       },
       {
         tipo: 'AB+',
-        createdAt: new Date(),
-        updatedAt: new Date(),
       },
       {
         tipo: 'AB-',
-        createdAt: new Date(),
-        updatedAt: new Date(),
       },
       {
         tipo: 'O+',
-        createdAt: new Date(),
-        updatedAt: new Date(),
       },
       {
         tipo: 'O-',
-        createdAt: new Date(),
-        updatedAt: new Date(),
       },
       ], {});
   },

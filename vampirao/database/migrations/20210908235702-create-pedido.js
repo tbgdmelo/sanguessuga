@@ -12,9 +12,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      data: {
-        type: Sequelize.DATEONLY
-      },
       id_sangue: {
         allowNull: false,
         type: Sequelize.INTEGER
@@ -26,14 +23,6 @@ module.exports = {
       id_hospital: {
         allowNull: false,
         type: Sequelize.INTEGER
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
       }
     });
   },

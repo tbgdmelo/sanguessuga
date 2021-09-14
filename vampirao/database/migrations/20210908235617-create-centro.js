@@ -16,23 +16,12 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      horario: {
-        type: Sequelize.STRING
-      },
       telefone: {
         type: Sequelize.STRING
       },
       vampirao: {
         type: Sequelize.BOOLEAN
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
     });
   },
   down: async (queryInterface, Sequelize) => {
