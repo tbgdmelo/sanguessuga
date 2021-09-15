@@ -7,3 +7,18 @@ body{
 .navbarRed{
     background-color: $corBackNavbar;
 }
+.propaganda{
+    display: inline;
+    float: right;
+}
+.itemPropaganda{
+    list-style-type:none;
+    margin-top: 10px;
+}
+.imgPropaganda, .containerImg{
+    width: 100%;
+}
+
+.textHome{
+    padding-top: 10px;
+}
