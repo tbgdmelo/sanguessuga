@@ -24,6 +24,8 @@ async function cadastro(req,res){
             nascimento: req.body.nascimento,
             email: req.body.email,
             senha: req.body.senha,
+            pontuacao: 0,
+            telefone: req.body.telefone,
             id_sangue: req.body.id_sangue
         })
         res.redirect("/");
