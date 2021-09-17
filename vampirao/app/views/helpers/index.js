@@ -17,8 +17,7 @@ function checked(atual, value){
 
 function printError(errors, campo){
     let message;
-
-    if(typeof(errors)!== 'undefined' && errors.original.parameters[7] !== 'Invalid date'){
+    if(typeof(errors)!== 'undefined' && typeof(errors.original)!=='undefined' && errors.original.parameters[7] !== 'Invalid date'){
         errors.errors.forEach(error=>{
             if(error.path === campo){
                 message=error.message;
@@ -30,7 +29,7 @@ function printError(errors, campo){
 
 function printErrorNascimento(errors){
     let message;
-    if(errors.original.parameters[7] === 'Invalid date'){
+    if(typeof errors !== "undefined" && typeof(errors.original)!=='undefined' && errors.original.parameters[7] === 'Invalid date'){
         message = "Insira sua data de nascimento";
     }
     return message;
@@ -38,7 +37,7 @@ function printErrorNascimento(errors){
 
 function printErrorEmail(errors, campo){
     let message;    
-    if(typeof errors !== "undefined" && errors.original.parameters[7] !== 'Invalid date'){
+    if(typeof errors !== "undefined" && typeof(errors.original)!=='undefined' && errors.original.parameters[7] !== 'Invalid date'){
         errors.errors.forEach(error=>{
             var path = error.path;
             var pathreplace = "."
@@ -53,7 +52,7 @@ function printErrorEmail(errors, campo){
 
 function printErrorCPF(errors, campo){
     let message;    
-    if(typeof errors !== "undefined" && errors.original.parameters[7] !== 'Invalid date'){
+    if(typeof errors !== "undefined" && typeof(errors.original)!=='undefined' && errors.original.parameters[7] !== 'Invalid date'){
         errors.errors.forEach(error=>{
             var path = error.path;
             var pathreplace = "."

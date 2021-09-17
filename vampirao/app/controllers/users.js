@@ -32,8 +32,8 @@ async function cadastro(req,res){
             res.redirect("/");
         }
         catch (error){
-            console.log("olha aquiiiiii")
-            console.log(error)
+            //console.log("olha aquiiiiii")
+            //console.log(error)
             
             res.render("user/cadastro",{
                 errors: error,
@@ -48,7 +48,8 @@ async function cadastro(req,res){
                     pontuacao: 0,
                     telefone: req.body.telefone,
                     id_sangue: req.body.id_sangue
-                }
+                },
+                titulo: "Cadastro de usuário",
             })
         }
     }
