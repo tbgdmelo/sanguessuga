@@ -18,7 +18,6 @@ function checked(atual, value){
 function printError(errors, campo){
     let message;
     //console.log(Object.values(errors))
-    //console.log(errors.errors);
     if(typeof(errors)!== 'undefined'){
         errors.errors.forEach(error=>{
             if(error.path === campo){
@@ -29,4 +28,34 @@ function printError(errors, campo){
     return message;
 }
 
-module.exports = { toLower, toUpper, checked, printError};
+function printErrorEmail(errors, campo){
+    let message;    
+    if(typeof errors !== "undefined"){
+        errors.errors.forEach(error=>{
+            var path = error.path;
+            var pathreplace = "."
+            var path = path.substring(path.indexOf(pathreplace)+pathreplace.length);
+            if(path === campo){
+                message = "Opa! Este e-mail é inválido ou já está em uso.";
+            }
+        });
+    }
+    return message;
+}
+
+function printErrorCPF(errors, campo){
+    let message;    
+    if(typeof errors !== "undefined"){
+        errors.errors.forEach(error=>{
+            var path = error.path;
+            var pathreplace = "."
+            var path = path.substring(path.indexOf(pathreplace)+pathreplace.length);
+            if(path === campo){
+                message = "Este CPF é inválido ou já está em uso.";
+            }
+        });
+    }
+    return message;
+}
+
+module.exports = { toLower, toUpper, checked, printError, printErrorEmail, printErrorCPF};

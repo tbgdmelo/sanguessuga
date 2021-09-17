@@ -17,18 +17,40 @@ async function cadastro(req,res){
         });
     }
     else{
-        await User.create({
-            cpf: req.body.cpf,
-            nome: req.body.nome,
-            sobrenome: req.body.sobrenome,
-            nascimento: req.body.nascimento,
-            email: req.body.email,
-            senha: req.body.senha,
-            pontuacao: 0,
-            telefone: req.body.telefone,
-            id_sangue: req.body.id_sangue
-        })
-        res.redirect("/");
+        try{
+            await User.create({
+                cpf: req.body.cpf,
+                nome: req.body.nome,
+                sobrenome: req.body.sobrenome,
+                nascimento: req.body.nascimento,
+                email: req.body.email,
+                senha: req.body.senha,
+                pontuacao: 0,
+                telefone: req.body.telefone,
+                id_sangue: req.body.id_sangue
+            })
+            res.redirect("/");
+        }
+        catch (error){
+            console.log("olha aquiiiiii")
+            console.log(error)
+            
+            res.render("user/cadastro",{
+                errors: error,
+                sangues: sangues.map(sangue=>sangue.toJSON()),
+                user: {
+                    cpf: req.body.cpf,
+                    nome: req.body.nome,
+                    sobrenome: req.body.sobrenome,
+                    nascimento: req.body.nascimento,
+                    email: req.body.email,
+                    senha: req.body.senha,
+                    pontuacao: 0,
+                    telefone: req.body.telefone,
+                    id_sangue: req.body.id_sangue
+                }
+            })
+        }
     }
 }
 

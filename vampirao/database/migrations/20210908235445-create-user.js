@@ -11,6 +11,7 @@ module.exports = {
       cpf: {
         allowNull: false,
         primaryKey: true,
+        unique:true,
         type: Sequelize.STRING
       },
       nome: {

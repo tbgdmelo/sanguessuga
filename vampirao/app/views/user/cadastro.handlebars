@@ -7,22 +7,25 @@
             <div class="col-md-6">
                 <div class="form-group mt-4">
                     <label>Nome</label>
-                    <input name="nome" id="nome" type="text" class="form-control" placeholder="Digite seu nome..." minlength="2" maxlength="50">
+                    <input value="{{user.nome}}" name="nome" id="nome" type="text" class="form-control" placeholder="Digite seu nome..." minlength="2" maxlength="50">
+                    <span class="alert-danger">{{printError errors 'nome'}}</span>
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="form-group mt-4">
                     <label>CPF:</label>
-                    <input name="cpf" onkeypress="$(this).mask('000.000.000-00');" id="cpf" type="text" class="form-control" maxlength="11" minlength="11" placeholder="Não utilize pontos e traços">
-                    <span class="alert-link" id="resposta"></span>
+                    <input value="{{user.cpf}}" name="cpf" onkeypress="$(this).mask('000.000.000-00');" id="cpf" type="text" class="form-control" maxlength="11" minlength="11" placeholder="Não utilize pontos e traços">
+                    <span class="alert-danger">{{printErrorCPF errors 'cpf'}}</span>
+                    {{!--<span class="alert-link" id="resposta"></span> --}}
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Sobrenome:</label>
-                    <input name="sobrenome" id="sobrenome" type="text" class="form-control" minlength="2" maxlength="50" placeholder="Digite seu sobrenome...">
+                    <input value="{{user.sobrenome}}" name="sobrenome" id="sobrenome" type="text" class="form-control" minlength="2" maxlength="50" placeholder="Digite seu sobrenome...">
+                    <span class="alert-danger">{{printError errors 'sobrenome'}}</span>
                 </div>
             </div>
 
@@ -37,14 +40,15 @@
         <div class="col-md-6">
             <div class="form-group mt-3">
                 <label>Email:</label>
-                <input name="email" id="email" type="email" minlength="4" maxlength="254" class="form-control" placeholder="Digite seu email...">
+                <input value="{{user.email}}" name="email" id="email" type="email" minlength="4" maxlength="254" class="form-control" placeholder="Digite seu email...">
+                <span class="alert-danger">{{printErrorEmail errors 'email'}}</span>
             </div>
         </div>
 
         <div class="col-md-6">
             <div class="form-group mt-3">
                 <label>Telefone celular:</label>
-                <input name="telefone" onkeypress="$(this).mask('(00) 0000-00009')" id="telefone" minlength="15" maxlength="15" type="text" class="form-control">
+                <input value="{{user.telefone}}" name="telefone" onkeypress="$(this).mask('(00) 0000-00009')" id="telefone" minlength="15" maxlength="15" type="text" class="form-control">
             </div>
         </div>
 
