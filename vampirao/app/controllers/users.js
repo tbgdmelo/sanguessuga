@@ -103,9 +103,10 @@ async function esqueciSenha(req, res){
                         try {
                             await mailer.sendMail({
                                 to: req.body.email,
-                                from: 'tbgdmelo@gmail.com',
+                                from: 'sng.resetpass@gmail.com',
                                 template: 'auth/esqueci_senha',
-                                context: {token, email, nome, sobrenome}
+                                context: {token, email, nome, sobrenome},
+                                subject: 'Link para reset de senha'
                             })
                         }catch(error){
                             console.log(error)
