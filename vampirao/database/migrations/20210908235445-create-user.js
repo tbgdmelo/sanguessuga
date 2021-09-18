@@ -52,7 +52,13 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
+      passwordResetToken:{
+        type: Sequelize.STRING
+      },
+      passwordResetExpires: {
+        type: Sequelize.STRING
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {

@@ -17,12 +17,26 @@ function checked(atual, value){
 
 function printError(errors, campo){
     let message;
-    if(typeof(errors)!== 'undefined' && typeof(errors.original)!=='undefined' && errors.original.parameters[7] !== 'Invalid date'){
-        errors.errors.forEach(error=>{
-            if(error.path === campo){
-                message=error.message;
+    if(typeof(errors)!== 'undefined'){
+        if(typeof(errors.original)!=='undefined'){
+            if(errors.original.parameters[7] !== 'Invalid date'){
+                errors.errors.forEach(error=>{
+                    if(error.path === campo){
+                        message=error.message;
+                    }
+                });
             }
-        });
+            else{
+                console.log('terceiro')
+            }
+        }
+        else{
+            errors.errors.forEach(error=>{
+                if(error.path === campo){
+                    message=error.message;
+                }
+            });
+        }
     }
     return message;
 }
@@ -51,19 +65,36 @@ function printErrorEmail(errors, campo){
 }
 
 function printErrorCPF(errors, campo){
-    let message;    
-    if(typeof errors !== "undefined" && typeof(errors.original)!=='undefined' && errors.original.parameters[7] !== 'Invalid date'){
+    let message;
+    //console.log('aaaaaaaaaaaaaaaaaaaaa');
+    //console.log(errors)
+    /*errors.errors.forEach(error=>{
+        console.log(error.path);
+    });*/
+    if(typeof errors !== "undefined"){
+        if(typeof(errors.original)!=='undefined'){
+            if(errors.original.parameters[7] !== 'Invalid date'){
+                errors.errors.forEach(error=>{
+                    var path = error.path;
+                    var pathreplace = "."
+                    var path = path.substring(path.indexOf(pathreplace)+pathreplace.length);
+                    if(path === campo){
+                        message = "Este CPF é inválido ou já está em uso.";
+                    }
+                });
+            }
+        }
+    }
+    else if(typeof errors !== "undefined" && errors.original.parameters[7] !== 'Invalid date'){
         errors.errors.forEach(error=>{
-            var path = error.path;
-            var pathreplace = "."
-            var path = path.substring(path.indexOf(pathreplace)+pathreplace.length);
-            if(path === campo){
-                message = "Este CPF é inválido ou já está em uso.";
+            if(error.path === campo){
+                message=error.message;
             }
         });
     }
     return message;
 }
+
 
 function printErrorEsqueciSenha(errorMsg){
     let message = errorMsg;    

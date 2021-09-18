@@ -8,6 +8,8 @@ const User = models.User;
 
 const crypto = require('crypto');
 
+const mailer = require("../modules/mailer");
+
 async function cadastro(req,res){
     const sangues = await Sangue.findAll(); //recupera todos os registros da tabela sangues
 
@@ -76,11 +78,8 @@ async function esqueciSenha(req, res){
             }
             else{
                 //prosseguir com os passos para enviar o link
-                res.render("user/esqueci_senha",{
-                    titulo: "Recuperação de senha",
-                    modal: "ClickBotao()"
-                });
-                /*try{
+                
+                try{
 
                     const token = crypto.randomBytes(20).toString("hex");
 
@@ -94,7 +93,25 @@ async function esqueciSenha(req, res){
                             passwordResetToken: token,
                             passwordResetExpires: now,
                         },{ where: {email: req.body.email} });
-                        res.redirect("/");
+                        
+                        console.log(req.body.email)
+                        try {
+                            await mailer.sendMail({
+                                to:req.body.email,
+                                from:'tbgdmelo@gmail.com',
+                                template: 'esqueci_senha',
+                                context: {token}
+                            })
+                        }catch(error){
+                            if(error)
+                                return res.status(400).send({error: 'Cannot send forgot password email'})
+                        }
+                        
+
+                        res.render("user/esqueci_senha",{
+                            titulo: "Recuperação de senha",
+                            modal: "ClickBotao()"
+                        });
                     }
                     catch(error){
                         console.log('erro na atualizacao dos tokens');
@@ -104,8 +121,9 @@ async function esqueciSenha(req, res){
                 catch(error){
                     console.log("tive um erro de recup senha");
                     console.log(error);
-                    res.redirect("/");
-                }*/
+                }
+
+                
             }
         }
         catch(errors){
