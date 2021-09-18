@@ -15,4 +15,7 @@ router.post("/cadastro", usersController.cadastro);
 router.get("/esqueci_senha", usersController.esqueciSenha);
 router.post("/esqueci_senha", usersController.esqueciSenha);
 
+router.post("/reset_senha/:token", usersController.reset_senha);
+router.get("/reset_senha/:token", usersController.reset_senha);
+
 module.exports = router;

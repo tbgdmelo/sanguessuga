@@ -86,7 +86,7 @@ async function esqueciSenha(req, res){
                     const now = new Date();
                     now.setHours(now.getHours()+1);
 
-                    await User.findOne({ where: {email: req.body.email} })
+                    await User.findOne({ where: {email: req.body.email} });
 
                     try{
                         await User.update({
@@ -94,20 +94,21 @@ async function esqueciSenha(req, res){
                             passwordResetExpires: now,
                         },{ where: {email: req.body.email} });
                         
-                        console.log(req.body.email)
+                        console.log(req.body.email);
+                        const email = req.body.email;
                         try {
                             await mailer.sendMail({
-                                to:req.body.email,
-                                from:'tbgdmelo@gmail.com',
-                                template: 'esqueci_senha',
-                                context: {token}
+                                to: req.body.email,
+                                from: 'tbgdmelo@gmail.com',
+                                template: 'auth/esqueci_senha',
+                                context: {token, email}
                             })
                         }catch(error){
+                            console.log(error)
                             if(error)
                                 return res.status(400).send({error: 'Cannot send forgot password email'})
                         }
                         
-
                         res.render("user/esqueci_senha",{
                             titulo: "Recuperação de senha",
                             modal: "ClickBotao()"
@@ -119,7 +120,7 @@ async function esqueciSenha(req, res){
                     console.log(token, now)
                 }
                 catch(error){
-                    console.log("tive um erro de recup senha");
+                    console.log("tive um erro de recup email");
                     console.log(error);
                 }
 
@@ -132,4 +133,43 @@ async function esqueciSenha(req, res){
     }
 }
 
-module.exports = {cadastro, esqueciSenha};
+async function reset_senha(req, res){
+    if(req.route.methods.get){
+        res.render("user/reset_senha",{
+            titulo: "Reset de senha",
+            token: req.params.token
+        })
+    }
+    else{
+        const token= req.params.token;
+        try{
+            const user = await User.findOne({ where: {passwordResetToken: token} });
+            try{
+                await User.update({
+                    senha: req.body.senha,
+                },{ where: {passwordResetToken: token} });
+
+                /*res.render("user/login",{
+                    titulo: "LOGIN",
+                    modal: "ClickBotao()"
+                });*/
+            }
+            catch(error){
+                if(error)
+                console.log(error);
+                return res.status(400).send({error: 'Cannot update new password'})
+            }
+        }
+        catch(error){
+            console.log(error)
+            if(error)
+                return res.status(400).send({error: 'Cannot send new password'})
+        }
+    }
+}
+
+function login(req, res){
+    res.render("user/login");
+}
+
+module.exports = {cadastro, esqueciSenha, reset_senha, login};

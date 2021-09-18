@@ -15,7 +15,7 @@ const transport = nodemailer.createTransport({
 
 transport.use('compile',hbs({
     viewEngine: 'handlebars',
-    viewPath: path.resolve('./app/resources/mail'),
+    viewPath: path.resolve('./app/resources/mail/'),
     extName: '.html'
 }))
 
