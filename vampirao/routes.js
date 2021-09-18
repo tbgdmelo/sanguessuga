@@ -17,5 +17,6 @@ router.post("/esqueci_senha", usersController.esqueciSenha);
 
 router.post("/reset_senha/:token", usersController.reset_senha);
 router.get("/reset_senha/:token", usersController.reset_senha);
+router.get("/tokenexpired", usersController.tokenexpired);
 
 module.exports = router;
