@@ -1,5 +1,12 @@
 <title>{{titulo}}</title>
 
+<script>
+function ClickBotao(){
+document.getElementById("mybutton").click();
+}
+</script>
+
+<body onload={{modal}}>
   <div style="margin-top: 25px;" id="carouselExampleIndicators" class="carousel slide container" data-ride="carousel" data-interval="5000" style="width:100%">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -136,3 +143,27 @@
         <!-- /FIM DAS FEATUREZINHAS *-* -->
 
       </div><!-- /.container -->
+
+
+<!-- Button trigger modal -->
+<button hidden="true" id="mybutton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Conta criada com sucesso!</h5>
+      </div>
+      <div class="modal-body">
+        Obrigado por se cadastrar! Realize o seu login e comece a doar.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

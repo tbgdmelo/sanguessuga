@@ -33,7 +33,10 @@ async function cadastro(req,res){
                 telefone: req.body.telefone,
                 id_sangue: req.body.id_sangue
             })
-            res.redirect("/");
+            res.render("main/index",{
+                titulo: "Home Page",
+                modal: "ClickBotao()"
+            });
         }
         catch (error){
             //console.log("olha aquiiiiii")
