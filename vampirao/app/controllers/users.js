@@ -94,14 +94,18 @@ async function esqueciSenha(req, res){
                             passwordResetExpires: now,
                         },{ where: {email: req.body.email} });
                         
-                        console.log(req.body.email);
+                        const user = await User.findOne({ where:{email: req.body.email } }); 
+                        //console.log(req.body.email);
                         const email = req.body.email;
+                        const nome = user.nome;
+                        const sobrenome = user.sobrenome;
+                        
                         try {
                             await mailer.sendMail({
                                 to: req.body.email,
                                 from: 'tbgdmelo@gmail.com',
                                 template: 'auth/esqueci_senha',
-                                context: {token, email}
+                                context: {token, email, nome, sobrenome}
                             })
                         }catch(error){
                             console.log(error)
@@ -135,6 +139,21 @@ async function esqueciSenha(req, res){
 
 async function reset_senha(req, res){
     if(req.route.methods.get){
+        const token= req.params.token;
+        try{
+            const user = await User.findOne({ where: {passwordResetToken: token} });
+            const now = new Date();
+            console.log(now);
+            if(now > new Date(user.passwordResetExpires)){
+                res.redirect("../tokenexpired");
+            }
+        }
+        catch(error){
+            if(error)
+                console.log(error);
+                return res.status(400).send({error: 'User undefined'})
+        }
+
         res.render("user/reset_senha",{
             titulo: "Reset de senha",
             token: req.params.token
@@ -168,8 +187,8 @@ async function reset_senha(req, res){
     }
 }
 
-function login(req, res){
-    res.render("user/login");
+function tokenexpired(req, res){
+    res.render("user/tokenexpired");
 }
 
-module.exports = {cadastro, esqueciSenha, reset_senha, login};
+module.exports = {cadastro, esqueciSenha, reset_senha, tokenexpired};
