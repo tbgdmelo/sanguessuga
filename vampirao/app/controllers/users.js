@@ -195,4 +195,21 @@ function tokenexpired(req, res){
     res.render("user/tokenexpired");
 }
 
-module.exports = {cadastro, esqueciSenha, reset_senha, tokenexpired};
+async function perfil(req, res){
+    if(req.route.methods.get){
+        const id= req.params.id;
+
+        const user = await User.findOne({where: {id: id }});
+        const sanguineo = await Sangue.findOne({where: {id: user.id_sangue}});
+        
+        res.render("user/perfil",{
+            titulo:"Meu Perfil",
+            nome: user.nome,
+            sobrenome: user.sobrenome,
+            tipoSanguineo: sanguineo.tipo,
+            pontuacao: user.pontuacao
+        });
+    }
+}
+
+module.exports = {cadastro, esqueciSenha, reset_senha, tokenexpired, perfil};
