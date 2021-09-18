@@ -65,4 +65,10 @@ function printErrorCPF(errors, campo){
     return message;
 }
 
-module.exports = { toLower, toUpper, checked, printError, printErrorEmail, printErrorCPF, printErrorNascimento};
+function printErrorEsqueciSenha(errorMsg){
+    let message = errorMsg;    
+    return message;
+}
+
+
+module.exports = { toLower, toUpper, checked, printError, printErrorEmail, printErrorCPF, printErrorNascimento, printErrorEsqueciSenha};

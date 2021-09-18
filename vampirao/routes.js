@@ -12,4 +12,7 @@ router.get("/sobre",mainController.sobre);
 router.get("/cadastro",usersController.cadastro);
 router.post("/cadastro", usersController.cadastro);
 
+router.get("/esqueci_senha", usersController.esqueciSenha);
+router.post("/esqueci_senha", usersController.esqueciSenha);
+
 module.exports = router;

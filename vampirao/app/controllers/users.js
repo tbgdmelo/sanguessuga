@@ -6,6 +6,8 @@ const Sangue = models.Sangue; //utilizando apenas o model de sangue para exibir 
 
 const User = models.User;
 
+const crypto = require('crypto');
+
 async function cadastro(req,res){
     const sangues = await Sangue.findAll(); //recupera todos os registros da tabela sangues
 
@@ -55,4 +57,61 @@ async function cadastro(req,res){
     }
 }
 
-module.exports = {cadastro};
+async function esqueciSenha(req, res){
+    if(req.route.methods.get){
+        res.render("user/esqueci_senha",{
+            titulo: "Recuperação de senha",
+        })
+    }
+    else{
+        try{
+            const user = await User.findOne({ where:{email: req.body.email } });
+            //console.log('veio user');
+            //console.log(user);
+            if(user===null){
+                res.render("user/esqueci_senha",{
+                    titulo: "Recuperação de senha",
+                    errorMsg: "Não há nenhum cadastro para este e-mail!"
+                })
+            }
+            else{
+                //prosseguir com os passos para enviar o link
+                res.render("user/esqueci_senha",{
+                    titulo: "Recuperação de senha",
+                    modal: "ClickBotao()"
+                });
+                /*try{
+
+                    const token = crypto.randomBytes(20).toString("hex");
+
+                    const now = new Date();
+                    now.setHours(now.getHours()+1);
+
+                    await User.findOne({ where: {email: req.body.email} })
+
+                    try{
+                        await User.update({
+                            passwordResetToken: token,
+                            passwordResetExpires: now,
+                        },{ where: {email: req.body.email} });
+                        res.redirect("/");
+                    }
+                    catch(error){
+                        console.log('erro na atualizacao dos tokens');
+                    }
+                    console.log(token, now)
+                }
+                catch(error){
+                    console.log("tive um erro de recup senha");
+                    console.log(error);
+                    res.redirect("/");
+                }*/
+            }
+        }
+        catch(errors){
+            console.log(errors);
+        }
+    }
+}
+
+module.exports = {cadastro, esqueciSenha};

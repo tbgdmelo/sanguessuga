@@ -1,0 +1,50 @@
+<title>{{titulo}}</title>
+<script>
+function ClickBotao(){
+document.getElementById("mybutton").click();
+}
+</script>
+
+<body onload={{modal}}>
+    <div class="container">
+        <br/>
+        <h3>Recuperação de senha de usuário</h3>
+        <hr class="featurette-divider">
+        <div>Informe os dados abaixo e receba em seu e-mail cadastrado um link para recuperar seu acesso</div>
+        <br/>
+        <h5><i class="fas fa-key"></i> Recuperar senha</h5>
+
+        <form action='/esqueci_senha' method="post">
+            <div class="form-group col-md-6">
+                <label for="exampleInputEmail1">E-mail cadastrado:</label>
+                <input name="email" type="email" class="form-control md-2" id="email" aria-describedby="emailHelp" placeholder="Digite o e-mail utilizado no cadastro">
+                <span class="alert-danger">{{printErrorEsqueciSenha errorMsg}}</span>
+                <br/>
+                <small id="emailHelp" class="form-text text-muted">Siga as instruções no e-mail enviado para realizar a recuperação de senha.</small>
+            </div>
+            <hr class="featurette-divider">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+</body>
+
+<!-- Button trigger modal -->
+<button hidden="true" id="mybutton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">E-mail enviado!</h5>
+      </div>
+      <div class="modal-body">
+        Um e-mail com o link para realizar o cadastro da nova senha foi enviado para o endereço de e-mail informado.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
