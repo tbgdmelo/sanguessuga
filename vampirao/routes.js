@@ -10,4 +10,6 @@ router.get("/",mainController.index);
 router.get("/sobre",mainController.sobre);
 router.get("/cadastro",mainController.cadastro);
 
+router.get("/login",usersController.login);
+router.post("/login",usersController.login);
 module.exports = router;

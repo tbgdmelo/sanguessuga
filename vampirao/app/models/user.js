@@ -14,10 +14,45 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   User.init({
-    cpf: DataTypes.STRING,
-    nome: DataTypes.STRING,
-    sobrenome: DataTypes.STRING,
-    email: DataTypes.STRING,
+    cpf: {
+      type: DataTypes.STRING,
+      validate:{
+        customValidator(value){
+          const valida = require("gerador-validador-cpf");
+          if(valida.validate(value) === false){
+            throw new Error("O CPF é inválido!");
+          }
+        }
+      }    
+    },
+    nome:{
+      type: DataTypes.STRING,
+      validate:{
+        len:{
+          args: [3, 40],
+          msg: "O nome precisa conter entre 3 e 40 caracteres."
+        }
+      }
+    },
+    sobrenome:{
+      type: DataTypes.STRING,
+      validate:{
+        len:{
+          args: [3, 40],
+          msg: "O sobrenome precisa conter entre 3 e 40 caracteres."
+        }
+      }
+    },
+    email: {
+      type: DataTypes.STRING,
+      unique: {
+        args: true,
+        message: 'Opa! Este e-mail já está em uso.',
+      },
+      validate: {
+        isEmail:true
+      },
+    },
     senha: DataTypes.STRING,
     pontuacao: DataTypes.INTEGER,
     telefone: DataTypes.STRING,

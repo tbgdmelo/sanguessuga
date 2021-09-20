@@ -1,7 +1,7 @@
 {
   "development": {
-    "username": "myvampirao",
-    "password": "senha",
+    "username": "root",
+    "password": null,
     "database": "vampirao",
     "host": "127.0.0.1",
     "dialect": "mysql"

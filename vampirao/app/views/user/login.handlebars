@@ -1,0 +1,33 @@
+<title>{{titulo}}</title>
+<div class="container">
+    <div class="card-login">
+        <div class="card shadow" style="margin: 0 auto;">
+            <div class="d-flex justify-content-center">
+                <img src="/img/user2.png" class="usuario" width="100" width="100" alt="">
+            </div>
+           
+            <div class="card-body" style="padding: 30px 100px 20px 100px;">
+                <h6 class="alerta">{{message}}</h6>
+                <form action='/login' method="post">
+                    <div class="mt-3">
+                        <input value="{{login.email}}"  name="email" id="email" class="form-control" type="email" placeholder="E-mail">
+                    </div>
+                    <div class="mt-3">
+                        <input value="{{login.senha}}"  name="senha" id="senha" class="form-control" type="password" placeholder="Senha">
+                    </div>
+                    <div class="">
+                        <a href="#">Esqueci minha senha</a>
+                    </div>
+                     <span class="alert-danger">{{printError errors 'cpf'}}</span>
+                    <div class="mt-3 d-flex justify-content-center">
+                        <button class="btn btn-outline-success" type="submit" style="width:150px;">Entrar</button>
+                    </div>
+                </form>
+            </div>
+           
+        </div>
+        <div class="mt-4 text-center">
+            <a href="/cadastro">Não tenho cadastro</a>
+        </div>
+    </div>
+</div>
