@@ -211,5 +211,26 @@ async function perfil(req, res){
         });
     }
 }
-
-module.exports = {cadastro, esqueciSenha, reset_senha, tokenexpired, perfil};
+async function login(req, res) {
+    if (req.route.methods.get) {
+        res.render("user/login", {
+            titulo: "Login",
+        })
+    }
+    else {
+        try {
+            const user = await User.findOne({ where:{email: req.body.email, senha:req.body.senha } });
+            
+            if(!user){
+                return res.render("user/login", {
+                    message: "Sua conta ou senha está incorreta.",
+                });
+            }
+            res.redirect("/");
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+}
+module.exports = {cadastro, esqueciSenha, reset_senha, tokenexpired, perfil, login};

@@ -12,4 +12,8 @@ function sobre(req,res){
     });
 }
 
-module.exports = {index,sobre};
+function cadastro(req,res){
+    res.render("main/cadastro");
+}
+
+module.exports = {index,sobre,cadastro};
