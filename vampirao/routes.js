@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get("/",mainController.index);
 router.get("/sobre",mainController.sobre);
-router.get("/cadastro",mainController.cadastro);
+router.get("/cadastro",usersController.cadastro);
 
 router.get("/cadastro",usersController.cadastro);
 router.post("/cadastro", usersController.cadastro);

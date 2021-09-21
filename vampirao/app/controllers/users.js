@@ -172,10 +172,10 @@ async function reset_senha(req, res){
                     senha: req.body.senha,
                 },{ where: {passwordResetToken: token} });
 
-                /*res.render("user/login",{
-                    titulo: "LOGIN",
+                res.render("user/login",{
+                    titulo: "Login",
                     modal: "ClickBotao()"
-                });*/
+                });
             }
             catch(error){
                 if(error)
@@ -226,7 +226,7 @@ async function login(req, res) {
                     message: "Sua conta ou senha está incorreta.",
                 });
             }
-            res.redirect("/");
+            res.redirect("perfil/"+user.id);
         }
         catch (error) {
             console.log(error);

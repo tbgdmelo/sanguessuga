@@ -1,5 +1,11 @@
 <title>{{titulo}}</title>
-<div class="container">
+<script>
+function ClickBotao(){
+document.getElementById("mybutton").click();
+}
+</script>
+<body onload={{modal}}>
+    <div class="container">
     <div class="card-login">
         <div class="card shadow" style="margin: 0 auto;">
             <div class="d-flex justify-content-center">
@@ -16,7 +22,7 @@
                         <input value="{{login.senha}}"  name="senha" id="senha" class="form-control" type="password" placeholder="Senha">
                     </div>
                     <div class="">
-                        <a href="#">Esqueci minha senha</a>
+                        <a href="/esqueci_senha">Esqueci minha senha</a>
                     </div>
                      <span class="alert-danger">{{printError errors 'cpf'}}</span>
                     <div class="mt-3 d-flex justify-content-center">
@@ -30,4 +36,27 @@
             <a href="/cadastro">Não tenho cadastro</a>
         </div>
     </div>
+</div>
+</body>
+
+<!-- Button trigger modal -->
+<button hidden="true" id="mybutton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Sua senha foi redefinida!</h5>
+      </div>
+      <div class="modal-body">
+        Realize o login com sua nova senha.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
 </div>
