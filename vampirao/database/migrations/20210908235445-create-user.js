@@ -42,7 +42,7 @@ module.exports = {
         type: Sequelize.DATEONLY
       },
       id_sangue: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.INTEGER
       },
       createdAt: {

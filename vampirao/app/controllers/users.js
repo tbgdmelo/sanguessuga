@@ -38,10 +38,7 @@ async function cadastro(req,res){
                 modal: "ClickBotao()"
             });
         }
-        catch (error){
-            //console.log("olha aquiiiiii")
-            //console.log(error)
-            
+        catch (error){            
             res.render("user/cadastro",{
                 errors: error,
                 sangues: sangues.map(sangue=>sangue.toJSON()),
