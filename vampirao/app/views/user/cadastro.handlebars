@@ -7,7 +7,7 @@
             <div class="col-md-6">
                 <div class="form-group mt-4">
                     <label>Nome</label>
-                    <input value="{{user.nome}}" name="nome" id="nome" type="text" class="form-control" placeholder="Digite seu nome..." minlength="2" maxlength="50">
+                    <input value="{{user.nome}}" name="nome" id="nome" type="text" class="form-control" placeholder="Digite seu nome..." minlength="2" maxlength="50" required>
                     <span class="alert-danger">{{printError errors 'nome'}}</span>
                 </div>
             </div>
@@ -15,7 +15,7 @@
             <div class="col-md-6">
                 <div class="form-group mt-4">
                     <label>CPF:</label>
-                    <input value="{{user.cpf}}" name="cpf" onkeypress="$(this).mask('000.000.000-00');" id="cpf" type="text" class="form-control" maxlength="11" minlength="11" placeholder="Não utilize pontos e traços">
+                    <input value="{{user.cpf}}" name="cpf" onkeypress="$(this).mask('000.000.000-00');" id="cpf" type="text" class="form-control" maxlength="11" minlength="11" placeholder="Não utilize pontos e traços" required>
                     <span class="alert-danger">{{printErrorCPF errors 'cpf'}}</span>
                     {{!--<span class="alert-link" id="resposta"></span> --}}
                 </div>
@@ -24,7 +24,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Sobrenome:</label>
-                    <input value="{{user.sobrenome}}" name="sobrenome" id="sobrenome" type="text" class="form-control" minlength="2" maxlength="50" placeholder="Digite seu sobrenome...">
+                    <input value="{{user.sobrenome}}" name="sobrenome" id="sobrenome" type="text" class="form-control" minlength="2" maxlength="50" placeholder="Digite seu sobrenome..." required>
                     <span class="alert-danger">{{printError errors 'sobrenome'}}</span>
                 </div>
             </div>
@@ -32,7 +32,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Data de Nascimento:</label>
-                    <input name="nascimento" id="nascimento" type="date" class="form-control">
+                    <input name="nascimento" id="nascimento" type="date" class="form-control" required>
                     <span class="alert-danger">{{printErrorNascimento errors}}</span>
                 </div>
             </div>
@@ -41,7 +41,7 @@
         <div class="col-md-6">
             <div class="form-group mt-3">
                 <label>Email:</label>
-                <input value="{{user.email}}" name="email" id="email" type="email" minlength="4" maxlength="254" class="form-control" placeholder="Digite seu email...">
+                <input value="{{user.email}}" name="email" id="email" type="email" minlength="4" maxlength="254" class="form-control" placeholder="Digite seu email..." required>
                 
                 <span class="alert-danger">{{printError errors 'email'}}</span>
             </div>
