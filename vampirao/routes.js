@@ -20,9 +20,10 @@ router.post("/reset_senha/:token", usersController.reset_senha);
 router.get("/reset_senha/:token", usersController.reset_senha);
 router.get("/tokenexpired", usersController.tokenexpired);
 
-router.get("/perfil/:id", usersController.perfil);
-
 router.get("/login",usersController.login);
 router.post("/login",usersController.login);
+
+//Páginas que precisam de autenticacao para acessar
+router.get("/perfil/:id", usersController.perfil);
 
 module.exports = router;

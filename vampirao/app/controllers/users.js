@@ -193,10 +193,9 @@ function tokenexpired(req, res){
 async function perfil(req, res){
     if(req.route.methods.get){
         const id= req.params.id;
-
         const user = await User.findOne({where: {id: id }});
         const sanguineo = await Sangue.findOne({where: {id: user.id_sangue}});
-        
+
         res.render("user/perfil",{
             titulo:"Meu Perfil",
             nome: user.nome,
@@ -208,9 +207,11 @@ async function perfil(req, res){
 }
 async function login(req, res) {
     if (req.route.methods.get) {
-        res.render("user/login", {
-            titulo: "Login",
-        })
+        if(!req.session.user){ //nao há um user logado
+            res.render("user/login", {
+                titulo: "Login",
+            });
+        }
     }
     else {
         try {
@@ -221,6 +222,7 @@ async function login(req, res) {
                     message: "Sua conta ou senha está incorreta.",
                 });
             }
+            req.session.user = user;
             res.redirect("perfil/"+user.id);
         }
         catch (error) {

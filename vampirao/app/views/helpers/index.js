@@ -106,5 +106,15 @@ function printErrorSangue(errorMsg){
     return message;
 }
 
+function verificaLogin(user){
+    console.log(user);
+    if(!user){
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+
 module.exports = { toLower, toUpper, checked, printError, printErrorEmail, printErrorCPF, 
-    printErrorNascimento, printErrorEsqueciSenha, printErrorSangue};
+    printErrorNascimento, printErrorEsqueciSenha, printErrorSangue, verificaLogin};
