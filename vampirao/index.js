@@ -21,6 +21,11 @@ app.use(session({
     cookie: { maxAge: 24 * 60 * 1000} //por 24h mantem a sessao do usuario
 }));
 
+app.use(function (req, res, next) {
+    res.locals.session = req.session;
+    next();
+});
+
 app.use(sass({
     src:`${__dirname}/public/scss`,
     dest:`${__dirname}/public/css`,
