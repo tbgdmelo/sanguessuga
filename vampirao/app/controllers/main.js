@@ -7,9 +7,13 @@ function index(req,res){
 }
 
 function sobre(req,res){
+    if(!req.session.user){
+        return res.status(401).send()
+    }
     res.render("main/sobre", {
         titulo: "Sobre",
     });
 }
+    
 
 module.exports = {index,sobre};
