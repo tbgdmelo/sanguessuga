@@ -107,7 +107,7 @@ function printErrorSangue(errorMsg){
 }
 
 function verificaLogin(user){
-    console.log(user)
+    // console.log(user)
     if(typeof(user)==='undefined'){
         return true;
     }
