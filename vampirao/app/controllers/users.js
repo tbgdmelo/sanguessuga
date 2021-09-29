@@ -190,18 +190,27 @@ function tokenexpired(req, res){
 }
 
 async function perfil(req, res){
-    if(req.route.methods.get){
-        const id= req.params.id;
-        const user = await User.findOne({where: {id: id }});
-        const sanguineo = await Sangue.findOne({where: {id: user.id_sangue}});
-
-        res.render("user/perfil",{
-            titulo:"Meu Perfil",
-            nome: user.nome,
-            sobrenome: user.sobrenome,
-            tipoSanguineo: sanguineo.tipo,
-            pontuacao: user.pontuacao
-        });
+    try{
+        if(req.route.methods.get && req.session.user !== 'undefined'){
+            const id= req.params.id;
+            const user = await User.findOne({where: {id: id }});
+            const sanguineo = await Sangue.findOne({where: {id: user.id_sangue}});
+            if(req.session.user.id == id){
+                res.render("user/perfil",{
+                    titulo:"Meu Perfil",
+                    nome: user.nome,
+                    sobrenome: user.sobrenome,
+                    tipoSanguineo: sanguineo.tipo,
+                    pontuacao: user.pontuacao
+                });
+            }
+            else{
+                res.redirect("/notfound");
+            }
+        }
+    }
+    catch(error){
+        res.redirect("/notfound");
     }
 }
 async function login(req, res) {
