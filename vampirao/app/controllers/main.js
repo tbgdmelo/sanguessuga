@@ -8,12 +8,18 @@ function index(req,res){
 
 function sobre(req,res){
     if(!req.session.user){
-        return res.status(401).send()
+        res.redirect("notfound");
     }
     res.render("main/sobre", {
         titulo: "Sobre",
     });
 }
+
+function notfound(req,res){
+    res.render("main/notfound",{
+        titulo:"Not Found"
+    });
+}
     
 
-module.exports = {index,sobre};
+module.exports = {index,sobre,notfound};

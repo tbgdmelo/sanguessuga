@@ -25,6 +25,8 @@ router.post("/login",usersController.login);
 
 router.get("/sair", usersController.deslogar);
 
+router.get("/notfound", mainController.notfound);
+
 //Páginas que precisam de autenticacao para acessar
 router.get("/perfil/:id", usersController.perfil);
 
