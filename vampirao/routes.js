@@ -23,6 +23,8 @@ router.get("/tokenexpired", usersController.tokenexpired);
 router.get("/login",usersController.login);
 router.post("/login",usersController.login);
 
+router.get("/sair", usersController.deslogar);
+
 //Páginas que precisam de autenticacao para acessar
 router.get("/perfil/:id", usersController.perfil);
 

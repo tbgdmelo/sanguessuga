@@ -34,7 +34,7 @@
                         <a class="nav-link" href="/cadastro">Cadastre-se</a>
                     </li>
                     {{else}}
-                    <a href="/perfil/{{session.user.id}}" class="nav-link">Meu Perfil</a>
+                    <a href="/perfil/{{session.user.id}}" class="nav-link">Meu Perfil <i class="fas fa-user"></i></a>
                     {{/if}}
                     <li class="nav-item">
                         <a class="nav-link" href="/sobre">Sobre</a>
@@ -44,7 +44,7 @@
                     {{#if (verificaLogin session.user) }}
                     <a href="/login" class="btn btn-outline-light">Entrar</a>
                     {{else}}
-                    <a href="#" class="btn btn-outline-light">Sair</a>
+                    <a href="/sair" class="btn btn-outline-light">Sair <i class="fas fa-sign-out-alt"></i></a>
                     {{/if}}
                 </form>
             </div>
@@ -52,7 +52,7 @@
     </nav>
     
     {{{body}}}
-
+    
     <script src="/js/jquery.min.js"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>

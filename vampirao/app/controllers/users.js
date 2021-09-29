@@ -144,7 +144,6 @@ async function reset_senha(req, res){
         try{
             const user = await User.findOne({ where: {passwordResetToken: token} });
             const now = new Date();
-            console.log(now);
             if(now > new Date(user.passwordResetExpires)){
                 res.redirect("../tokenexpired");
             }
@@ -230,4 +229,11 @@ async function login(req, res) {
         }
     }
 }
-module.exports = {cadastro, esqueciSenha, reset_senha, tokenexpired, perfil, login};
+
+async function deslogar(req,res){
+    console.log(req.session.user);
+    req.session.user=undefined;
+    res.redirect("/")
+}
+
+module.exports = {cadastro, esqueciSenha, reset_senha, tokenexpired, perfil, login, deslogar};
