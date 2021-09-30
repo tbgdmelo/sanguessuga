@@ -7,9 +7,6 @@ function index(req,res){
 }
 
 function sobre(req,res){
-    if(!req.session.user){
-        res.redirect("notfound");
-    }
     res.render("main/sobre", {
         titulo: "Sobre",
     });
