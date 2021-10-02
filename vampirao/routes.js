@@ -30,4 +30,6 @@ router.get("/notfound", mainController.notfound);
 //Páginas que precisam de autenticacao para acessar
 router.get("/perfil/:id", usersController.perfil);
 
+router.get("/centros/index", centrosController.index);
+
 module.exports = router;
