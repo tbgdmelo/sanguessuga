@@ -12,4 +12,11 @@ function sobre(req,res){
     });
 }
 
-module.exports = {index,sobre};
+function notfound(req,res){
+    res.render("main/notfound",{
+        titulo:"Not Found"
+    });
+}
+    
+
+module.exports = {index,sobre,notfound};

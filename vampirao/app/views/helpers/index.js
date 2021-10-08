@@ -26,9 +26,6 @@ function printError(errors, campo){
                     }
                 });
             }
-            else{
-                console.log('terceiro')
-            }
         }
         else{
             errors.errors.forEach(error=>{
@@ -76,7 +73,7 @@ function printErrorCPF(errors, campo){
                 });
             }
             else{
-                console.log('terceiro')
+                console.log('terceiro CPF')
             }
         }
         else{
@@ -104,5 +101,20 @@ function printErrorEsqueciSenha(errorMsg){
     return message;
 }
 
+function printErrorSangue(errorMsg){
+    let message = errorMsg;    
+    return message;
+}
 
-module.exports = { toLower, toUpper, checked, printError, printErrorEmail, printErrorCPF, printErrorNascimento, printErrorEsqueciSenha};
+function verificaLogin(user){
+    // console.log(user)
+    if(typeof(user)==='undefined'){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+module.exports = { toLower, toUpper, checked, printError, printErrorEmail, printErrorCPF, 
+    printErrorNascimento, printErrorEsqueciSenha, printErrorSangue, verificaLogin};

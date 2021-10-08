@@ -3,6 +3,8 @@ const handlebars = require("express-handlebars");
 const express = require("express");
 const router = require("./routes");
 const app = express();
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
 
 app.engine("handlebars", handlebars({
     helpers: require(`${__dirname}/app/views/helpers`),
@@ -10,6 +12,19 @@ app.engine("handlebars", handlebars({
 
 app.set("view engine", "handlebars");
 app.set("views", `${__dirname}/app/views`);
+
+app.use(cookieParser());
+app.use(session({
+    secret: "x319h39hh981h3jad", 
+    resave:false, 
+    saveUninitialized:true,
+    cookie: { maxAge: 24 * 60 * 1000} //por 24h mantem a sessao do usuario
+}));
+
+app.use(function (req, res, next) {
+    res.locals.session = req.session;
+    next();
+});
 
 app.use(sass({
     src:`${__dirname}/public/scss`,

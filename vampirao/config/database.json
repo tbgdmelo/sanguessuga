@@ -1,7 +1,12 @@
 {
   "development": {
+<<<<<<< HEAD
     "username": "victor",
     "password": "vk212206",
+=======
+    "username": "thiago",
+    "password": "@Senha2212",
+>>>>>>> cbee13f05508e5fbe630e7b0bb57a3501456ac77
     "database": "vampirao",
     "host": "127.0.0.1",
     "dialect": "mysql"

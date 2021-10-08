@@ -50,16 +50,43 @@ module.exports = (sequelize, DataTypes) => {
         message: 'Opa! Este e-mail já está em uso.',
       },
       validate: {
-        isEmail:true
+        customValidator(value){
+          if(value === ""){
+            throw new Error("O e-mail é um campo obrigatório e não pode ficar em branco!");
+          }
+        }
       },
     },
-    senha: DataTypes.STRING,
+    senha:{
+      type: DataTypes.STRING,
+      validate: {
+        len:{
+          args: [8, 254],
+          msg: "A senha precisa conter 8 caracteres ou mais."
+        },
+        customValidator(value){
+          if(value === ""){
+            throw new Error("A senha não pode ficar em branco.");
+          }
+        }
+      }
+    },
     pontuacao: DataTypes.INTEGER,
     telefone: DataTypes.STRING,
     nascimento: DataTypes.DATEONLY,
     passwordResetToken: DataTypes.STRING,
     passwordResetExpires: DataTypes.DATE,
-    id_sangue: DataTypes.INTEGER
+    id_sangue:{
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      validate: {
+        customValidator(value){
+          if(typeof(value)=='undefined'){
+            throw new Error("Selecione um tipo sanguíneo.");
+          }
+        }
+      }
+    } 
   }, {
     sequelize,
     modelName: 'User',

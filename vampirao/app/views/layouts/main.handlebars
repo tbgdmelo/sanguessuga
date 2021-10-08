@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="shortcut icon" href="/img/icons/shortcut.png" >
     {{!-- <title>Projeto Sanguessuga</title> --}}
 </head>
 
@@ -28,22 +29,30 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Como doar</a>
                     </li>
+                    {{#if (verificaLogin session.user) }}
                     <li class="nav-item">
                         <a class="nav-link" href="/cadastro">Cadastre-se</a>
                     </li>
+                    {{else}}
+                    <a href="/perfil/{{session.user.id}}" class="nav-link">Meu Perfil <i class="fas fa-user"></i></a>
+                    {{/if}}
                     <li class="nav-item">
                         <a class="nav-link" href="/sobre">Sobre</a>
                     </li>
                 </ul>
                 <form class="justify-content-end">
+                    {{#if (verificaLogin session.user) }}
                     <a href="/login" class="btn btn-outline-light">Entrar</a>
+                    {{else}}
+                    <a href="/sair" class="btn btn-outline-light">Sair <i class="fas fa-sign-out-alt"></i></a>
+                    {{/if}}
                 </form>
             </div>
         </div>
     </nav>
     
     {{{body}}}
-
+    
     <script src="/js/jquery.min.js"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>

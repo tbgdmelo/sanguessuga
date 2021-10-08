@@ -16,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
   Centro.init({
     nome: DataTypes.STRING,
     endereco: DataTypes.STRING,
-    horario: DataTypes.STRING,
     telefone: DataTypes.STRING,
     vampirao: DataTypes.BOOLEAN
   }, {

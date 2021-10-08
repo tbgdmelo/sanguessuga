@@ -38,10 +38,7 @@ async function cadastro(req,res){
                 modal: "ClickBotao()"
             });
         }
-        catch (error){
-            //console.log("olha aquiiiiii")
-            //console.log(error)
-            
+        catch (error){            
             res.render("user/cadastro",{
                 errors: error,
                 sangues: sangues.map(sangue=>sangue.toJSON()),
@@ -147,7 +144,6 @@ async function reset_senha(req, res){
         try{
             const user = await User.findOne({ where: {passwordResetToken: token} });
             const now = new Date();
-            console.log(now);
             if(now > new Date(user.passwordResetExpires)){
                 res.redirect("../tokenexpired");
             }
@@ -178,8 +174,6 @@ async function reset_senha(req, res){
                 });
             }
             catch(error){
-                if(error)
-                console.log(error);
                 return res.status(400).send({error: 'Cannot update new password'})
             }
         }
@@ -196,26 +190,36 @@ function tokenexpired(req, res){
 }
 
 async function perfil(req, res){
-    if(req.route.methods.get){
-        const id= req.params.id;
-
-        const user = await User.findOne({where: {id: id }});
-        const sanguineo = await Sangue.findOne({where: {id: user.id_sangue}});
-        
-        res.render("user/perfil",{
-            titulo:"Meu Perfil",
-            nome: user.nome,
-            sobrenome: user.sobrenome,
-            tipoSanguineo: sanguineo.tipo,
-            pontuacao: user.pontuacao
-        });
+    try{
+        if(req.route.methods.get && req.session.user !== 'undefined'){
+            const id= req.params.id;
+            const user = await User.findOne({where: {id: id }});
+            const sanguineo = await Sangue.findOne({where: {id: user.id_sangue}});
+            if(req.session.user.id == id){
+                res.render("user/perfil",{
+                    titulo:"Meu Perfil",
+                    nome: user.nome,
+                    sobrenome: user.sobrenome,
+                    tipoSanguineo: sanguineo.tipo,
+                    pontuacao: user.pontuacao
+                });
+            }
+            else{
+                res.redirect("/notfound");
+            }
+        }
+    }
+    catch(error){
+        res.redirect("/notfound");
     }
 }
 async function login(req, res) {
     if (req.route.methods.get) {
-        res.render("user/login", {
-            titulo: "Login",
-        })
+        if(!req.session.user){ //nao há um user logado
+            res.render("user/login", {
+                titulo: "Login",
+            });
+        }
     }
     else {
         try {
@@ -226,6 +230,7 @@ async function login(req, res) {
                     message: "Sua conta ou senha está incorreta.",
                 });
             }
+            req.session.user = user;
             res.redirect("perfil/"+user.id);
         }
         catch (error) {
@@ -233,4 +238,11 @@ async function login(req, res) {
         }
     }
 }
-module.exports = {cadastro, esqueciSenha, reset_senha, tokenexpired, perfil, login};
+
+async function deslogar(req,res){
+    console.log(req.session.user);
+    req.session.user=undefined;
+    res.redirect("/")
+}
+
+module.exports = {cadastro, esqueciSenha, reset_senha, tokenexpired, perfil, login, deslogar};
