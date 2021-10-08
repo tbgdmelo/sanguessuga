@@ -27,14 +27,6 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },
-      {
-        nome: 'Banco expresso Valente',
-        endereco: 'R. Itaúba Amarela - Lago Azul',
-        telefone:'(92) 98495-7383',
-        vampirao: false,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
       ], {});
   },
 

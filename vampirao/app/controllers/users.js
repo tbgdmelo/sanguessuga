@@ -8,6 +8,8 @@ const User = models.User;
 
 const crypto = require('crypto');
 
+const bcrypt = require('bcryptjs');
+
 const mailer = require("../modules/mailer");
 
 async function cadastro(req,res){
@@ -22,16 +24,18 @@ async function cadastro(req,res){
     }
     else{
         try{
+            const senha = await bcrypt.hash(req.body.senha, 10);
             await User.create({
                 cpf: req.body.cpf,
                 nome: req.body.nome,
                 sobrenome: req.body.sobrenome,
                 nascimento: req.body.nascimento,
                 email: req.body.email,
-                senha: req.body.senha,
+                senha: senha,
                 pontuacao: 0,
                 telefone: req.body.telefone,
-                id_sangue: req.body.id_sangue
+                id_sangue: req.body.id_sangue,
+                isAdmin: false
             })
             res.render("main/index",{
                 titulo: "Home Page",
@@ -163,9 +167,10 @@ async function reset_senha(req, res){
         const token= req.params.token;
         try{
             const user = await User.findOne({ where: {passwordResetToken: token} });
+            const senha = await bcrypt.hash(req.body.senha, 10);
             try{
                 await User.update({
-                    senha: req.body.senha,
+                    senha: senha,
                 },{ where: {passwordResetToken: token} });
 
                 res.render("user/login",{
@@ -191,7 +196,7 @@ function tokenexpired(req, res){
 
 async function perfil(req, res){
     try{
-        if(req.route.methods.get && req.session.user !== 'undefined'){
+        if(req.route.methods.get && req.session.user !== 'undefined' && !req.session.user.isAdmin){
             const id= req.params.id;
             const user = await User.findOne({where: {id: id }});
             const sanguineo = await Sangue.findOne({where: {id: user.id_sangue}});
@@ -208,6 +213,9 @@ async function perfil(req, res){
                 res.redirect("/notfound");
             }
         }
+        else{
+            res.redirect("/notfound");
+        }
     }
     catch(error){
         res.redirect("/notfound");
@@ -223,18 +231,35 @@ async function login(req, res) {
     }
     else {
         try {
-            const user = await User.findOne({ where:{email: req.body.email, senha:req.body.senha } });
+            const user = await User.findOne({ where:{email: req.body.email} });
             
+            if(!await bcrypt.compare(req.body.senha, user.senha)){
+                return res.render("user/login", {
+                    message: "Sua conta ou senha está incorreta.",
+                    titulo: "Login"
+                });
+            }
             if(!user){
                 return res.render("user/login", {
                     message: "Sua conta ou senha está incorreta.",
+                    titulo: "Login"
                 });
             }
             req.session.user = user;
-            res.redirect("perfil/"+user.id);
+            if(!user.isAdmin){
+                res.redirect("perfil/"+user.id);
+            }
+            else{
+                res.redirect("admin/index");
+            }
+            
         }
         catch (error) {
             console.log(error);
+            return res.render("user/login", {
+                message: "Sua conta ou senha está incorreta.",
+                titulo: "Login"
+            });
         }
     }
 }

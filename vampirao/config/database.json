@@ -1,12 +1,7 @@
 {
   "development": {
-<<<<<<< HEAD
-    "username": "victor",
-    "password": "vk212206",
-=======
     "username": "thiago",
     "password": "@Senha2212",
->>>>>>> cbee13f05508e5fbe630e7b0bb57a3501456ac77
     "database": "vampirao",
     "host": "127.0.0.1",
     "dialect": "mysql"
@@ -19,10 +14,7 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "use_env_variable": "JAWSDB_URL",
     "dialect": "mysql"
   }
 }

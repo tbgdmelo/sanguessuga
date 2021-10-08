@@ -59,6 +59,9 @@ module.exports = {
       passwordResetExpires: {
         type: Sequelize.STRING
       },
+      isAdmin:{
+        type: Sequelize.BOOLEAN
+      }
     });
   },
   down: async (queryInterface, Sequelize) => {

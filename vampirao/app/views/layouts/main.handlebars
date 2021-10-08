@@ -34,8 +34,15 @@
                         <a class="nav-link" href="/cadastro">Cadastre-se</a>
                     </li>
                     {{else}}
-                    <a href="/perfil/{{session.user.id}}" class="nav-link">Meu Perfil <i class="fas fa-user"></i></a>
+                        {{#if session.user.isAdmin}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/admin/index">Console Admin</a>
+                        </li>
+                        {{else}}
+                        <a href="/perfil/{{session.user.id}}" class="nav-link">Meu Perfil <i class="fas fa-user"></i></a>
+                        {{/if}}
                     {{/if}}
+
                     <li class="nav-item">
                         <a class="nav-link" href="/sobre">Sobre</a>
                     </li>

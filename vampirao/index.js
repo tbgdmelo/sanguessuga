@@ -5,6 +5,7 @@ const router = require("./routes");
 const app = express();
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
+const db = require("./app/models");
 
 app.engine("handlebars", handlebars({
     helpers: require(`${__dirname}/app/views/helpers`),

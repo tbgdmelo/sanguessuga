@@ -32,4 +32,7 @@ router.get("/perfil/:id", usersController.perfil);
 
 router.get("/centros/index", centrosController.index);
 
+//Rotas do admin
+router.get("/admin/index", adminController.index);
+
 module.exports = router;
