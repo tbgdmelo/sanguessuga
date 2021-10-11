@@ -41,13 +41,7 @@ async function cadastrarVampirao(req, res) {
             });
             const recompensaAmount = await Recompensa.count();
             const pedidoAmount = await Pedido.count();
-            res.render("admin/index", {
-                titulo: "Dashboard Admin",
-                usersAmount: usersAmount,
-                centrosAmount: centrosAmount,
-                recompensaAmount: recompensaAmount,
-                pedidoAmount: pedidoAmount,
-            });
+            res.redirect("../admin/index");
         }
         else {
             res.redirect("/notfound");
