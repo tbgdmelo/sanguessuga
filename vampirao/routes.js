@@ -39,5 +39,7 @@ router.post("/centros/cadastro", vampiraoController.cadastrarVampirao);
 router.get("/admin/vampiroes/index", vampiraoController.index);
 router.get("/admin/vampiroes/update/:id", vampiraoController.update);
 router.post("/admin/vampiroes/update/:id", vampiraoController.update);
+router.get("/admin/vampiroes/remove/:id", vampiraoController.remove);
+router.post("/admin/vampiroes/remove/:id", vampiraoController.remove);
 
 module.exports = router;
