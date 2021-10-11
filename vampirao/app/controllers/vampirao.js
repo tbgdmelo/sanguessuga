@@ -13,6 +13,26 @@ async function cadastrarVampirao(req , res){
             });
         }
         else if(req.route.methods.post){
+            try{
+                await Centro.create({
+                    nome: req.body.nome,
+                    telefone: req.body.telefone,
+                    endereco: req.body.endereco,
+                    vampirao: 1
+                });
+            }
+            catch(error){
+                res.render("centros/cadastro",{
+                    errors: error,
+                    vampirao: {
+                        nome: req.body.nome,
+                        telefone: req.body.telefone,
+                        endereco: req.body.endereco,
+                        vampirao: 1
+                    },
+                    titulo: "Adicionar Vampirão",
+                })
+            }
             const usersAmount = await User.count();
             const centrosAmount = await Centro.count({
                 where:{
@@ -21,13 +41,6 @@ async function cadastrarVampirao(req , res){
             });
             const recompensaAmount = await Recompensa.count();
             const pedidoAmount = await Pedido.count();
-
-            await Centro.create({
-                nome: req.body.nome,
-                telefone: req.body.telefone,
-                endereco: req.body.endereco,
-                vampirao: 1
-            });
             res.render("admin/index", {
                 titulo: "Dashboard Admin",
                 usersAmount: usersAmount,

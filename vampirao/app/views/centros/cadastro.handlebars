@@ -8,18 +8,21 @@
     <form action='/centros/cadastro' method="post">
         <div class="row g-3">
             <div class="form-group col-md-5">
-                <label for="exampleFormControlInput1">Nome:</label>
-                <input type="text" name="nome" class="form-control" id="nome" placeholder="Nome">
+                <span class="required">* <label>Nome:</label></span>
+                <input value="{{vampirao.nome}}" type="text" name="nome" class="form-control" id="nome" placeholder="Nome">
+                <span class="alert-danger">{{printError errors 'nome'}}</span>
                 <br />
-                <label>Telefone:</label>
-                <input name="telefone" onkeypress="$(this).mask('(00) 0000-0009')" id="telefone" minlength="14"
+                <span><label>Telefone:</label></span>
+                <input value="{{vampirao.telefone}}" name="telefone" onkeypress="$(this).mask('(00) 0000-0009')" id="telefone" minlength="14"
                     maxlength="14" type="text" class="form-control">
+                <span class="alert-danger">{{printError errors 'telefone'}}</span>
             </div>
         </div>
         <br />
         <div class="form-group col-md-5">
-            <label for="exampleFormControlTextarea1">Endereço Completo:</label>
-            <textarea class="form-control" name="endereco" id="endereco" rows="3"></textarea>
+            <span class="required">* <label>Endereço completo:</label></span>
+            <textarea value="{{vampirao.endereco}}" class="form-control" name="endereco" id="endereco" rows="3"></textarea>
+            <span class="alert-danger">{{printError errors 'endereco'}}</span>
         </div>
         <br />
         <div class="d-grid gap-2 d-md-flex justify-content-md-center">

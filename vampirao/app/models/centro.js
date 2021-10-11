@@ -14,8 +14,24 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Centro.init({
-    nome: DataTypes.STRING,
-    endereco: DataTypes.STRING,
+    nome:{
+      type: DataTypes.STRING,
+      validate:{
+        len:{
+          args: [3, 40],
+          msg: "O nome precisa conter entre 3 e 40 caracteres."
+        }
+      }
+    },
+    endereco: {
+      type: DataTypes.STRING,
+      validate:{
+        len:{
+          args: [5, 200],
+          msg: "O endereço precisa conter entre 5 e 200 caracteres."
+        }
+      }
+    },
     telefone: DataTypes.STRING,
     vampirao: DataTypes.BOOLEAN
   }, {
