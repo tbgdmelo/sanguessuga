@@ -17,14 +17,12 @@ async function index(req , res){
                 }
             });
             const recompensaAmount = await Recompensa.count();
-            const doacaoAmount = await Doacao.count();
             const pedidoAmount = await Pedido.count();
             res.render("admin/index", {
                 titulo: "Dashboard Admin",
                 usersAmount: usersAmount,
                 centrosAmount: centrosAmount,
                 recompensaAmount: recompensaAmount,
-                doacaoAmount: doacaoAmount,
                 pedidoAmount: pedidoAmount,
             });
         }
