@@ -1,0 +1,30 @@
+<title>{{titulo}}</title>
+
+
+<div class="container">
+    <br />
+    <h2>Cadastro de vampirão</h2>
+    <hr>
+    <form action='/centros/cadastro' method="post">
+        <div class="row g-3">
+            <div class="form-group col-md-5">
+                <label for="exampleFormControlInput1">Nome:</label>
+                <input type="text" name="nome" class="form-control" id="nome" placeholder="Nome">
+                <br />
+                <label>Telefone:</label>
+                <input name="telefone" onkeypress="$(this).mask('(00) 0000-0009')" id="telefone" minlength="14"
+                    maxlength="14" type="text" class="form-control">
+            </div>
+        </div>
+        <br />
+        <div class="form-group col-md-5">
+            <label for="exampleFormControlTextarea1">Endereço Completo:</label>
+            <textarea class="form-control" name="endereco" id="endereco" rows="3"></textarea>
+        </div>
+        <br />
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+            <button class="btn btn-outline-success me-md-2" type="submit">Cadastrar</button>
+            <a href="../admin/index" class="btn btn-outline-danger">Cancelar</a>
+        </div>
+    </form>
+</div>

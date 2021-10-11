@@ -34,5 +34,7 @@ router.get("/centros/index", centrosController.index);
 
 //Rotas do admin
 router.get("/admin/index", adminController.index);
+router.get("/centros/cadastro", vampiraoController.cadastrarVampirao);
+router.post("/centros/cadastro", vampiraoController.cadastrarVampirao);
 
 module.exports = router;
