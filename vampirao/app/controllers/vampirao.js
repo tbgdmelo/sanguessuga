@@ -12,7 +12,7 @@ async function cadastrarVampirao(req , res){
                 titulo: "Adicionar Vampirao",
             });
         }
-        else if(req.route.methods.post){
+        else if(req.route.methods.post && typeof(req.session.user) !== 'undefined' && req.session.user.isAdmin){
             try{
                 await Centro.create({
                     nome: req.body.nome,
@@ -79,5 +79,52 @@ async function index(req,res){
     }
     
 }
+async function update(req,res){
+    try{
+        if(req.route.methods.get && typeof(req.session.user) !== 'undefined' && req.session.user.isAdmin){ //se esta logado e como admin
+            const vampirao = await Centro.findOne({where:{id: req.params.id,vampirao: 1}});
+            if(!vampirao){
+                res.redirect("/notfound");
+            }
+            res.render("centros/update", {
+                nome_vampirao: vampirao.nome,
+                tel_vampirao: vampirao.telefone,
+                end_vampirao: vampirao.endereco,
+                id_vampirao: vampirao.id,
+            });
+        }
+        else if(req.route.methods.post && typeof(req.session.user) !== 'undefined' && req.session.user.isAdmin){
+            try{
+                await Centro.update({
+                    id: req.body.id,
+                    nome: req.body.nome,
+                    endereco: req.body.endereco,
+                    telefone: req.body.telefone,
+                    vampirao: 1,
+                },{where: {id:req.params.id, vampirao: 1}});
+                res.redirect("../index");
+            }
+            catch(error){
+                res.render("centros/update",{
+                    id_vampirao: req.body.id,
+                    nome_vampirao: req.body.nome,
+                    end_vampirao: req.body.endereco,
+                    tel_vampirao: req.body.telefone,
+                    errors: error
+                });
+            }
+        }
+        else{
+            res.redirect("/notfound");
+        }
+    }
+    catch(error){
+        res.redirect("/notfound");
+    }
+    
+}
 
-module.exports = {cadastrarVampirao, index};
+async function remove(req, res){
+
+}
+module.exports = {cadastrarVampirao, index, update};
