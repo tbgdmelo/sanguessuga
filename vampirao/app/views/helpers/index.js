@@ -131,7 +131,25 @@ function getNomeSangue(id_sangue, nomesSangues){
     }
 }
 
+function nivelSangue(nivel){
+    if(nivel==='Crítico'){
+        return "width: 10%;"
+    }
+    else if(nivel==='Alerta'){
+        return "width: 25%;"
+    }
+    else if(nivel==='Normal'){
+        return "width: 75%;"
+    }
+    else if(nivel==='Ótimo'){
+        return "width: 100%;"
+    }
+    else{
+        return "width: 0%;"
+    }
+}
+
   
 
 module.exports = { toLower, toUpper, checked, printError, printErrorEmail, printErrorCPF, 
-    printErrorNascimento, printErrorEsqueciSenha, printErrorSangue, verificaLogin, getNomeSangue};
+    printErrorNascimento, printErrorEsqueciSenha, printErrorSangue, verificaLogin, getNomeSangue,nivelSangue};
