@@ -116,5 +116,22 @@ function verificaLogin(user){
     }
 }
 
+function getNomeSangue(id_sangue, nomesSangues){
+    let nome;
+    nomesSangues.forEach(sangue=>{
+        if(sangue.id === id_sangue){
+            nome=sangue.tipo;
+        }
+    });
+    if(nome){
+        return nome;
+    }
+    else{
+        return "Tipo não encontrado";
+    }
+}
+
+  
+
 module.exports = { toLower, toUpper, checked, printError, printErrorEmail, printErrorCPF, 
-    printErrorNascimento, printErrorEsqueciSenha, printErrorSangue, verificaLogin};
+    printErrorNascimento, printErrorEsqueciSenha, printErrorSangue, verificaLogin, getNomeSangue};
