@@ -1,0 +1,27 @@
+<title>Vampirões</title>
+<div class="container">
+    <h1>Vampiroes</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Endereço</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {{#each vampiroes}}
+                <th scope="row">{{id}}</th>
+                <td>{{nome}}</td>
+                <td>{{endereco}}</td>
+                <td class="options">
+                    <a href="#"><i class="fas fa-edit"></i></a>
+                    <a href="#"><i class="fas fa-trash-alt"></i></a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

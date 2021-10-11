@@ -57,6 +57,27 @@ async function cadastrarVampirao(req , res){
         res.redirect("/notfound");
     }
 }
-    
 
-module.exports = {cadastrarVampirao};
+async function index(req,res){
+    try{
+        if(req.route.methods.get && typeof(req.session.user) !== 'undefined' && req.session.user.isAdmin){ //se esta logado e como admin
+            const vampiroes = await Centro.findAll({
+                where:{
+                    vampirao:1
+                }
+            });
+            res.render("centros/vampiroes", {
+                vampiroes: vampiroes.map(centro => centro.toJSON()),
+            });
+        }
+        else{
+            res.redirect("/notfound");
+        }
+    }
+    catch(error){
+        res.redirect("/notfound");
+    }
+    
+}
+
+module.exports = {cadastrarVampirao, index};
