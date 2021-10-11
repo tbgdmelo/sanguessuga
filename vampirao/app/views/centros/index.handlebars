@@ -16,16 +16,26 @@
           {{#each centros}}
             <div class="col-md-4">
               <div class="card mb-4 shadow-sm">
-                <img class="card-img-top" src="/img/centros/{{nome}}.png" alt="{{nome}}">
+                {{#if vampirao }}
+                <h5 class="text-center">Vampirão</h5>
+                  
+                {{else}}
+                  <img class="card-img-top" src="/img/centros/{{nome}}.png" alt="{{nome}}">
+                
+                {{/if}}
+                
                 <div class="card-body">
                   <p class="card-text"><strong>{{nome}}</strong></p>
                   <p class="card-text">Endereço: {{endereco}}</p>
                   <p class="card-text">Telefone: {{telefone}}</p>
                   <div class="d-flex justify-content-between align-items-center">
+                    {{#if vampirao}}
+                    {{else}}
                     <div class="btn-group">
                       <a type="button" class="btn btn-sm btn-outline-primary">Agendar doação</a>
                       <a type="button" href="../centros/{{id}}" class="btn btn-sm btn-outline-primary">Banco de Sangue</a>
                     </div>
+                    {{/if}}
                   </div>
                 </div>
               </div>
