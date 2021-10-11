@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   Estoque.init({
     id_centro: DataTypes.INTEGER,
     id_sangue: DataTypes.INTEGER,
-    quantidade: DataTypes.INTEGER
+    quantidade: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Estoque',

@@ -29,8 +29,8 @@ router.get("/notfound", mainController.notfound);
 
 //Páginas que precisam de autenticacao para acessar
 router.get("/perfil/:id", usersController.perfil);
-
 router.get("/centros/index", centrosController.index);
+router.get("/centros/:id", centrosController.estoque);
 
 //Rotas do admin
 router.get("/admin/index", adminController.index);
