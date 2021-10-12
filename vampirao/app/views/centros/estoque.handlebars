@@ -12,14 +12,13 @@
     <br />
     <div class="row">
         {{#each estoques}}
-        <div class="estoque col-sm-3">
 
-            <h><strong>Tipo: {{getNomeSangue id_sangue @root.sanguineos}}</strong></h>
-            <div class="progress caixa-sangue">
-                <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar"
-                    style="{{nivelSangue quantidade}}" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="col-sm-3">
+            <strong><p class="text-estoque">Tipo: {{getNomeSangue id_sangue @root.sanguineos}}</p></strong>
+            <div class="col-sm">
+                <img class="img-estoque" src="/img/estoque/{{quantidade}}.png">
             </div>
-            <h><strong class="font-weight-bold">Nível: {{quantidade}}</strong></h>
+            <p class="text-center" class="text-center">Nível: {{quantidade}}</p>
         </div>
         {{/each}}
     </div>
