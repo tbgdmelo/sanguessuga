@@ -27,6 +27,8 @@ router.get("/sair", usersController.deslogar);
 
 router.get("/notfound", mainController.notfound);
 
+router.get("/campanhas", mainController.campanhas);
+
 //Páginas que precisam de autenticacao para acessar
 router.get("/perfil/:id", usersController.perfil);
 router.get("/centros/index", centrosController.index);

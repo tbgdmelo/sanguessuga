@@ -17,6 +17,12 @@ function notfound(req,res){
         titulo:"Not Found"
     });
 }
+
+function campanhas(req,res){
+    res.render("main/campanhas", {
+        titulo: "Campanhas",
+    });
+}
     
 
-module.exports = {index,sobre,notfound};
+module.exports = {index,sobre,notfound, campanhas};
