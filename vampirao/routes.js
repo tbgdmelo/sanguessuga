@@ -4,6 +4,7 @@ const vampiraoController = require("./app/controllers/vampirao");
 const usersController = require("./app/controllers/users");
 const adminController = require("./app/controllers/admin");
 const mainController = require("./app/controllers/main");
+const recompensaController = require("./app/controllers/recompensas");
 const router = express.Router();
 
 router.get("/",mainController.index);
@@ -43,5 +44,7 @@ router.get("/admin/vampiroes/update/:id", vampiraoController.update);
 router.post("/admin/vampiroes/update/:id", vampiraoController.update);
 router.get("/admin/vampiroes/remove/:id", vampiraoController.remove);
 router.post("/admin/vampiroes/remove/:id", vampiraoController.remove);
+router.get("/admin/recompensas/index", recompensaController.index);
+router.get("/admin/recompensas/add", recompensaController.addRecompensa);
 
 module.exports = router;
