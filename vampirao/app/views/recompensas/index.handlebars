@@ -1,3 +1,65 @@
 <title>{{titulo}}</title>
 
-<h2>Recompensas</h2>
+<script>
+    function ClickBotao() {
+        document.getElementById("mybutton").click();
+    }
+</script>
+
+<body onload={{modal}}>
+    <div class="container">
+        <h2>Recompensas ativas</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Pontuação para resgate</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    {{#each recompensas}}
+                    <th scope="row">{{id}}</th>
+                    <td>{{nome}}</td>
+                    <td>{{valor}}</td>
+                    <td class="options">
+                        <a href="/admin/recompensas/update/{{id}}"><i class="fas fa-edit" style="color: #006625;"></i></a>
+                        <a href="/admin/recompensas/remove/{{id}}"><i class="fas fa-trash-alt"
+                                style="color: #8f0000;"></i></a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+
+    <!-- Button trigger modal -->
+    <button hidden="true" id="mybutton" type="button" class="btn btn-primary" data-toggle="modal"
+        data-target="#exampleModal">
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tem certeza que deseja deletar item #{{id}}?</h5>
+                </div>
+                <div class="modal-body">
+                    Selecione uma opção abaixo.
+                </div>
+                <div class="modal-footer">
+                    <form action='/admin/recompensas/remove/{{id}}' method="post">
+                        <button type="submit" href="/admin/recompensas/remove/{{id}}" class="btn btn-success">Sim</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

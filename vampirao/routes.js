@@ -44,8 +44,13 @@ router.get("/admin/vampiroes/update/:id", vampiraoController.update);
 router.post("/admin/vampiroes/update/:id", vampiraoController.update);
 router.get("/admin/vampiroes/remove/:id", vampiraoController.remove);
 router.post("/admin/vampiroes/remove/:id", vampiraoController.remove);
+
 router.get("/admin/recompensas/index", recompensaController.index);
 router.get("/admin/recompensas/add", recompensaController.addRecompensa);
 router.post("/recompensas/add", recompensaController.addRecompensa);
+router.get("/admin/recompensas/update/:id", recompensaController.update);
+router.post("/admin/recompensas/update/:id", recompensaController.update);
+router.get("/admin/recompensas/remove/:id", recompensaController.remove);
+router.post("/admin/recompensas/remove/:id", recompensaController.remove);
 
 module.exports = router;

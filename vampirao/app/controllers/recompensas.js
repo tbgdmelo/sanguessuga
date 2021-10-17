@@ -6,8 +6,10 @@ const Recompensa = models.Recompensa;
 async function index(req , res){
     try{
         if(req.route.methods.get && typeof(req.session.user) !== 'undefined' && req.session.user.isAdmin){ //se esta logado
+            const recompensas = await Recompensa.findAll();
             res.render("recompensas/index", {
                 titulo: "Recompensas ativas",
+                recompensas: recompensas.map(recompensa => recompensa.toJSON()),
             });
         }
         else{
@@ -31,8 +33,10 @@ async function addRecompensa(req , res){
                 nome: req.body.nome,
                 valor: req.body.valor
             });
+            const recompensas = await Recompensa.findAll();
             res.render("recompensas/index",{
                 titulo: "Recompensas ativas",
+                recompensas: recompensas.map(recompensa => recompensa.toJSON()),
             });
         }
         else{
@@ -43,6 +47,81 @@ async function addRecompensa(req , res){
         res.redirect("/notfound");
     }
 }
-    
 
-module.exports = {index, addRecompensa};
+async function remove(req, res) {
+    try {
+        if (req.route.methods.get && typeof (req.session.user) !== 'undefined' && req.session.user.isAdmin) { //se esta logado e como admin
+            const recompensas = await Recompensa.findAll();
+            res.render("recompensas/index", {
+                modal: "ClickBotao()",
+                recompensas: recompensas.map(recompensa => recompensa.toJSON()),
+                id: req.params.id,
+            });
+        }
+        else if (req.route.methods.post && typeof (req.session.user) !== 'undefined' && req.session.user.isAdmin) {
+            try {
+                const recompensa = await Recompensa.findOne({where: {id:req.params.id}});
+                
+                if(recompensa){
+                    await recompensa.destroy();
+                }
+                else{
+                    res.redirect("/notfound");
+                }
+                res.redirect("../../recompensas/index");
+            }
+            catch (error) {
+                console.log(error)
+            }
+        }
+        else {
+            res.redirect("/notfound");
+        }
+    }
+    catch (error) {
+        res.redirect("/notfound");
+    }
+}
+    
+async function update(req, res) {
+    try {
+        if (req.route.methods.get && typeof (req.session.user) !== 'undefined' && req.session.user.isAdmin) { //se esta logado e como admin
+            const recompensa = await Recompensa.findOne({ where: { id: req.params.id} });
+            if (!recompensa) {
+                res.redirect("/notfound");
+            }
+            res.render("recompensas/update", {
+                nome_recompensa: recompensa.nome,
+                val_recompensa: recompensa.valor,
+                id_recompensa: recompensa.id,
+            });
+        }
+        else if (req.route.methods.post && typeof (req.session.user) !== 'undefined' && req.session.user.isAdmin) {
+            try {
+                await Recompensa.update({
+                    id: req.body.id,
+                    nome: req.body.nome,
+                    valor: req.body.valor,
+                }, { where: { id: req.params.id} });
+                res.redirect("../index");
+            }
+            catch (error) {
+                res.render("recompensas/update", {
+                nome_recompensa: req.body.nome,
+                val_recompensa: req.body.telefone,
+                id_recompensa: req.body.id,
+                    errors: error
+                });
+            }
+        }
+        else {
+            res.redirect("/notfound");
+        }
+    }
+    catch (error) {
+        res.redirect("/notfound");
+    }
+
+}
+
+module.exports = {index, addRecompensa, remove, update};

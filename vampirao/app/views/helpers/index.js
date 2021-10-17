@@ -149,7 +149,31 @@ function nivelSangue(nivel){
     }
 }
 
+function nomeRecomp(nome){
+    if(nome==="Desconto 10"){
+        return "Desconto de R$ 10,00 na loja X"
+    }
+    else if(nome==="Vale-Compras 50"){
+        return "Vale-Compras de R$ 50,00 na loja X"
+    }
+    else if(nome==="Gift Card Google 15"){
+        return "Gift Card GooglePlay de R$ 15,00"
+    }
+    else if(nome==="Gift Card Google 50"){
+        return "Gift Card GooglePlay de R$ 50,00"
+    }
+    else if(nome==="Gift Card Spotify 17"){
+        return "Gift Card Spotify de R$ 18,00"
+    }
+    else if(nome==="Gift Card NETFLIX 50"){
+        return "Gift Card NETFLIX de R$ 50,00"
+    }
+    else if(nome==="Gift Card iFood 50"){
+        return "Gift Card iFood de R$ 50,00"
+    }
+}
   
 
 module.exports = { toLower, toUpper, checked, printError, printErrorEmail, printErrorCPF, 
-    printErrorNascimento, printErrorEsqueciSenha, printErrorSangue, verificaLogin, getNomeSangue,nivelSangue};
+    printErrorNascimento, printErrorEsqueciSenha, printErrorSangue, verificaLogin, getNomeSangue,
+    nivelSangue, nomeRecomp};
