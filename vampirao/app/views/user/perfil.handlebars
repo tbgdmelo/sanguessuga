@@ -1,6 +1,11 @@
 <title>{{titulo}}</title>
-<br/>
-
+<br />
+<script>
+    function ClickBotao2() {
+        document.getElementById("mybutton").click();
+    }
+</script>
+<body onload={{modal}}>
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,31 +29,59 @@
                 <a class="nav-link" href="#">Recompensas Ativas <i class="fas fa-trophy"></i></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Editar perfil <i class="fas fa-user-edit"></i></a>
+                <a class="nav-link" href="/atualizar/{{id}}">Editar perfil <i class="fas fa-user-edit"></i></a>
             </li>
             </ul>
         </div>
     </nav>
-    <hr/>
-            <div class="container">    
-                <div class="jumbotron">
-                  <div class="row">
-                      <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
-                          <img src="https://www.svgimages.com/svg-image/s5/man-passportsize-silhouette-icon-256x256.png" alt="stack photo" class="img">
-                      </div>
-                      <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
-                          <div class="container" >
+    <hr />
+        <div class="container">
+            <div class="jumbotron">
+                <div class="row">
+                    <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                        <img src="https://www.svgimages.com/svg-image/s5/man-passportsize-silhouette-icon-256x256.png"
+                            alt="stack photo" class="img">
+                    </div>
+                    <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                        <div class="container">
                             <h4> Bem vindo(a) {{nome}} {{sobrenome}}</h4>
-                          </div>
-                            <hr>
-                          <ul class="container details">
-                            <li class="itemPropaganda"><p></span><i class="fas fa-tint"></i> Tipo Sanguíneo: {{tipoSanguineo}}</p></li>
-                            <li class="itemPropaganda"><p></span><i class="fas fa-coins"></i> Pontuação: {{pontuacao}}</p></li>
-                          </ul>
-                      </div>
-                  </div>
+                        </div>
+                        <hr>
+                        <ul class="container details">
+                            <li class="itemPropaganda">
+                                <p></span><i class="fas fa-tint"></i> Tipo Sanguíneo: {{tipoSanguineo}}</p>
+                            </li>
+                            <li class="itemPropaganda">
+                                <p></span><i class="fas fa-coins"></i> Pontuação: {{pontuacao}}</p>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-        
+            </div>
+
+        </div>
+        <img src="">
     </div>
-    <img src="">
-</div>
+
+
+    <!-- Button trigger modal -->
+    <button hidden="true" id="mybutton" type="button" class="btn btn-primary" data-toggle="modal"
+        data-target="#exampleModal">
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Dados Atualizados com sucesso!</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
