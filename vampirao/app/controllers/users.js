@@ -287,7 +287,7 @@ async function atualizar(req, res) {
             email: user.email,
             telefone: user.telefone,
             id_sangue: user.id_sangue,
-            senha: user.senha,
+            senha: "",
             sangues: sangues.map(sangue => sangue.toJSON()),
         });
     }
