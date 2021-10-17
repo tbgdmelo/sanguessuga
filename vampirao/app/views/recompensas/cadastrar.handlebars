@@ -1,3 +1,35 @@
 <title>{{titulo}}</title>
 
-<h2>Cadastrar recompensa</h2>
+<div class="container">
+    <br />
+    <h2>Cadastro de recompensa</h2>
+    <hr>
+    <form action='/recompensas/add' method="post">
+        <div class="row g-3">
+            <div class="form-group col-md-5">
+                <div class="form-group">
+                    <span class="required">* <label>Tipo:</label></span>
+                    <select class="form-control form-select" id="nome" name="nome">
+                        <option value="Desconto 10">Desconto de R$ 10,00 na loja X</option>
+                        <option value="Vale-Compras 50">Vale-Compras de R$ 50,00 na loja X</option>
+                        <option value="Gift Card Google 15">Gift Card GooglePlay de R$ 15,00</option>
+                        <option value="Gift Card Google 50">Gift Card GooglePlay de R$ 50,00</option>
+                        <option value="Gift Card Spotify 17">Gift Card Spotify de R$ 18,00</option>
+                        <option value="Gift Card NETFLIX 50">Gift Card NETFLIX de R$ 50,00</option>
+                        <option value="Gift Card iFood 50">Gift Card iFood de R$ 50,00</option>
+                    </select>
+                </div>
+                <br />
+                <span><label>Pontos para resgatar:</label></span>
+                <input name="valor" id="valor" type="number" class="form-control">
+                <span class="alert-danger">{{printError errors 'valor'}}</span>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+            <button class="btn btn-outline-success me-md-2" type="submit">Cadastrar</button>
+            <a href="../index" class="btn btn-outline-danger">Cancelar</a>
+        </div>
+    </form>
+</div>

@@ -46,5 +46,6 @@ router.get("/admin/vampiroes/remove/:id", vampiraoController.remove);
 router.post("/admin/vampiroes/remove/:id", vampiraoController.remove);
 router.get("/admin/recompensas/index", recompensaController.index);
 router.get("/admin/recompensas/add", recompensaController.addRecompensa);
+router.post("/recompensas/add", recompensaController.addRecompensa);
 
 module.exports = router;

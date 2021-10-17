@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Recompensa.init({
+    nome: DataTypes.STRING,
     valor: DataTypes.INTEGER
   }, {
     sequelize,
