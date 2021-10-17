@@ -7,6 +7,9 @@
                 <h2>Atualização de Cadastro</h2>
             </div>
 
+            <input hidden="true" name="id" id="id" type="text" value="{{id}}">
+            <input hidden="true" name="pontuacao" id="pontuacao" type="text" value="{{pontuacao}}">
+
             <div class="card-body">
                 <div class="row g-3">
                     <div class="col-md-3">
@@ -22,8 +25,7 @@
                         <div class="form-group">
                             <span class="required">* <label>Sobrenome:</label></span>
                             <input value="{{sobrenome}}" name="sobrenome" id="sobrenome" type="text"
-                                class="form-control" minlength="2" maxlength="50" placeholder={{sobrenome}}
-                               >
+                                class="form-control" minlength="2" maxlength="50" placeholder={{sobrenome}}>
                             <span class="alert-danger">{{printError errors 'sobrenome'}}</span>
                         </div>
                     </div>
@@ -31,9 +33,9 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <span class="required">* <label>CPF:</label></span>
-                            <input value="{{cpf}}" name="cpf" onkeypress="$(this).mask('000.000.000-00');" id="cpf"
-                                type="text" class="form-control" maxlength="11" minlength="11"
-                                placeholder={{cpf}}>
+                            <input readonly disabled value="{{cpf}}" name="cpf"
+                                onkeypress="$(this).mask('000.000.000-00');" id="cpf" type="text" class="form-control"
+                                maxlength="11" minlength="11" placeholder={{cpf}}>
                             <span class="alert-danger">{{printErrorCPF errors 'cpf'}}</span>
                             {{!--<span class="alert-link" id="resposta"></span> --}}
                         </div>
@@ -42,7 +44,9 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <span class="required">* <label>Data de Nascimento:</label></span>
-                            <input name="nascimento" placeholder="{{nascimento}}" id="nascimento" type="text" class="form-control" onfocus="(this.type='date'),$(this).mask('00/00/0000')" onblur="(this.type='text')">
+                            <input readonly disabled name="nascimento" placeholder="{{nascimento}}" id="nascimento"
+                                type="text" class="form-control" onfocus="(this.type='date'),$(this).mask('00/00/0000')"
+                                onblur="(this.type='text')">
                             <span class="alert-danger">{{printErrorNascimento errors}}</span>
                         </div>
                     </div>
@@ -51,8 +55,8 @@
                     <div class="col-md-4">
                         <div class="form-group mt-3">
                             <span class="required">* <label>Email:</label></span>
-                            <input value="{{email}}" name="email" id="email" type="email" minlength="4"
-                                maxlength="254" class="form-control" placeholder="{{email}}">
+                            <input value="{{email}}" name="email" id="email" type="email" minlength="4" maxlength="254"
+                                class="form-control" placeholder="{{email}}">
                             <span class="alert-danger">{{printError errors 'email'}}</span>
                         </div>
                     </div>
@@ -60,8 +64,7 @@
                     <div class="col-md-2">
                         <div class="form-group mt-3">
                             <label>Telefone celular:</label>
-                            <input value="{{telefone}}" name="telefone"
-                                placeholder="{{telefone}}"
+                            <input value="{{telefone}}" name="telefone" placeholder="{{telefone}}"
                                 onkeypress="$(this).mask('(00) 0000-00009')" id="telefone" minlength="15" maxlength="15"
                                 type="text" class="form-control">
                         </div>
@@ -70,7 +73,7 @@
                     <div class="col-md-3">
                         <div class="form-group mt-3">
                             <span class="required">* <label>Senha:</label></span>
-                            <input name="senha" type="password" id="senha" minlength="8" class="form-control">
+                            <input value="{{senha}}" name="senha" type="password" id="senha" minlength="8" class="form-control">
                             <span class="alert-danger">{{printError errors 'senha'}}</span>
                         </div>
                     </div>
@@ -78,8 +81,7 @@
                     <div class="col-md-3">
                         <div class="form-group mt-3">
                             <span class="required">* <label>Confirmação de senha:</label></span>
-                            <input name="confSenha" minlength="8" id="confSenha" type="password" class="form-control"
-                               >
+                            <input value="{{senha}}" name="confSenha" minlength="8" id="confSenha" type="password" class="form-control">
                         </div>
                     </div>
 
@@ -91,8 +93,8 @@
                                     {{#each sangues}}
 
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="id_sangue" id="id_sangue" placeholder="{{id_sangue}}"
-                                            value={{id_sangue}}>
+                                        <input class="form-check-input" type="radio" name="id_sangue" id="id_sangue"
+                                            value={{id}}>
                                         <label class="form-check-label">{{tipo}}</label>
                                     </div>
 

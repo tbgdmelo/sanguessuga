@@ -248,7 +248,7 @@ async function deslogar(req, res) {
 
 async function atualizar(req, res) {
     const sangues = await Sangue.findAll(); //r
-    if (req.route.methods.get) {
+    if (req.route.methods.get && req.session.user !== 'undefined' && !req.session.user.isAdmin && req.session.user.id == req.params.id) {
         const id = req.params.id;
         const user = await User.findOne({ where: { id: id } });
         let nascimento = user.nascimento.split('-').reverse().join('/');
@@ -260,47 +260,52 @@ async function atualizar(req, res) {
             sobrenome: user.sobrenome,
             pontuacao: user.pontuacao,
             cpf: user.cpf,
-            nascimento,
+            nascimento: user.nascimento,
             email: user.email,
             telefone: user.telefone,
             id_sangue: user.id_sangue,
+            senha: user.senha,
             sangues: sangues.map(sangue => sangue.toJSON()),
         });
     }
-    else {
+    else if(req.route.methods.post && req.session.user !== 'undefined' && !req.session.user.isAdmin && req.session.user.id == req.params.id) {
         try {
             const user = await User.findOne({ where: { id: req.params.id } });
             await User.update(
                 {
+                    id: req.body.id,
                     nome: req.body.nome,
                     sobrenome: req.body.sobrenome,
                     cpf: req.body.cpf,
                     nascimento: req.body.nascimento,
                     email: req.body.email,
                     senha: req.body.senha,
-                    pontuacao: 0,
+                    pontuacao: req.body.pontuacao,
                     telefone: req.body.telefone,
-                    id_sangue: req.body.id_sangue
+                    id_sangue: req.body.id_sangue,
+                    isAdmin: 0
                 },
                 { where: { id: req.params.id } }
-            ).then(result =>
-                res.render("user/perfil", {
-                    titulo: "Perfil",
-                    id: req.params.id,
-                    nome: req.body.nome,
-                    sobrenome: req.body.sobrenome,
-                    tipoSanguineo: req.body.id_sangue,
-                    pontuacao: user.pontuacao,
-                    modal: "ClickBotao2()"
-                })
-            ).catch(err =>
-                console.log("nao foi",err)
             )
+
+            const sanguineo = await Sangue.findOne({ where: { id: req.body.id_sangue } });
+            res.render("user/perfil", {
+                titulo: "Perfil",
+                id: req.params.id,
+                nome: req.body.nome,
+                sobrenome: req.body.sobrenome,
+                tipoSanguineo: sanguineo.tipo,
+                pontuacao: user.pontuacao,
+                modal: "ClickBotao2()"
+            })
 
         }
         catch (error) {
             console.log(error);
         }
+    }
+    else{
+        res.redirect("/notfound");
     }
 }
 
