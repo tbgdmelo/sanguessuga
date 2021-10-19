@@ -5,62 +5,78 @@
         document.getElementById("mybutton").click();
     }
 </script>
+
 <body onload={{modal}}>
-<div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Meu perfil <i class="fas fa-user"></i><span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Minhas doações <i class="fas fa-hand-holding-medical"></i></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/centros/index">Centros de doação <i class="fas fa-hospital-alt"></i></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/campanhas">Campanhas <i class="fas fa-first-aid"></i></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Recompensas Ativas <i class="fas fa-trophy"></i></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/atualizar/{{id}}">Editar perfil <i class="fas fa-user-edit"></i></a>
-            </li>
-            </ul>
+    <div class="container">
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <h5> Bem vindo(a) {{nome}} {{sobrenome}}</h5>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex justify-content-end">
+                    <h5> Sua pontuacao: {{pontuacao}}</h5>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <p><i class="fas fa-tint"></i> Tipo Sanguíneo: {{tipoSanguineo}}</p>
+                </div>
+            </div>
         </div>
-    </nav>
-    <hr />
-        <div class="container">
-            <div class="jumbotron">
-                <div class="row">
-                    <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
-                        <img src="https://www.svgimages.com/svg-image/s5/man-passportsize-silhouette-icon-256x256.png"
-                            alt="stack photo" class="img">
-                    </div>
-                    <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
-                        <div class="container">
-                            <h4> Bem vindo(a) {{nome}} {{sobrenome}}</h4>
+
+        <br>
+        <div class="row row-cols-1 row-cols-md-4 g-5">
+            <div class="col">
+                <div class="card shadow">
+                    <a href="#" class="a-perfil">
+                        <div class="card-perfil">
+                            <div class="card-body">
+                                <h5 class="card-title">Minhas doações</h5>
+                            </div>
                         </div>
-                        <hr>
-                        <ul class="container details">
-                            <li class="itemPropaganda">
-                                <p></span><i class="fas fa-tint"></i> Tipo Sanguíneo: {{tipoSanguineo}}</p>
-                            </li>
-                            <li class="itemPropaganda">
-                                <p></span><i class="fas fa-coins"></i> Pontuação: {{pontuacao}}</p>
-                            </li>
-                        </ul>
-                    </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card shadow">
+                    <a href="/centros/index" class="a-perfil">
+                        <div class="card-perfil">
+                            <div class="card-body">
+                                <h5 class="card-title">Centros de doação</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card shadow">
+                    <a href="/campanhas" class="a-perfil">
+                        <div class="card-perfil">
+                            <div class="card-body">
+                                <h5 class="card-title">Campanhas</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card shadow">
+                    <a href="#" class="a-perfil">
+                        <div class="card-perfil">
+                            <div class="card-body">
+                                <h5 class="card-title">Recompensas Ativas</h5>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
 
         </div>
-        <img src="">
     </div>
 
 
