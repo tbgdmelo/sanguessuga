@@ -58,4 +58,8 @@ router.post("/admin/recompensas/update/:id", recompensaController.update);
 router.get("/admin/recompensas/remove/:id", recompensaController.remove);
 router.post("/admin/recompensas/remove/:id", recompensaController.remove);
 
+router.get("/admin/estoques/index", adminController.indexEstoque);
+router.get("/admin/estoques/update/:id", adminController.updateEstoque);
+router.post("/admin/estoques/update/:id", adminController.updateEstoque);
+
 module.exports = router;
