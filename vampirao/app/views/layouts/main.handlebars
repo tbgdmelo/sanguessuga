@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="shortcut icon" href="/img/icons/shortcut.png" >
+    <link rel="shortcut icon" href="/img/blood.png">
     {{!-- <title>Projeto Sanguessuga</title> --}}
 </head>
 
@@ -14,11 +14,10 @@
     {{!-- arquivo com a cabeçalho e rodapé fixos das páginas --}}
     <nav class="navbar navbar-expand-lg navbar-dark navbarRed">
         <div class="container-fluid">
-           {{!- <a class="navbar-brand" href="/">Projeto Sanguessuga</a> --}}
-           <a class="navbar-brand" href="/"><img class="imgheader" src="/img/header.png" alt=""></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                aria-label="Toggle navigation">
+            {{!- <a class="navbar-brand" href="/">Projeto Sanguessuga</a> --}}
+            <a class="navbar-brand" href="/"><img class="imgheader" src="/img/header.png" alt=""></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -34,13 +33,16 @@
                         <a class="nav-link" href="/cadastro">Cadastre-se</a>
                     </li>
                     {{else}}
-                        {{#if session.user.isAdmin}}
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/index">Console Admin</a>
-                        </li>
-                        {{else}}
-                        <a href="/perfil/{{session.user.id}}" class="nav-link">Meu Perfil <i class="fas fa-user"></i></a>
-                        {{/if}}
+                    {{#if session.user.isAdmin}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/index">Console Admin</a>
+                    </li>
+                    {{else}}
+                    <a href="/perfil/{{session.user.id}}" class="nav-link">Meu Perfil <i class="fas fa-user"></i></a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/atualizar/{{session.user.id}}">Editar perfil <i class="fas fa-user-edit"></i></a>
+                    </li>
+                    {{/if}}
                     {{/if}}
 
                     <li class="nav-item">
@@ -49,7 +51,7 @@
                 </ul>
                 <form class="justify-content-end">
                     {{#if (verificaLogin session.user) }}
-                    <a href="/login" class="btn btn-outline-light">Login</a>
+                    <a href="/login" class="btn btn-outline-light">Entrar</a>
                     {{else}}
                     <a href="/sair" class="btn btn-outline-light">Sair <i class="fas fa-sign-out-alt"></i></a>
                     {{/if}}
@@ -57,9 +59,9 @@
             </div>
         </div>
     </nav>
-    
+
     {{{body}}}
-    
+
     <script src="/js/jquery.min.js"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>

@@ -7,6 +7,7 @@ const Recompensa = models.Recompensa;
 const Sangue = models.Sangue;
 const Pedido = models.Pedido;
 const Estoque = models.Estoque;
+const Declaracao = models.declaracao;
 
 
 async function index(req, res) {
@@ -20,6 +21,7 @@ async function index(req, res) {
             });
             const recompensaAmount = await Recompensa.count();
             const pedidoAmount = await Pedido.count();
+            
             res.render("admin/index", {
                 titulo: "Dashboard Admin",
                 usersAmount: usersAmount,
@@ -108,5 +110,48 @@ async function updateEstoque(req, res) {
         res.redirect("/notfound");
     }
 }
-
-module.exports = { index, indexEstoque, updateEstoque };
+async function uploadDeclaracao(req, res) {
+    try {
+        if (req.route.methods.get && typeof (req.session.user) !== 'undefined' && req.session.user.isAdmin) { //se esta logado
+            res.render("admin/document");
+        }
+        else if (req.route.methods.post && typeof (req.session.user) !== 'undefined' && req.session.user.isAdmin) {
+            try {
+                const user = await User.findOne({ where: { cpf: req.body.cpf } });
+                if (!user) {
+                    res.render("admin/document", {
+                        msg: "O cpf é inválido ou não há um usuário com este CPF cadastrado. Tente novamente."
+                    });
+                }
+                console.log(req.file);
+                try {
+                    await Declaracao.create({
+                        cpf_user: "018.795.232-99",
+                        fileName: req.file.originalname,
+                        fileExt: req.file.mimetype,
+                        file: req.file.buffer
+                    })
+                }
+                catch (e) {
+                    console.log("falhou no banco");
+                    console.log(e);
+                }
+                res.render("admin/document", {
+                    modal: "ClickBotao()",
+                    cpf: req.body.cpf
+                });
+            }
+            catch (error) {
+                console.log("error no envio da declaracao");
+                res.redirect("/notfound");
+            }
+        }
+        else {
+            res.redirect("/notfound");
+        }
+    }
+    catch (error) {
+        res.redirect("/notfound");
+    }
+}
+module.exports = { index, indexEstoque, updateEstoque, uploadDeclaracao };

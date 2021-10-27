@@ -62,4 +62,10 @@ router.get("/admin/estoques/index", adminController.indexEstoque);
 router.get("/admin/estoques/update/:id", adminController.updateEstoque);
 router.post("/admin/estoques/update/:id", adminController.updateEstoque);
 
+router.get("/admin/declaracao/upload", adminController.uploadDeclaracao);
+
+const multer = require('multer');
+const upload = multer({ storage: multer.memoryStorage() });
+router.post("/admin/declaracao/upload", upload.single('documento'), adminController.uploadDeclaracao);
+
 module.exports = router;
