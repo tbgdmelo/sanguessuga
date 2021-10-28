@@ -1,0 +1,24 @@
+<title>Atualizar Estoque</title>
+<div class="container">
+    <h2>Atualizar estoque</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {{#each centros}}
+                <th scope="row">{{id}}</th>
+                <td>{{nome}}</td>
+                <td class="options">
+                    <a href="/admin/estoques/update/{{id}}"><i class="fas fa-edit" style="color: #006625;"></i></a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

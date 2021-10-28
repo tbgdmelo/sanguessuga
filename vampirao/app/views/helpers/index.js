@@ -173,7 +173,21 @@ function nomeRecomp(nome){
     }
 }
   
+function nomeCentro(id,centros){
+    let nome="";
+    centros.forEach(element => {
+        if(element.id===id){
+            nome=element.nome;
+        }
+    });
+    return nome;
+}
+
+function formatarData(data){
+    console.log(data)
+    return data.slice(-2)+"/" + data.slice(5,7) + "/"+data.slice(0,4);
+}
 
 module.exports = { toLower, toUpper, checked, printError, printErrorEmail, printErrorCPF, 
     printErrorNascimento, printErrorEsqueciSenha, printErrorSangue, verificaLogin, getNomeSangue,
-    nivelSangue, nomeRecomp};
+    nivelSangue, nomeRecomp, nomeCentro, formatarData};

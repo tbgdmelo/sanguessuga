@@ -124,4 +124,21 @@ async function update(req, res) {
 
 }
 
-module.exports = {index, addRecompensa, remove, update};
+async function listarRecompensas(req, res){
+    try{
+        if(req.route.methods.get && req.session.user !== 'undefined' && !req.session.user.isAdmin){
+            const recompensas = await Recompensa.findAll();
+            res.render("recompensas/listar",{
+                recompensas: recompensas.map(recompensa => recompensa.toJSON()),
+            });
+        }
+        else{
+            res.redirect("/notfound");
+        }
+    }
+    catch (error) {
+        res.redirect("/notfound");
+    }
+}
+
+module.exports = {index, addRecompensa, remove, update, listarRecompensas};

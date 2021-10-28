@@ -4,6 +4,8 @@ const models = require("../models/index"); //import de todos os models
 const Centro = models.Centro;
 const Estoque = models.Estoque;
 const Sangue = models.Sangue;
+const Doacao = models.Doacao;
+const User = models.User;
 
 async function index(req, res) {
     try {
@@ -52,4 +54,81 @@ async function estoque(req, res) {
     }
 }
 
-module.exports = { index, estoque };
+async function agendar(req, res) {
+    try {
+        if (req.route.methods.get && typeof (req.session.user) !== 'undefined') {
+            const id_centro = req.params.id;
+            const centro = await Centro.findOne({ where: { id: id_centro } });
+
+            if (!centro || typeof (centro) === 'undefined') {
+                res.redirect("/notfound");
+            }
+            let data = new Date();
+            let dataFormatada = ((data.getFullYear())) + "-" + ((data.getMonth() + 1)) + "-" + data.getDate();
+
+            res.render("centros/agendar", {
+                nome_centro: centro.nome,
+                data: dataFormatada
+            });
+        }
+        else if (req.route.methods.post && typeof (req.session.user) !== 'undefined') {
+            try {
+                const agendados = await Doacao.findAll({ where: { cpf_user: req.session.user.cpf, agendado:1 } });
+                console.log(agendados);
+                if (agendados.length===0) {
+                    await Doacao.create({
+                        data: req.body.dia,
+                        hora: req.body.hora,
+                        cpf_user: req.session.user.cpf,
+                        id_centro: req.params.id,
+                        agendado: 1
+                    });
+                }
+                else {
+                    const id_centro = req.params.id;
+                    const centro = await Centro.findOne({ where: { id: id_centro } });
+
+                    if (!centro || typeof (centro) === 'undefined') {
+                        res.redirect("/notfound");
+                    }
+                    let data = new Date();
+                    let dataFormatada = ((data.getFullYear())) + "-" + ((data.getMonth() + 1)) + "-" + data.getDate();
+
+                    res.render("centros/agendar", {
+                        nome_centro: centro.nome,
+                        data: dataFormatada,
+                        msg: "Você já possui uma doação agendada."
+                    });
+                }
+                const id = req.session.user.id;
+                const user = await User.findOne({ where: { id: id } });
+                const sanguineo = await Sangue.findOne({ where: { id: user.id_sangue } });
+                if (req.session.user.id == id) {
+                    res.render("user/perfil", {
+                        titulo: "Meu Perfil",
+                        id: user.id,
+                        nome: user.nome,
+                        sobrenome: user.sobrenome,
+                        tipoSanguineo: sanguineo.tipo,
+                        pontuacao: user.pontuacao
+                    });
+                }
+                else {
+                    res.redirect("/notfound");
+                }
+            }
+            catch (e) {
+                res.redirect("/notfound");
+                console.log(e);
+            }
+        }
+        else {
+            res.redirect("/notfound");
+        }
+    }
+    catch (error) {
+        res.redirect("/notfound");
+    }
+}
+
+module.exports = { index, estoque, agendar };

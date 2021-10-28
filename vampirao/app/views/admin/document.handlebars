@@ -1,0 +1,73 @@
+<title>Cadastrar declaração</title>
+<script>
+  function ClickBotao() {
+    document.getElementById("mybutton").click();
+  }
+</script>
+
+<body onload={{modal}}>
+  <div class="container">
+    <br />
+    <h2>Cadastro de declaração</h2>
+    <form action="upload" method="post" enctype="multipart/form-data">
+      <div class="col-md-3">
+        <div class="form-group">
+          <span class="required">* <label>CPF do doador:</label></span>
+          <input name="cpf" onkeypress="$(this).mask('000.000.000-00');" id="cpf" type="text" class="form-control"
+            maxlength="11" minlength="11" placeholder="Não utilize pontos e traços" required>
+          <span class="alert-danger">{{printErrorCPF errors 'cpf'}}</span>
+        </div>
+      </div>
+      <br />
+      <div class="col-md-3">
+        <div class="form-group">
+          <span class="required">* <label>Local de doação:</label></span>
+          <select name="id_centro" class="form-select" required>
+            <option value="" selected>Selecione o centro...</option>
+            {{#each centros}}
+              <option value="{{id}}">{{nome}}</option>
+            {{/each}}
+          </select>
+        </div>
+      </div>
+      <br />
+      <label>Adicione a declaração em PDF abaixo</label>
+      <br />
+      <div>
+        <input type="file" name="documento" id="documento" accept=".pdf" required>
+      </div>
+      <br />
+      <span class="alert-danger">{{msg}}</span>
+      <div class="d-grid gap-2 d-md-flex">
+        <button class="btn btn-outline-success me-md-2" type="submit">Cadastrar</button>
+        <a href="/admin/index" class="btn btn-outline-danger">Cancelar</a>
+      </div>
+    </form>
+  </div>
+
+  <!-- Button trigger modal -->
+  <button hidden="true" id="mybutton" type="button" class="btn btn-primary" data-toggle="modal"
+    data-target="#exampleModal">
+    Launch demo modal
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Documento adicionado com sucesso!</h5>
+        </div>
+        <div class="modal-body">
+          A declaração de doação foi adicionada com sucesso para o CPF: {{cpf}}.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</body>

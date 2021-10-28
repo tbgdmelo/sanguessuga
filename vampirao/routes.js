@@ -58,4 +58,20 @@ router.post("/admin/recompensas/update/:id", recompensaController.update);
 router.get("/admin/recompensas/remove/:id", recompensaController.remove);
 router.post("/admin/recompensas/remove/:id", recompensaController.remove);
 
+router.get("/admin/estoques/index", adminController.indexEstoque);
+router.get("/admin/estoques/update/:id", adminController.updateEstoque);
+router.post("/admin/estoques/update/:id", adminController.updateEstoque);
+
+router.get("/admin/declaracao/upload", adminController.uploadDeclaracao);
+
+const multer = require('multer');
+const upload = multer({ storage: multer.memoryStorage() });
+router.post("/admin/declaracao/upload", upload.single('documento'), adminController.uploadDeclaracao);
+
+//Rotas de usuário
+router.get("/doacoes/:id", usersController.doacoes);
+router.get("/centros/:id/agendar", centrosController.agendar);
+router.post("/centros/:id/agendar", centrosController.agendar);
+router.get("/recompensas", recompensaController.listarRecompensas);
+
 module.exports = router;

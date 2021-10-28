@@ -562,8 +562,25 @@ section {
   font-size:32px;
   margin-bottom: 32px;
 }
+
 .log-login{
   width: 500px;
+}
+
+.card-perfil {
+  padding: 15px;
+  text-align: center;
+  transition: 0.3s;
+  color: #707071;
+}
+
+.card-perfil:hover {
+  background-color: gray;
+  color: white;
+}
+
+.a-perfil{
+  text-decoration: none;
 }
 
 @media (max-width: 991px) {
