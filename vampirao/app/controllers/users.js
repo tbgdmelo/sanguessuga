@@ -5,12 +5,15 @@ const models = require("../models/index"); //import de todos os models
 const Sangue = models.Sangue; //utilizando apenas o model de sangue para exibir nos radios button
 
 const User = models.User;
+const Doacao = models.Doacao;
+const Centro = models.Centro;
 
 const crypto = require('crypto');
 
 const bcrypt = require('bcryptjs');
 
 const mailer = require("../modules/mailer");
+const doacao = require("../models/doacao");
 
 async function cadastro(req, res) {
     const sangues = await Sangue.findAll(); //recupera todos os registros da tabela sangues
@@ -333,4 +336,31 @@ async function atualizar(req, res) {
     }
 }
 
-module.exports = { cadastro, esqueciSenha, reset_senha, tokenexpired, perfil, login, deslogar, atualizar };
+async function doacoes(req, res){
+    try{
+        if(req.route.methods.get && req.session.user !== 'undefined' && !req.session.user.isAdmin){
+            const id= req.params.id;
+            if(req.session.user.id == id){
+                const cpf_user = req.session.user.cpf;
+                const doacoes = await Doacao.findAll({where:{cpf_user:cpf_user}});
+                const centros = await Centro.findAll();
+                res.render("user/doacoes",{
+                    doacoes: doacoes.map(doacao => doacao.toJSON()),
+                    centros: centros.map(centro => centro.toJSON()),
+                });
+            }
+            else {
+                res.redirect("/notfound");
+            }
+        }
+        else{
+            res.redirect("/notfound");
+        }
+    }
+    catch (error) {
+        res.redirect("/notfound");
+    }
+}
+
+module.exports = { cadastro, esqueciSenha, reset_senha, tokenexpired, perfil, login, 
+    deslogar, atualizar, doacoes};

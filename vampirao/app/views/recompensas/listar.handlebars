@@ -1,0 +1,20 @@
+<title>Recompensas ativas</title>
+
+<div class="container">
+    <br />
+    <h3>Recompensas para resgatar</h3>
+    <div class="row">
+        {{#each recompensas}}
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem; margin-top: 15px;" >
+                <img class="card-img-top img-centro" src="/img/recompensas/{{nome}}.png" alt="Imagem recompensa">
+                <div class="card-body">
+                    <h4 class="card-title">{{nomeRecomp nome}}</h4>
+                    <p class="card-text">Pontos para resgatar: {{valor}}</p>
+                    <a href="#" class="btn btn-primary">Resgatar</a>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

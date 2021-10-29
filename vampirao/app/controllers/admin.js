@@ -110,10 +110,20 @@ async function updateEstoque(req, res) {
         res.redirect("/notfound");
     }
 }
+
+function calculaPontos(nivel){
+    if(nivel==='Ótimo') return 50
+    else if(nivel==='Normal') return 100
+    else if(nivel==='Alerta') return 150
+    else if(nivel==='Crítico') return 250
+}
 async function uploadDeclaracao(req, res) {
     try {
+        const centros = await Centro.findAll({where:{vampirao:0}});
         if (req.route.methods.get && typeof (req.session.user) !== 'undefined' && req.session.user.isAdmin) { //se esta logado
-            res.render("admin/document");
+            res.render("admin/document",{
+                centros : centros.map(centro=>centro.toJSON()),
+            });nt2
         }
         else if (req.route.methods.post && typeof (req.session.user) !== 'undefined' && req.session.user.isAdmin) {
             try {
@@ -125,6 +135,14 @@ async function uploadDeclaracao(req, res) {
                 }
                 console.log(req.file);
                 try {
+
+                    const user = User.findOne({where:{cpf:req.body.cpf}});
+                    const nivel = Estoque.findOne({where:{id_centro:req.body.id_centro, 
+                        id_sangue:user.id_sangue}});
+                    
+                    await User.update({
+                        pontuacao: calculaPontos(nivel.quantidade)
+                    },{where:{cpf:req.body.cpf}});
                     await Declaracao.create({
                         cpf_user: "018.795.232-99",
                         fileName: req.file.originalname,
@@ -138,7 +156,9 @@ async function uploadDeclaracao(req, res) {
                 }
                 res.render("admin/document", {
                     modal: "ClickBotao()",
-                    cpf: req.body.cpf
+
+                    cpf: req.body.cpf,
+                    centros : centros.map(centro=>centro.toJSON()),
                 });
             }
             catch (error) {

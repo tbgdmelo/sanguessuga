@@ -68,4 +68,11 @@ const multer = require('multer');
 const upload = multer({ storage: multer.memoryStorage() });
 router.post("/admin/declaracao/upload", upload.single('documento'), adminController.uploadDeclaracao);
 
+
+//Rotas de usuário
+router.get("/doacoes/:id", usersController.doacoes);
+router.get("/centros/:id/agendar", centrosController.agendar);
+router.post("/centros/:id/agendar", centrosController.agendar);
+router.get("/recompensas", recompensaController.listarRecompensas);
+
 module.exports = router;

@@ -15,9 +15,10 @@ module.exports = (sequelize, DataTypes) => {
   };
   Doacao.init({
     data: DataTypes.DATEONLY,
-    pontuacao: DataTypes.INTEGER,
+    hora: DataTypes.STRING,
     cpf_user: DataTypes.STRING,
-    id_centro: DataTypes.INTEGER
+    id_centro: DataTypes.INTEGER,
+    agendado: DataTypes.BOOLEAN
   }, {
     sequelize,
     modelName: 'Doacao',
