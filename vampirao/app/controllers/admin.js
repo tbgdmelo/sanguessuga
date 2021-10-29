@@ -123,7 +123,7 @@ async function uploadDeclaracao(req, res) {
         if (req.route.methods.get && typeof (req.session.user) !== 'undefined' && req.session.user.isAdmin) { //se esta logado
             res.render("admin/document",{
                 centros : centros.map(centro=>centro.toJSON()),
-            });nt2
+            });
         }
         else if (req.route.methods.post && typeof (req.session.user) !== 'undefined' && req.session.user.isAdmin) {
             try {
