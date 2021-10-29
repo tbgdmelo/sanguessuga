@@ -149,6 +149,7 @@ async function uploadDeclaracao(req, res) {
 
                     const pontos = await calculaPontos(nivel.quantidade);
                     console.log(pontos);
+                    
                     await User.update({
                         pontuacao: user.pontuacao+pontos
                     }, { where: { cpf: req.body.cpf } });
