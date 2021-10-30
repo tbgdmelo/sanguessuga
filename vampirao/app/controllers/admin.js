@@ -123,13 +123,8 @@ async function uploadDeclaracao(req, res) {
     try {
         const centros = await Centro.findAll({ where: { vampirao: 0 } });
         if (req.route.methods.get && typeof (req.session.user) !== 'undefined' && req.session.user.isAdmin) { //se esta logado
-<<<<<<< HEAD
             res.render("admin/document",{
                 centros : centros.map(centro=>centro.toJSON()),
-=======
-            res.render("admin/document", {
-                centros: centros.map(centro => centro.toJSON()),
->>>>>>> agendarDoacao
             });
         }
         else if (req.route.methods.post && typeof (req.session.user) !== 'undefined' && req.session.user.isAdmin) {
