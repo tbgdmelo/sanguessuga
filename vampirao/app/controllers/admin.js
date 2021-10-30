@@ -154,21 +154,22 @@ async function uploadDeclaracao(req, res) {
                             }
                         });
 
-                        const pontos = await calculaPontos(nivel.quantidade);
+                        const pontos = calculaPontos(nivel.quantidade);
 
                         await User.update({
                             pontuacao: user.pontuacao + pontos
                         }, { where: { cpf: req.body.cpf } });
 
                         const declaracao = await Declaracao.create({
-                            cpf_user: "018.795.232-99",
+                            cpf_user: req.body.cpf,
                             fileName: req.file.originalname,
                             fileExt: req.file.mimetype,
                             file: req.file.buffer
                         });
 
                         await Doacao.update({
-                            id_declaracao: declaracao.id
+                            id_declaracao: declaracao.id,
+                            agendado: false
                         }, { where: { id: req.body.id_declaracao } });
 
 

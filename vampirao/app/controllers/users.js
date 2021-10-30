@@ -7,6 +7,7 @@ const Sangue = models.Sangue; //utilizando apenas o model de sangue para exibir 
 const User = models.User;
 const Doacao = models.Doacao;
 const Centro = models.Centro;
+const Declaracao = models.declaracao;
 
 const crypto = require('crypto');
 
@@ -24,8 +25,8 @@ async function cadastro(req, res) {
             titulo: "Cadastro de usuário",
         });
     }
-    else{
-        try{
+    else {
+        try {
             const senha = await bcrypt.hash(req.body.senha, 10);
             await User.create({
                 cpf: req.body.cpf,
@@ -74,8 +75,7 @@ async function esqueciSenha(req, res) {
     else {
         try {
             const user = await User.findOne({ where: { email: req.body.email } });
-            //console.log('veio user');
-            //console.log(user);
+
             if (user === null) {
                 res.render("user/esqueci_senha", {
                     titulo: "Recuperação de senha",
@@ -101,7 +101,7 @@ async function esqueciSenha(req, res) {
                         }, { where: { email: req.body.email } });
 
                         const user = await User.findOne({ where: { email: req.body.email } });
-                        //console.log(req.body.email);
+
                         const email = req.body.email;
                         const nome = user.nome;
                         const sobrenome = user.sobrenome;
@@ -165,15 +165,15 @@ async function reset_senha(req, res) {
             token: req.params.token
         })
     }
-    else{
-        const token= req.params.token;
-        try{
-            const user = await User.findOne({ where: {passwordResetToken: token} });
+    else {
+        const token = req.params.token;
+        try {
+            const user = await User.findOne({ where: { passwordResetToken: token } });
             const senha = await bcrypt.hash(req.body.senha, 10);
-            try{
+            try {
                 await User.update({
                     senha: senha,
-                },{ where: {passwordResetToken: token} });
+                }, { where: { passwordResetToken: token } });
                 res.render("user/login", {
                     titulo: "Login",
                     modal: "ClickBotao()"
@@ -195,15 +195,15 @@ function tokenexpired(req, res) {
     res.render("user/tokenexpired");
 }
 
-async function perfil(req, res){
-    try{
-        if(req.route.methods.get && req.session.user !== 'undefined' && !req.session.user.isAdmin){
-            const id= req.params.id;
-            const user = await User.findOne({where: {id: id }});
-            const sanguineo = await Sangue.findOne({where: {id: user.id_sangue}});
-            if(req.session.user.id == id){
-                res.render("user/perfil",{
-                    titulo:"Meu Perfil",
+async function perfil(req, res) {
+    try {
+        if (req.route.methods.get && req.session.user !== 'undefined' && !req.session.user.isAdmin) {
+            const id = req.params.id;
+            const user = await User.findOne({ where: { id: id } });
+            const sanguineo = await Sangue.findOne({ where: { id: user.id_sangue } });
+            if (req.session.user.id == id) {
+                res.render("user/perfil", {
+                    titulo: "Meu Perfil",
                     id: user.id,
                     nome: user.nome,
                     sobrenome: user.sobrenome,
@@ -215,7 +215,7 @@ async function perfil(req, res){
                 res.redirect("/notfound");
             }
         }
-        else{
+        else {
             res.redirect("/notfound");
         }
     }
@@ -234,25 +234,25 @@ async function login(req, res) {
     }
     else {
         try {
-            const user = await User.findOne({ where:{email: req.body.email} });
-            
-            if(!await bcrypt.compare(req.body.senha, user.senha)){
+            const user = await User.findOne({ where: { email: req.body.email } });
+
+            if (!await bcrypt.compare(req.body.senha, user.senha)) {
                 return res.render("user/login", {
                     message: "Sua conta ou senha está incorreta.",
                     titulo: "Login"
                 });
             }
-            if(!user){
+            if (!user) {
                 return res.render("user/login", {
                     message: "Sua conta ou senha está incorreta.",
                     titulo: "Login"
                 });
             }
             req.session.user = user;
-            if(!user.isAdmin){
-                res.redirect("perfil/"+user.id);
+            if (!user.isAdmin) {
+                res.redirect("perfil/" + user.id);
             }
-            else{
+            else {
                 res.redirect("admin/index");
             }
         }
@@ -267,7 +267,6 @@ async function login(req, res) {
 }
 
 async function deslogar(req, res) {
-    console.log(req.session.user);
     req.session.user = undefined;
     res.redirect("/")
 }
@@ -294,7 +293,7 @@ async function atualizar(req, res) {
             sangues: sangues.map(sangue => sangue.toJSON()),
         });
     }
-    else if(req.route.methods.post && req.session.user !== 'undefined' && !req.session.user.isAdmin && req.session.user.id == req.params.id) {
+    else if (req.route.methods.post && req.session.user !== 'undefined' && !req.session.user.isAdmin && req.session.user.id == req.params.id) {
         try {
             const user = await User.findOne({ where: { id: req.params.id } });
             const senha = await bcrypt.hash(req.body.senha, 10);
@@ -331,21 +330,36 @@ async function atualizar(req, res) {
             console.log(error);
         }
     }
-    else{
+    else {
         res.redirect("/notfound");
     }
 }
 
-async function doacoes(req, res){
-    try{
-        if(req.route.methods.get && req.session.user !== 'undefined' && !req.session.user.isAdmin){
-            const id= req.params.id;
-            if(req.session.user.id == id){
+async function doacoes(req, res) {
+    try {
+        if (req.route.methods.get && req.session.user !== 'undefined' && !req.session.user.isAdmin) {
+            const id = req.params.id;
+            if (req.session.user.id == id) {
                 const cpf_user = req.session.user.cpf;
-                const doacoes = await Doacao.findAll({where:{cpf_user:cpf_user}});
+                const doacoes = await Doacao.findAll({ where: { cpf_user: cpf_user } });
                 const centros = await Centro.findAll();
-                res.render("user/doacoes",{
-                    doacoes: doacoes.map(doacao => doacao.toJSON()),
+
+                const dc = doacoes.map(doacao => doacao.toJSON());
+                
+                for (var i = 0; i < dc.length; i++) {
+                    if(!dc[i].agendado){
+                        const declaracao = await Declaracao.findOne({ 
+                            where: { cpf_user: cpf_user,
+                                     id: dc[i].id_declaracao } 
+                        });
+                        const buffer = new Buffer.from(declaracao.file);
+                        const url = 'data:application/pdf' + ';' + 'base64' + ',' + buffer.toString('base64');
+                        dc[i].link = url;
+                    }
+                }
+
+                res.render("user/doacoes", {
+                    doacoes: dc,
                     centros: centros.map(centro => centro.toJSON()),
                 });
             }
@@ -353,7 +367,7 @@ async function doacoes(req, res){
                 res.redirect("/notfound");
             }
         }
-        else{
+        else {
             res.redirect("/notfound");
         }
     }
@@ -362,5 +376,7 @@ async function doacoes(req, res){
     }
 }
 
-module.exports = { cadastro, esqueciSenha, reset_senha, tokenexpired, perfil, login, 
-    deslogar, atualizar, doacoes};
+module.exports = {
+    cadastro, esqueciSenha, reset_senha, tokenexpired, perfil, login,
+    deslogar, atualizar, doacoes
+};
