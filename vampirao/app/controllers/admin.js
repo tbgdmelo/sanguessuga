@@ -8,6 +8,7 @@ const Sangue = models.Sangue;
 const Pedido = models.Pedido;
 const Estoque = models.Estoque;
 const Declaracao = models.declaracao;
+const Doacao = models.Doacao;
 
 
 async function index(req, res) {
@@ -117,6 +118,7 @@ function calculaPontos(nivel) {
     else if (nivel === 'Alerta') return 150
     else if (nivel === 'Crítico') return 250
 }
+
 async function uploadDeclaracao(req, res) {
     try {
         const centros = await Centro.findAll({ where: { vampirao: 0 } });
@@ -130,47 +132,57 @@ async function uploadDeclaracao(req, res) {
                 const user = await User.findOne({ where: { cpf: req.body.cpf } });
                 if (!user) {
                     res.render("admin/document", {
-                        msg: "O cpf é inválido ou não há um usuário com este CPF cadastrado. Tente novamente."
+                        msg: "O cpf é inválido ou não há um usuário com este CPF cadastrado. Tente novamente.",
+                        centros: centros.map(centro => centro.toJSON()),
                     });
                 }
-                console.log(req.file);
-                try {
 
-                    const user = await User.findOne({ where: { cpf: req.body.cpf } });
-                    console.log(user);
-
-                    const nivel = await Estoque.findOne({
-                        where: {
-                            id_centro: req.body.id_centro,
-                            id_sangue: user.id_sangue
-                        }
+                const doacao = await Doacao.findOne({ where: { id: req.body.id_declaracao } });
+                if (!doacao) {
+                    res.render("admin/document", {
+                        centros: centros.map(centro => centro.toJSON()),
+                        msg_doacao: "O código da declaração está incorreto, tente novamente."
                     });
-                    console.log(nivel);
-
-                    const pontos = await calculaPontos(nivel.quantidade);
-                    console.log(pontos);
-                    
-                    await User.update({
-                        pontuacao: user.pontuacao+pontos
-                    }, { where: { cpf: req.body.cpf } });
-
-                    await Declaracao.create({
-                        cpf_user: "018.795.232-99",
-                        fileName: req.file.originalname,
-                        fileExt: req.file.mimetype,
-                        file: req.file.buffer
-                    })
                 }
-                catch (e) {
-                    console.log("falhou no banco");
-                    console.log(e);
-                }
-                res.render("admin/document", {
-                    modal: "ClickBotao()",
+                else {
+                    try {
+                        const user = await User.findOne({ where: { cpf: req.body.cpf } });
+                        const nivel = await Estoque.findOne({
+                            where: {
+                                id_centro: req.body.id_centro,
+                                id_sangue: user.id_sangue
+                            }
+                        });
 
-                    cpf: req.body.cpf,
-                    centros: centros.map(centro => centro.toJSON()),
-                });
+                        const pontos = await calculaPontos(nivel.quantidade);
+
+                        await User.update({
+                            pontuacao: user.pontuacao + pontos
+                        }, { where: { cpf: req.body.cpf } });
+
+                        const declaracao = await Declaracao.create({
+                            cpf_user: "018.795.232-99",
+                            fileName: req.file.originalname,
+                            fileExt: req.file.mimetype,
+                            file: req.file.buffer
+                        });
+
+                        await Doacao.update({
+                            id_declaracao: declaracao.id
+                        }, { where: { id: req.body.id_declaracao } });
+
+
+                    }
+                    catch (e) {
+                        console.log("falhou no banco");
+                        console.log(e);
+                    }
+                    res.render("admin/document", {
+                        modal: "ClickBotao()",
+                        cpf: req.body.cpf,
+                        centros: centros.map(centro => centro.toJSON()),
+                    });
+                }
             }
             catch (error) {
                 console.log("error no envio da declaracao");
