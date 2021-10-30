@@ -16,7 +16,17 @@
           <input name="cpf" onkeypress="$(this).mask('000.000.000-00');" id="cpf" type="text" class="form-control"
             maxlength="11" minlength="11" placeholder="Não utilize pontos e traços" required>
           <span class="alert-danger">{{printErrorCPF errors 'cpf'}}</span>
+          <span class="alert-danger">{{msg}}</span>
         </div>
+      </div>
+      <br />
+      <div class="col-md-3">
+        <div class="form-group">
+          <span class="required">* <label>Código da doação:</label></span>
+          <input name="id_declaracao" id="id_declaracao" type="text" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+            required>
+           <span class="alert-danger">{{msg_doacao}}</span>
+          </div>
       </div>
       <br />
       <div class="col-md-3">
@@ -37,7 +47,7 @@
         <input type="file" name="documento" id="documento" accept=".pdf" required>
       </div>
       <br />
-      <span class="alert-danger">{{msg}}</span>
+     
       <div class="d-grid gap-2 d-md-flex">
         <button class="btn btn-outline-success me-md-2" type="submit">Cadastrar</button>
         <a href="/admin/index" class="btn btn-outline-danger">Cancelar</a>

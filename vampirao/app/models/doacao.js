@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     hora: DataTypes.STRING,
     cpf_user: DataTypes.STRING,
     id_centro: DataTypes.INTEGER,
-    agendado: DataTypes.BOOLEAN
+    agendado: DataTypes.BOOLEAN,
+    id_declaracao: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Doacao',

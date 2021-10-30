@@ -8,6 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      hora: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       data: {
         allowNull: false,
         type: Sequelize.DATEONLY
@@ -23,6 +27,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER
       },
+      agendado: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -30,6 +38,10 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      id_declaracao: {
+        allowNull: true,
+        type: Sequelize.INTEGER
       }
     });
   },
