@@ -31,6 +31,8 @@ router.get("/notfound", mainController.notfound);
 
 router.get("/campanhas", mainController.campanhas);
 
+router.get("/comodoar", mainController.comoDoar);
+
 //Páginas que precisam de autenticacao para acessar
 router.get("/perfil/:id", usersController.perfil);
 
