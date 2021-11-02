@@ -24,5 +24,8 @@ function campanhas(req,res){
     });
 }
     
+function comoDoar(req,res){
+    res.render("main/comodoar");
+}
 
-module.exports = {index,sobre,notfound, campanhas};
+module.exports = {index,sobre,notfound, campanhas, comoDoar};
