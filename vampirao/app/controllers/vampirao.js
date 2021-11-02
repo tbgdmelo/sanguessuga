@@ -41,7 +41,7 @@ async function cadastrarVampirao(req, res) {
             });
             const recompensaAmount = await Recompensa.count();
             const pedidoAmount = await Pedido.count();
-            res.redirect("../admin/index");
+            res.redirect("../admin/vampiroes/index");
         }
         else {
             res.redirect("/notfound");
