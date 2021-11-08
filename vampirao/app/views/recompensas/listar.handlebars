@@ -1,20 +1,52 @@
 <title>Recompensas ativas</title>
+<script>
+  function ClickBotao() {
+    document.getElementById("mybutton").click();
+  }
+</script>
 
+<body onload={{modal}}>
 <div class="container">
     <br />
     <h3>Recompensas para resgatar</h3>
     <div class="row">
         {{#each recompensas}}
         <div class="col-md-4">
-            <div class="card" style="width: 18rem; margin-top: 15px;" >
-                <img class="card-img-top img-centro" src="/img/recompensas/{{nome}}.png" alt="Imagem recompensa">
-                <div class="card-body">
-                    <h4 class="card-title">{{nomeRecomp nome}}</h4>
-                    <p class="card-text">Pontos para resgatar: {{valor}}</p>
-                    <a href="#" class="btn btn-primary">Resgatar</a>
+            <form action='/resgatar/{{id}}' method="post">
+                <div class="card" style="width: 18rem; margin-top: 15px;">
+                    <img class="card-img-top img-centro" src="/img/recompensas/{{nome}}.png" alt="Imagem recompensa">
+                    <div class="card-body">
+                        <h4 class="card-title">{{nomeRecomp nome}}</h4>
+                        <p class="card-text">Pontos para resgatar: {{valor}}</p>
+                        <button type="submit" class="btn btn-primary">Resgatar</button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
         {{/each}}
     </div>
 </div>
+
+  <!-- Button trigger modal -->
+  <button hidden="true" id="mybutton" type="button" class="btn btn-primary" data-toggle="modal"
+    data-target="#exampleModal">
+    Launch demo modal
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        </div>
+        <div class="modal-body">
+          {{msg}}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
