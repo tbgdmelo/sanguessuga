@@ -37,7 +37,7 @@ router.get("/comodoar", mainController.comoDoar);
 router.get("/perfil/:id", usersController.perfil);
 
 router.get("/atualizar/:id",usersController.atualizar);
-router.post("/atualizar/:id",usersController.atualizar)
+router.post("/atualizar/:id",usersController.atualizar);
 
 router.get("/centros/index", centrosController.index);
 router.get("/centros/:id", centrosController.estoque);
@@ -76,5 +76,7 @@ router.get("/doacoes/:id", usersController.doacoes);
 router.get("/centros/:id/agendar", centrosController.agendar);
 router.post("/centros/:id/agendar", centrosController.agendar);
 router.get("/recompensas", recompensaController.listarRecompensas);
+
+router.post("/resgatar/:id",usersController.resgatar);
 
 module.exports = router;

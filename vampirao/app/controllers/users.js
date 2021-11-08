@@ -8,6 +8,7 @@ const User = models.User;
 const Doacao = models.Doacao;
 const Centro = models.Centro;
 const Declaracao = models.declaracao;
+const Recompensa = models.Recompensa;
 
 const crypto = require('crypto');
 
@@ -212,7 +213,7 @@ async function perfil(req, res) {
                     sobrenome: user.sobrenome,
                     tipoSanguineo: sanguineo.tipo,
                     pontuacao: user.pontuacao,
-                    meuperfil:"active"
+                    meuperfil: "active"
                 });
             }
             else {
@@ -351,12 +352,14 @@ async function doacoes(req, res) {
                 const centros = await Centro.findAll();
 
                 const dc = doacoes.map(doacao => doacao.toJSON());
-                
+
                 for (var i = 0; i < dc.length; i++) {
-                    if(!dc[i].agendado){
-                        const declaracao = await Declaracao.findOne({ 
-                            where: { cpf_user: cpf_user,
-                                     id: dc[i].id_declaracao } 
+                    if (!dc[i].agendado) {
+                        const declaracao = await Declaracao.findOne({
+                            where: {
+                                cpf_user: cpf_user,
+                                id: dc[i].id_declaracao
+                            }
                         });
                         const buffer = new Buffer.from(declaracao.file);
                         const url = 'data:application/pdf' + ';' + 'base64' + ',' + buffer.toString('base64');
@@ -382,7 +385,54 @@ async function doacoes(req, res) {
     }
 }
 
+async function resgatar(req, res) {
+    if (req.route.methods.post && req.session.user !== 'undefined' && !req.session.user.isAdmin) {
+        const recompensa = await Recompensa.findOne({ where: { id: req.params.id } });
+        const usuario = await User.findOne({ where: { cpf: req.session.user.cpf } });
+
+        if (usuario.pontuacao >= recompensa.valor) {
+            //faz o resgate se tiver pontos suficientes
+            try {
+                //atualiza a pontuacao
+                await User.update({
+                    pontuacao: usuario.pontuacao - recompensa.valor
+                }, { where: { cpf: req.session.user.cpf } });
+                try {
+                    //deleta a recompensa resgatada
+                    if (recompensa) {
+                        await recompensa.destroy();
+                    }
+                    const recompensas = await Recompensa.findAll();
+                    res.render("recompensas/listar", {
+                        recompensas: recompensas.map(recompensa => recompensa.toJSON()),
+                        modal: "ClickBotao()",
+                        msg: "Recompensa resgatada com sucesso. Seu código de resgate é: ."
+                    });
+                }
+                catch (e) {
+                    console.log("Falha na destruicao do objeto");
+                    console.log(e);
+                    res.redirect("/notfound");
+                }
+            }
+            catch (e) {
+                console.log("Falha na atualizqação dos pontos");
+                console.log(e);
+                res.redirect("/notfound");
+            }
+        }
+        else {
+            const recompensas = await Recompensa.findAll();
+            res.render("recompensas/listar", {
+                recompensas: recompensas.map(recompensa => recompensa.toJSON()),
+                modal: "ClickBotao()",
+                msg: "Você não possui pontos suficientes para resgatar esta recompensa."
+            });
+        }
+    }
+}
+
 module.exports = {
     cadastro, esqueciSenha, reset_senha, tokenexpired, perfil, login,
-    deslogar, atualizar, doacoes
+    deslogar, atualizar, doacoes, resgatar
 };
