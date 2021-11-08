@@ -64,7 +64,11 @@ async function agendar(req, res) {
                 res.redirect("/notfound");
             }
             let data = new Date();
-            let dataFormatada = ((data.getFullYear())) + "-" + ((data.getMonth() + 1)) + "-" + data.getDate();
+            let dia = data.getDate();
+            if(dia<10){
+                dia='0'+dia;
+            }
+            let dataFormatada = ((data.getFullYear())) + "-" + ((data.getMonth() + 1)) + "-" + dia;
 
             res.render("centros/agendar", {
                 nome_centro: centro.nome,
