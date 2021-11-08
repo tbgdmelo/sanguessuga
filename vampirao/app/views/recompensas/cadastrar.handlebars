@@ -8,7 +8,7 @@
         <div class="row g-3">
             <div class="form-group col-md-5">
                 <div class="form-group">
-                    <span class="required">* <label>Tipo:</label></span>
+                    <span>* <label>Tipo:</label></span>
                     <select class="form-control form-select" id="nome" name="nome">
                         <option value="Desconto 10">Desconto de R$ 10,00 na loja X</option>
                         <option value="Vale-Compras 50">Vale-Compras de R$ 50,00 na loja X</option>
@@ -20,9 +20,13 @@
                     </select>
                 </div>
                 <br />
-                <span><label>Pontos para resgatar:</label></span>
+                <span><label>* Pontos para resgatar:</label></span>
                 <input name="valor" id="valor" type="number" class="form-control">
                 <span class="alert-danger">{{printError errors 'valor'}}</span>
+                <br />
+                <span><label>* Código do cartão:</label></span>
+                <input name="codigo" id="codigo" type="text" class="form-control">
+                <span class="alert-danger">{{printError errors 'codigo'}}</span>
             </div>
         </div>
         <br />

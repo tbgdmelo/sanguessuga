@@ -24,6 +24,10 @@
                 <span><label>Pontos para resgatar:</label></span>
                 <input value="{{val_recompensa}}" name="valor" id="valor" type="number" class="form-control">
                 <span class="alert-danger">{{printError errors 'valor'}}</span>
+                <br />
+                <span><label>* Código do cartão:</label></span>
+                <input value="{{cod_recompensa}}" name="codigo" id="codigo" type="text" class="form-control">
+                <span class="alert-danger">{{printError errors 'codigo'}}</span>
             </div>
         </div>
         <br />

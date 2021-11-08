@@ -406,7 +406,7 @@ async function resgatar(req, res) {
                     res.render("recompensas/listar", {
                         recompensas: recompensas.map(recompensa => recompensa.toJSON()),
                         modal: "ClickBotao()",
-                        msg: "Recompensa resgatada com sucesso. Seu código de resgate é: ."
+                        msg: "Recompensa resgatada com sucesso. Seu código de resgate é: "+recompensa.codigo+ ". Salve este código e acesse a plataforma correspondente para resgatar.",
                     });
                 }
                 catch (e) {

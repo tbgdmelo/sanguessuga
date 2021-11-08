@@ -31,7 +31,8 @@ async function addRecompensa(req , res){
         else if(req.route.methods.post && typeof(req.session.user) !== 'undefined' && req.session.user.isAdmin){
             await Recompensa.create({
                 nome: req.body.nome,
-                valor: req.body.valor
+                valor: req.body.valor,
+                codigo: req.body.codigo
             });
             const recompensas = await Recompensa.findAll();
             res.render("recompensas/index",{
@@ -94,6 +95,7 @@ async function update(req, res) {
                 nome_recompensa: recompensa.nome,
                 val_recompensa: recompensa.valor,
                 id_recompensa: recompensa.id,
+                cod_recompensa: recompensa.codigo
             });
         }
         else if (req.route.methods.post && typeof (req.session.user) !== 'undefined' && req.session.user.isAdmin) {
@@ -102,6 +104,7 @@ async function update(req, res) {
                     id: req.body.id,
                     nome: req.body.nome,
                     valor: req.body.valor,
+                    codigo: req.body.codigo
                 }, { where: { id: req.params.id} });
                 res.redirect("../index");
             }
@@ -110,6 +113,7 @@ async function update(req, res) {
                 nome_recompensa: req.body.nome,
                 val_recompensa: req.body.telefone,
                 id_recompensa: req.body.id,
+                cod_recompensa: req.body.codigo,
                     errors: error
                 });
             }

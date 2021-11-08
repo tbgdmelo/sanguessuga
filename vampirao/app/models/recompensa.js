@@ -15,7 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   };
   Recompensa.init({
     nome: DataTypes.STRING,
-    valor: DataTypes.INTEGER
+    valor: DataTypes.INTEGER,
+    codigo: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Recompensa',
