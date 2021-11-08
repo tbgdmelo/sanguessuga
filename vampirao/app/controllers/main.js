@@ -3,12 +3,14 @@
 function index(req,res){
     res.render("main/index", {
         titulo: "Home Page",
+        inicio: "active"
     });
 }
 
 function sobre(req,res){
     res.render("main/sobre", {
         titulo: "Sobre",
+        sobre: "active"
     });
 }
 
@@ -25,7 +27,9 @@ function campanhas(req,res){
 }
     
 function comoDoar(req,res){
-    res.render("main/comodoar");
+    res.render("main/comodoar",{
+        comodoar: "active"
+    });
 }
 
 module.exports = {index,sobre,notfound, campanhas, comoDoar};

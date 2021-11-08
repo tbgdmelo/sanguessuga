@@ -23,6 +23,7 @@ async function cadastro(req, res) {
         res.render("user/cadastro", {
             sangues: sangues.map(sangue => sangue.toJSON()), //envia para a view um json com oq foi encontrado no bd
             titulo: "Cadastro de usuário",
+            cadastro: "active"
         });
     }
     else {
@@ -42,7 +43,8 @@ async function cadastro(req, res) {
             })
             res.render("main/index", {
                 titulo: "Home Page",
-                modal: "ClickBotao()"
+                modal: "ClickBotao()",
+                inicio: "active"
             });
         }
         catch (error) {
@@ -61,6 +63,7 @@ async function cadastro(req, res) {
                     id_sangue: req.body.id_sangue
                 },
                 titulo: "Cadastro de usuário",
+                cadastro: "active"
             })
         }
     }
@@ -208,7 +211,8 @@ async function perfil(req, res) {
                     nome: user.nome,
                     sobrenome: user.sobrenome,
                     tipoSanguineo: sanguineo.tipo,
-                    pontuacao: user.pontuacao
+                    pontuacao: user.pontuacao,
+                    meuperfil:"active"
                 });
             }
             else {
@@ -291,6 +295,7 @@ async function atualizar(req, res) {
             id_sangue: user.id_sangue,
             senha: "",
             sangues: sangues.map(sangue => sangue.toJSON()),
+            editarperfil: "active"
         });
     }
     else if (req.route.methods.post && req.session.user !== 'undefined' && !req.session.user.isAdmin && req.session.user.id == req.params.id) {
@@ -322,7 +327,8 @@ async function atualizar(req, res) {
                 sobrenome: req.body.sobrenome,
                 tipoSanguineo: sanguineo.tipo,
                 pontuacao: user.pontuacao,
-                modal: "ClickBotao2()"
+                modal: "ClickBotao2()",
+                meuperfil: "active"
             })
 
         }

@@ -29,6 +29,7 @@ async function index(req, res) {
                 centrosAmount: centrosAmount,
                 recompensaAmount: recompensaAmount,
                 pedidoAmount: pedidoAmount,
+                consoleadmin: "active"
             });
         }
         else {

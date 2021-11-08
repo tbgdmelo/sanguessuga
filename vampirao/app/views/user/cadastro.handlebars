@@ -12,7 +12,7 @@
                 <div class="row g-3">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <span class="required">* <label>Nome</label></span>
+                            <span>* <label>Nome</label></span>
                             <input value="{{user.nome}}" name="nome" id="nome" type="text" class="form-control"
                                 placeholder="Digite seu nome..." minlength="2" maxlength="50" required>
                             <span class="alert-danger">{{printError errors 'nome'}}</span>
@@ -21,7 +21,7 @@
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <span class="required">* <label>Sobrenome:</label></span>
+                            <span>* <label>Sobrenome:</label></span>
                             <input value="{{user.sobrenome}}" name="sobrenome" id="sobrenome" type="text"
                                 class="form-control" minlength="2" maxlength="50" placeholder="Digite seu sobrenome..."
                                 required>
@@ -31,7 +31,7 @@
 
                     <div class="col-md-3">
                         <div class="form-group">
-                            <span class="required">* <label>CPF:</label></span>
+                            <span>* <label>CPF:</label></span>
                             <input value="{{user.cpf}}" name="cpf" onkeypress="$(this).mask('000.000.000-00');" id="cpf"
                                 type="text" class="form-control" maxlength="11" minlength="11"
                                 placeholder="Não utilize pontos e traços" required>
@@ -42,7 +42,7 @@
 
                     <div class="col-md-2">
                         <div class="form-group">
-                            <span class="required">* <label>Data de Nascimento:</label></span>
+                            <span>* <label>Data de Nascimento:</label></span>
                             <input name="nascimento" id="nascimento" type="date" class="form-control" required>
                             <span class="alert-danger">{{printErrorNascimento errors}}</span>
                         </div>
@@ -51,7 +51,7 @@
 
                     <div class="col-md-4">
                         <div class="form-group mt-3">
-                            <span class="required">* <label>Email:</label></span>
+                            <span>* <label>Email:</label></span>
                             <input value="{{user.email}}" name="email" id="email" type="email" minlength="4"
                                 maxlength="254" class="form-control" placeholder="Digite seu email..." required>
                             <span class="alert-danger">{{printErrorEmail errors 'email'}}</span>
@@ -69,7 +69,7 @@
 
                     <div class="col-md-3">
                         <div class="form-group mt-3">
-                            <span class="required">* <label>Senha:</label></span>
+                            <span>* <label>Senha:</label></span>
                             <input name="senha" type="password" id="senha" minlength="8" class="form-control" required>
                             <span class="alert-danger">{{printError errors 'senha'}}</span>
                         </div>
@@ -77,7 +77,7 @@
 
                     <div class="col-md-3">
                         <div class="form-group mt-3">
-                            <span class="required">* <label>Confirmação de senha:</label></span>
+                            <span>* <label>Confirmação de senha:</label></span>
                             <input name="confSenha" minlength="8" id="confSenha" type="password" class="form-control"
                                 required>
                         </div>
@@ -85,7 +85,7 @@
 
                     <div class="">
                         <div class="form-group mt-3">
-                            <span class="required">* <label>Tipo Sanguíneo:</label></span>
+                            <span>* <label>Tipo Sanguíneo:</label></span>
                             <div class="row">
                                 <div class="col">
                                     {{#each sangues}}
@@ -102,6 +102,9 @@
                             </div>
                         </div>
                         <span class="alert-danger">{{printError errors 'id_sangue'}}</span>
+                        <div class="form-group mt-3">
+                            <p>Os campos marcados com (*) são de preenchimento obrigatório.</p>
+                        </div>
                     </div>
                 </div>
                 <br/>
