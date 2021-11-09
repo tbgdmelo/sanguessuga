@@ -5,6 +5,11 @@
         document.getElementById("mybutton").click();
     }
 </script>
+<script>
+    function ClickBotao3() {
+        document.getElementById("mybutton3").click();
+    }
+</script>
 
 <body onload={{modal}}>
     <div class="container">
@@ -98,6 +103,32 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Dados Atualizados com sucesso!</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Button trigger modal -->
+    <button hidden="true" id="mybutton3" type="button" class="btn btn-primary" data-toggle="modal"
+        data-target="#exampleModal3">
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel3"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel3">Doacao Agendada!</h5>
+                </div>
+                <div class="modal-body">
+                    ID de doação: {{id_doacao}}. Informe este ID e CPF no momento da doação.
+                    Você poderá consultar novamente na área "Minhas Doações".
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>

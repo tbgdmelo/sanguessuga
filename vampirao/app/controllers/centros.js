@@ -65,8 +65,8 @@ async function agendar(req, res) {
             }
             let data = new Date();
             let dia = data.getDate();
-            if(dia<10){
-                dia='0'+dia;
+            if (dia < 10) {
+                dia = '0' + dia;
             }
             let dataFormatada = ((data.getFullYear())) + "-" + ((data.getMonth() + 1)) + "-" + dia;
 
@@ -77,16 +77,34 @@ async function agendar(req, res) {
         }
         else if (req.route.methods.post && typeof (req.session.user) !== 'undefined') {
             try {
-                const agendados = await Doacao.findAll({ where: { cpf_user: req.session.user.cpf, agendado:1 } });
+                const agendados = await Doacao.findAll({ where: { cpf_user: req.session.user.cpf, agendado: 1 } });
                 console.log(agendados);
-                if (agendados.length===0) {
-                    await Doacao.create({
+                if (agendados.length === 0) {
+                    const doa = await Doacao.create({
                         data: req.body.dia,
                         hora: req.body.hora,
                         cpf_user: req.session.user.cpf,
                         id_centro: req.params.id,
                         agendado: 1
                     });
+                    const id = req.session.user.id;
+                    const user = await User.findOne({ where: { id: id } });
+                    const sanguineo = await Sangue.findOne({ where: { id: user.id_sangue } });
+                    if (req.session.user.id == id) {
+                        res.render("user/perfil", {
+                            titulo: "Meu Perfil",
+                            id: user.id,
+                            nome: user.nome,
+                            sobrenome: user.sobrenome,
+                            tipoSanguineo: sanguineo.tipo,
+                            pontuacao: user.pontuacao,
+                            modal: "ClickBotao3()",
+                            id_doacao: doa.id
+                        });
+                    }
+                    else {
+                        res.redirect("/notfound");
+                    }
                 }
                 else {
                     const id_centro = req.params.id;
@@ -103,22 +121,6 @@ async function agendar(req, res) {
                         data: dataFormatada,
                         msg: "Você já possui uma doação agendada."
                     });
-                }
-                const id = req.session.user.id;
-                const user = await User.findOne({ where: { id: id } });
-                const sanguineo = await Sangue.findOne({ where: { id: user.id_sangue } });
-                if (req.session.user.id == id) {
-                    res.render("user/perfil", {
-                        titulo: "Meu Perfil",
-                        id: user.id,
-                        nome: user.nome,
-                        sobrenome: user.sobrenome,
-                        tipoSanguineo: sanguineo.tipo,
-                        pontuacao: user.pontuacao
-                    });
-                }
-                else {
-                    res.redirect("/notfound");
                 }
             }
             catch (e) {
