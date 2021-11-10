@@ -115,7 +115,7 @@ async function esqueciSenha(req, res) {
                                 to: req.body.email,
                                 from: 'sng.resetpass@gmail.com',
                                 template: 'auth/esqueci_senha',
-                                context: { token, email, nome, sobrenome, recuperacao:true },
+                                context: { token, email, nome, sobrenome, recuperacao: true },
                                 subject: 'Link para reset de senha'
                             })
                         } catch (error) {
@@ -405,31 +405,31 @@ async function resgatar(req, res) {
                         await recompensa.destroy();
                     }
                     const recompensas = await Recompensa.findAll();
+                    try {
+                        await mailer.sendMail({
+                            to: req.session.user.email,
+                            from: 'sng.resetpass@gmail.com',
+                            template: 'auth/esqueci_senha',
+                            context: {
+                                nome: req.session.user.nome,
+                                sobrenome: req.session.user.sobrenome,
+                                recuperacao: false,
+                                codigo: rec_codigo,
+                                nome_recomp: rec_nome
+                            },
+                            subject: 'Código de recompensa',
+
+                        })
+                    } catch (error) {
+                        console.log(error)
+                        if (error)
+                            return res.status(400).send({ error: 'Cannot send forgot password email' })
+                    }
                     res.render("recompensas/listar", {
                         recompensas: recompensas.map(recompensa => recompensa.toJSON()),
                         modal: "ClickBotao()",
-                        msg: "Recompensa resgatada com sucesso. Seu código de resgate é: "+recompensa.codigo+ ". Salve este código e acesse a plataforma correspondente para resgatar.",
+                        msg: "Recompensa resgatada com sucesso. Em minutos você receberá um email com o código para resgatar a recompensa.",
                     });
-                    try {
-                            await mailer.sendMail({
-                                to: req.session.user.email,
-                                from: 'sng.resetpass@gmail.com',
-                                template: 'auth/esqueci_senha',
-                                context: {
-                                    nome: req.session.user.nome, 
-                                    sobrenome:req.session.user.sobrenome,
-                                    recuperacao:false,
-                                    codigo: rec_codigo,
-                                    nome_recomp: rec_nome
-                                },
-                                subject: 'Código de recompensa',
-                                
-                            })
-                        } catch (error) {
-                            console.log(error)
-                            if (error)
-                                return res.status(400).send({ error: 'Cannot send forgot password email' })
-                        }
                 }
                 catch (e) {
                     console.log("Falha na destruicao do objeto");
