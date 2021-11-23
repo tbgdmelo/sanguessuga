@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
   User.init({
     cpf: {
       type: DataTypes.STRING,
+      unique:{
+        args:true,
+        msg:"CPF em uso."
+      },
       validate:{
         customValidator(value){
           const valida = require("gerador-validador-cpf");
@@ -23,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
             throw new Error("O CPF é inválido!");
           }
         }
-      }    
+      }, 
     },
     nome:{
       type: DataTypes.STRING,
