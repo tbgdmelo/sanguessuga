@@ -7,32 +7,48 @@
 </script>
 
 <body onload={{modal}}>
-    <div class="container">
-        <h3>Vampiroes</h3>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Endereço</th>
-                    <th scope="col">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    {{#each vampiroes}}
-                    <th scope="row">{{id}}</th>
-                    <td>{{nome}}</td>
-                    <td>{{endereco}}</td>
-                    <td class="options">
-                        <a href="/admin/vampiroes/update/{{id}}"><i class="fas fa-edit" style="color: #006625;"></i></a>
-                        <a href="/admin/vampiroes/remove/{{id}}"><i class="fas fa-trash-alt"
-                                style="color: #8f0000;"></i></a>
-                    </td>
-                </tr>
-                {{/each}}
-            </tbody>
-        </table>
+    <div class="container mt-5">
+        <div class="row justify-content-between">
+            <div class="col-md-8">
+                <h4>Vampirões</h4>
+            </div>
+            <div class="col-md-1">
+                <a href="/admin/index" class="btn btn-outline-secondary">voltar</a>
+            </div>
+        </div>
+        {{#if vampiroes}}
+        <div class="table-responsive mt-3">
+            <table class="table shadow-sm table-red">
+                <thead class="thead-red">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Endereço</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {{#each vampiroes}}
+                        <th scope="row">{{id}}</th>
+                        <td>{{nome}}</td>
+                        <td>{{endereco}}</td>
+                        <td class="options">
+                            <a href="/admin/vampiroes/update/{{id}}"><i class="fas fa-edit"
+                                    style="color: #006625;"></i></a>
+                            <a href="/admin/vampiroes/remove/{{id}}"><i class="fas fa-trash-alt"
+                                    style="color: #8f0000;"></i></a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        {{else}}
+        <div class="alert alert-danger mt-3" role="alert">
+            Não há vampirões cadastrados no momento!
+        </div>
+        {{/if}}
     </div>
 
 
@@ -48,7 +64,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tem certeza que deseja deletar item #{{id}}?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tem certeza que deseja deletar o item #{{id}}?</h5>
                 </div>
                 <div class="modal-body">
                     Selecione uma opção abaixo.

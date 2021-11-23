@@ -1,59 +1,75 @@
 <title>Minhas Doações</title>
 
-<div class="container">
-    <br />
-    <h3>Doações Aguardando Declaração</h3>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Centro</th>
-                <th scope="col">Data</th>
-                <th scope="col">Hora</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each doacoes}}
-            {{#if agendado}}
-            <tr>
-                <td>{{id}}</td>
-                <th scope="row">{{nomeCentro id_centro @root.centros}}</th>
-                <td>{{formatarData data}}</td>
-                <td>{{hora}}</td>
-            </tr>
-            {{/if}}
-            {{/each}}
-        </tbody>
-    </table>
-    <br />
-    <h3>Doações Realizadas</h3>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Centro</th>
-                <th scope="col">Data</th>
-                <th scope="col">Hora</th>
-                <th scope="col">Declaração</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each doacoes}}
-            {{#unless agendado}}
-            <tr>
-                <td>{{id}}</td>
-                <th scope="row">{{nomeCentro id_centro @root.centros}}</th>
-                <td>{{formatarData data}}</td>
-                <td>{{hora}}</td>
-                <td>
-                <a href="{{link}}" download><i class="fas fa-print" style="color: darkgreen;"></i></a>
-                </td>
+<div class="container mt-5">
+    <h4>Doações Aguardando Declaração</h4>
 
-            </tr>
-            {{/unless}}
-            {{/each}}
-        </tbody>
-    </table>
+    {{#if doacoes}}
+    <div class="table-responsive">
+        <table class="table shadow-sm table-red">
+            <thead class="thead-red">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Centro</th>
+                    <th scope="col">Data da doação</th>
+                    <th scope="col">Hora da doação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each doacoes}}
+                {{#if agendado}}
+                <tr>
+                    <td>{{id}}</td>
+                    <th scope="row">{{nomeCentro id_centro @root.centros}}</th>
+                    <td>{{formatarData data}}</td>
+                    <td>{{hora}}</td>
+                </tr>
+                {{/if}}
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
 
+    {{else}}
+    <div class="alert alert-danger" role="alert">
+        Não há doações agendadas
+    </div>
+    {{/if}}
 
+    <h4 class="mt-5">Doações Realizadas</h4>
+    {{#unless agendado}}
+    <div class="table-responsive">
+        <table class="table shadow-sm table-red">
+            <thead class="thead-red">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Centro</th>
+                    <th scope="col">Data da doação</th>
+                    <th scope="col">Hora da doação</th>
+                    <th scope="col">Declaração</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each doacoes}}
+                {{#unless agendado}}
+                <tr>
+                    <td>{{id}}</td>
+                    <th scope="row">{{nomeCentro id_centro @root.centros}}</th>
+                    <td>{{formatarData data}}</td>
+                    <td>{{hora}}</td>
+                    <td class="text-center">
+                        <a href="{{link}}" download><i class="fas fa-print" style="color: darkgreen;"></i></a>
+                    </td>
+
+                </tr>
+                {{/unless}}
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+    {{else}}
+    <div class="alert alert-primary" role="alert">
+        A sua doação ainda está pendente do cadastro da declaração
+    </div>
+    {{/unless}}
 </div>

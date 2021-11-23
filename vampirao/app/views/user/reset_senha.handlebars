@@ -2,33 +2,40 @@
 
 
 <body onload={{modal}}>
-    <div class="container">
-        <br/>
-        <h3>Reset de senha de usuário</h3>
-        <hr class="featurette-divider">
-        <div>Informe abaixo a sua nova senha:</div>
-        <br/>
-        <h5><i class="fas fa-key"></i> Reset de senha</h5>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body p-4">
+                <h4><i class="fas fa-key"></i> Reset de senha de usuário</h4>
+                <div>Informe abaixo a sua nova senha:</div>
+                {{!-- <hr class="featurette-divider"> --}}
 
-        <form action="/reset_senha/{{token}}" method="post">
-            <div class="col-md-6">
-                <div class="form-group mt-3">
-                    <label>Senha:</label>
-                    <input name="senha" type="password" id="senha" minlength="8" class="form-control" required>
-                </div>
-            </div>
+                {{!-- <br /> --}}
+                {{!-- <h5><i class="fas fa-key"></i> Reset de senha</h5> --}}
 
-            <div class="col-md-6">
-                <div class="form-group mt-3">
-                    <label>Confirmação de senha:</label>
-                    <input name="confSenha" minlength="8" id="confSenha" type="password" class="form-control" required>
-                </div>
+                <form action="/reset_senha/{{token}}" method="post">
+                    <div class="col-md-6">
+                        <div class="form-group mt-3">
+                            <label>Senha:</label>
+                            <input name="senha" type="password" id="senha" minlength="8" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group mt-3">
+                            <label>Confirmação de senha:</label>
+                            <input name="confSenha" minlength="8" id="confSenha" type="password" class="form-control"
+                                required>
+                        </div>
+                    </div>
+                    <hr class="featurette-divider">
+                    <button type="submit" class="btn btn-primary">Enviar nova senha</button>
+                </form>
             </div>
-            <hr class="featurette-divider">
-            <button type="submit" class="btn btn-primary">Enviar nova senha</button>
-        </form>
+        </div>
+
+
 </body>
 
-      
+
 
 <script src="/js/confirmacao-senha.js"></script>

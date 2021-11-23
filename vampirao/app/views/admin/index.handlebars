@@ -10,9 +10,10 @@
     <meta name="description"
         content="Responsive sidebar template with sliding effect and dropdown menu based on bootstrap 3">
     <link href="/css/styles-admin.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    {{!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> --}}
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet"> 
 
 </head>
 
@@ -112,11 +113,11 @@
         <!-- sidebar-wrapper  -->
         <main class="page-content">
             <div class="container-fluid">
-                <h2>Dashboard Administrador</h2>
+                {{!-- <h2>Dashboard Administrador</h2> --}}
                 <hr>
                 <div class="row">
                     <div class="col-xl-3 col-md-6">
-                        <div class="card bg-primary text-white mb-4">
+                        <div class="card bg-secondary text-white mb-4">
                             <div class="card-body">Vampirões ativos <i class="fas fa-ambulance"></i></div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
                                 <div class="small text-white stretched-link">{{centrosAmount}}</div>
@@ -124,7 +125,7 @@
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card bg-primary text-white mb-4">
+                        <div class="card bg-secondary text-white mb-4">
                             <div class="card-body">Total de usuários <i class="fas fa-users"></i></div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
                                 <div class="small text-white stretched-link">{{usersAmount}}</div>
@@ -132,7 +133,7 @@
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card bg-primary text-white mb-4">
+                        <div class="card bg-secondary text-white mb-4">
                             <div class="card-body">Recompensas ativas <i class="far fa-gem"></i></div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
                                 <div class="small text-white stretched-link" href="#">{{recompensaAmount}}</div>
@@ -140,7 +141,7 @@
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-6">
-                        <div class="card bg-primary text-white mb-4">
+                        <div class="card bg-secondary text-white mb-4">
                             <div class="card-body">Pedidos ativos <i class="fas fa-hand-holding-water"></i></div>
                             <div class="card-footer d-flex align-items-center justify-content-between">
                                 <div class="small text-white stretched-link">{{pedidoAmount}}</div>

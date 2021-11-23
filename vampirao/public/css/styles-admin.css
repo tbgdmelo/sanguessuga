@@ -39,7 +39,8 @@
   }
 }
 body {
-  font-size: 0.9rem;
+  font-family: 'Roboto', sans-serif;
+  /* font-size: 0.9rem; */
 }
 .page-wrapper .sidebar-wrapper,
 .sidebar-wrapper .sidebar-brand > a,

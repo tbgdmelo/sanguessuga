@@ -6,26 +6,28 @@
 </script>
 
 <body onload={{modal}}>
-<div class="container">
-    <br />
+  <div class="container mt-5">
     <h3>Recompensas para resgatar</h3>
     <div class="row">
-        {{#each recompensas}}
-        <div class="col-md-4">
-            <form action='/resgatar/{{id}}' method="post">
-                <div class="card" style="width: 18rem; margin-top: 15px;">
-                    <img class="card-img-top img-centro" src="/img/recompensas/{{nome}}.png" alt="Imagem recompensa">
-                    <div class="card-body">
-                        <h4 class="card-title">{{nomeRecomp nome}}</h4>
-                        <p class="card-text">Pontos para resgatar: {{valor}}</p>
-                        <button type="submit" class="btn btn-primary">Resgatar</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        {{/each}}
+      {{#each recompensas}}
+      <div class="col-md-4">
+        <form action='/resgatar/{{id}}' method="post">
+          <div class="card" style="width: 18rem; margin-top: 15px;">
+          
+            <div class="card-body">
+                <img class="card-img-top img-centro" src="/img/recompensas/{{nome}}.png" alt="Imagem recompensa">
+              <h4 class="card-title">{{nomeRecomp nome}}</h4>
+              <p class="card-text">Pontos para resgatar: {{valor}}</p>
+              <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary">Resgatar</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      {{/each}}
     </div>
-</div>
+  </div>
 
   <!-- Button trigger modal -->
   <button hidden="true" id="mybutton" type="button" class="btn btn-primary" data-toggle="modal"

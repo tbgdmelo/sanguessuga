@@ -1,33 +1,44 @@
 <title>{{titulo}}</title>
 
 
-<div class="container">
-    <br />
-    <h2>Cadastro de vampirão</h2>
-    <hr>
-    <form action='/centros/cadastro' method="post">
-        <div class="row g-3">
-            <div class="form-group col-md-5">
-                <span class="required">* <label>Nome:</label></span>
-                <input value="{{vampirao.nome}}" type="text" name="nome" class="form-control" id="nome" placeholder="Nome">
-                <span class="alert-danger">{{printError errors 'nome'}}</span>
-                <br />
-                <span><label>Telefone:</label></span>
-                <input value="{{vampirao.telefone}}" name="telefone" onkeypress="$(this).mask('(00) 0000-0009')" id="telefone" minlength="14"
-                    maxlength="14" type="text" class="form-control">
-                <span class="alert-danger">{{printError errors 'telefone'}}</span>
-            </div>
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body p-4">
+            <h4>Cadastro de vampirão</h4>
+            <form action='/centros/cadastro' method="post">
+                <div class="form-control p-4 mt-3">
+                    <div class="row g-3">
+                        <div class="form-group col-md-5">
+                            <span class="required">* <label>Nome:</label></span>
+                            <input value="{{vampirao.nome}}" type="text" name="nome" class="form-control" id="nome"
+                                placeholder="Nome">
+                            <span class="alert-danger">{{printError errors 'nome'}}</span>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <span class="required">* <label>Endereço completo:</label></span>
+                                <input value="{{vampirao.endereco}}" class="form-control" name="endereco"
+                                    id="endereco"></input>
+                                <span class="alert-danger">{{printError errors 'endereco'}}</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <span><label>Telefone:</label></span>
+                            <input value="{{vampirao.telefone}}" name="telefone"
+                                onkeypress="$(this).mask('(00) 0000-0009')" id="telefone" minlength="14" maxlength="14"
+                                type="text" class="form-control">
+                            <span class="alert-danger">{{printError errors 'telefone'}}</span>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
+                        <button class="btn btn-outline-primary  me-md-2" type="submit">Cadastrar</button>
+                        <a href="../index" class="btn btn-outline-secondary">Cancelar</a>
+                    </div>
+                </div>
+            </form>
         </div>
-        <br />
-        <div class="form-group col-md-5">
-            <span class="required">* <label>Endereço completo:</label></span>
-            <textarea value="{{vampirao.endereco}}" class="form-control" name="endereco" id="endereco" rows="3"></textarea>
-            <span class="alert-danger">{{printError errors 'endereco'}}</span>
-        </div>
-        <br />
-        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-            <button class="btn btn-outline-success me-md-2" type="submit">Cadastrar</button>
-            <a href="../index" class="btn btn-outline-danger">Cancelar</a>
-        </div>
-    </form>
+    </div>
 </div>

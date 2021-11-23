@@ -7,32 +7,48 @@
 </script>
 
 <body onload={{modal}}>
-    <div class="container">
-        <h2>Recompensas ativas</h2>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Pontuação para resgate</th>
-                    <th scope="col">Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    {{#each recompensas}}
-                    <th scope="row">{{id}}</th>
-                    <td>{{nome}}</td>
-                    <td>{{valor}}</td>
-                    <td class="options">
-                        <a href="/admin/recompensas/update/{{id}}"><i class="fas fa-edit" style="color: #006625;"></i></a>
-                        <a href="/admin/recompensas/remove/{{id}}"><i class="fas fa-trash-alt"
-                                style="color: #8f0000;"></i></a>
-                    </td>
-                </tr>
-                {{/each}}
-            </tbody>
-        </table>
+    <div class="container mt-5">
+        <div class="row justify-content-between">
+            <div class="col-md-8">
+                <h4>Recompensas ativas</h4>
+            </div>
+            <div class="col-md-1">
+                <a href="/admin/index" class="btn btn-outline-secondary">voltar</a>
+            </div>
+        </div>
+        {{#if recompensas}}
+        <div class="table-responsive mt-3">
+            <table class="table shadow-sm table-red">
+                <thead class="thead-red">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Pontuação para resgate</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {{#each recompensas}}
+                        <th scope="row">{{id}}</th>
+                        <td>{{nome}}</td>
+                        <td>{{valor}}</td>
+                        <td class="options">
+                            <a href="/admin/recompensas/update/{{id}}"><i class="fas fa-edit"
+                                    style="color: #006625;"></i></a>
+                            <a href="/admin/recompensas/remove/{{id}}"><i class="fas fa-trash-alt"
+                                    style="color: #8f0000;"></i></a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        {{else}}
+        <div class="alert alert-danger" role="alert">
+            Não há recompensas ativas no momento!
+        </div>
+        {{/if}}
     </div>
 
 
@@ -55,7 +71,8 @@
                 </div>
                 <div class="modal-footer">
                     <form action='/admin/recompensas/remove/{{id}}' method="post">
-                        <button type="submit" href="/admin/recompensas/remove/{{id}}" class="btn btn-success">Sim</button>
+                        <button type="submit" href="/admin/recompensas/remove/{{id}}"
+                            class="btn btn-success">Sim</button>
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
                     </form>
                 </div>
