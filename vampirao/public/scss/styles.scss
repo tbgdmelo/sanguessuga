@@ -2,11 +2,10 @@ h1{
   color: $cor;
 }
 body{
+  font-family: 'Roboto', sans-serif;
   background-color: $corbackGround;
 }
-.navbarRed{
-  background-color: $corBackNavbar;
-}
+
 .propaganda{
   display: inline;
   float: right;
@@ -24,7 +23,7 @@ body{
 }
 
 .navbarRed{
-  background-color: $corBackNavbar;
+  background-color:#c5161d;
 }
 
 .card-login{
@@ -51,7 +50,7 @@ body{
 }
 
 .imgheader{
-  width: 100px;
+  width: 80px;
   height: 30px;
 }
 
@@ -63,9 +62,22 @@ body{
   background-color: black;
 }
 .box{
-  opacity: 0.7;
+  opacity: 0.8;
   transition: 1.2s;
   background-color: #f0f2f5;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.imagem-container {
+  position: relative;
+  // text-align: center;
+  color: white;
+  text-shadow: 0.1em 0.1em 0.2em black
 }
 
 .box:hover{
@@ -73,11 +85,11 @@ body{
 }
 
 .site-footer{
-background-color:#a00000;
+background-color:lightgray;
 padding:45px 0 20px;
 font-size:15px;
 line-height:24px;
-color:#dbdbdb;
+color:black;
 }
 .site-footer hr{
 border-top-color:#bbb;
@@ -87,7 +99,7 @@ opacity:0.5
 margin:20px 0
 }
 .site-footer h6{
-color:#fff;
+color:black;
 font-size:16px;
 text-transform:uppercase;
 margin-top:5px;
@@ -597,10 +609,54 @@ text-decoration: none;
 
 .a-perfil{
   text-decoration: none;
+  color: #717171;
 }
 
-@media (max-width: 991px) {
-.logo-login{
-  width: 50px;
+.color-sanguessuga{
+  color:#a00000;
 }
+
+/* Modelo da caixa de texto */
+.block-with-text {
+  overflow: hidden;
+  position: relative;
+  line-height: 1.2em; 
+  max-height: 6em; /* aqui vc controla a altura da caixa de texto */
+  text-align: justify;
+  margin-right: -1em;
+  padding-right: 1em;
+}
+.block-with-text:before {
+  content: '...';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.text-bold{
+  font-weight: bold;
+}
+
+.text-justified{
+  text-align: justify;
+}
+
+.thead-red{
+  background-color: #c5161d !important;
+  color: white;
+}
+
+.table-red{
+  background-color: white;
+}
+
+.imagem{
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  background-size: 100% 90%;
+}
+@media (max-width: 991px) {
+  .logo-login{
+    width: 50px;
+  }
 }

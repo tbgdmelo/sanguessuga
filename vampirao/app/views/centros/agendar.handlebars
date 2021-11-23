@@ -1,38 +1,42 @@
 <title>Agendar Doação</title>
 
-<div class="container">
-    <br />
-    <h3>Agendar doação em: {{nome_centro}}</h3>
-    <form action="{{id}}" method="post">
-        <div class="col-md-2">
-            <div class="form-group">
-                <span class="required">* <label>Data:</label></span>
-                <input min="{{data}}" max="2021-12-31"
-                 name="dia" id="dia" type="date" class="form-control" required>
+<div class="container mt-5">
+    <div class="card">
+        <div class="container">
+            <div class="card-body p-4">
+                <h4>Agendar doação em: {{ nome_centro }}</h4>
+                <form action="{{id}}" method="post">
+                    <div class="form-control mt-3 p-4">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <span class="required">* <label>Data:</label></span>
+                                <input min="{{data}}" max="2021-12-31" name="dia" id="dia" type="date"
+                                    class="form-control" required>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="required">* <label>Hora:</label></span>
+                                <select name="hora" class="form-select" required>
+                                    <option value="">Selecione um horário...</option>
+                                    <option value="08:00">08:00</option>
+                                    <option value="09:00">09:00</option>
+                                    <option value="10:00">10:00</option>
+                                    <option value="13:00">13:00</option>
+                                    <option value="14:00">14:00</option>
+                                    <option value="15:00">15:00</option>
+                                    <option value="16:00">16:00</option>
+                                </select>
+                            </div>
+                        </div>
+                        <span class="alert-danger">{{msg}}</span>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
+                            <button class="btn btn-outline-primary" type="submit">Agendar</button>
+                            <a href="/centros/index" class="btn btn-outline-secondary">Cancelar</a>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-        <br />
-        <div class="col-md-3">
-            <div class="form-group">
-                <span class="required">* <label>Hora:</label></span>
-                <select name="hora" class="form-select" required>
-                    <option value="" selected>Selecione um horário...</option>
-                    <option value="08:00">08:00</option>
-                    <option value="09:00">09:00</option>
-                    <option value="10:00">10:00</option>
-                    <option value="13:00">13:00</option>
-                    <option value="14:00">14:00</option>
-                    <option value="15:00">15:00</option>
-                    <option value="16:00">16:00</option>
-                </select>
-            </div>
-        </div>
-        <br />
-        <span class="alert-danger">{{msg}}</span>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-            <button class="btn btn-outline-success me-md-2" type="submit">Agendar</button>
-            <a href="../index" class="btn btn-outline-danger">Cancelar</a>
-        </div>
-        
-    </form>
+
+    </div>
 </div>

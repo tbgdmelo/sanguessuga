@@ -3,115 +3,116 @@
     {{!-- FORMULARIO DE CADASTRO DE USUÁRIO --}}
     <form action='/cadastro' method="post">
 
-        <div class="card shadow mt-5">
-            <div class="card-header">
-                <h2>Formulário de Cadastro</h2>
-            </div>
-
-            <div class="card-body">
-                <div class="row g-3">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <span>* <label>Nome</label></span>
-                            <input value="{{user.nome}}" name="nome" id="nome" type="text" class="form-control"
-                                placeholder="Digite seu nome..." minlength="2" maxlength="50" required>
-                            <span class="alert-danger">{{printError errors 'nome'}}</span>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <span>* <label>Sobrenome:</label></span>
-                            <input value="{{user.sobrenome}}" name="sobrenome" id="sobrenome" type="text"
-                                class="form-control" minlength="2" maxlength="50" placeholder="Digite seu sobrenome..."
-                                required>
-                            <span class="alert-danger">{{printError errors 'sobrenome'}}</span>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <span>* <label>CPF:</label></span>
-                            <input value="{{user.cpf}}" name="cpf" onkeypress="$(this).mask('000.000.000-00');" id="cpf"
-                                type="text" class="form-control" maxlength="11" minlength="11"
-                                placeholder="Não utilize pontos e traços" required>
-                            <span class="alert-danger">{{printErrorCPF errors 'cpf'}}</span>
-                            {{!--<span class="alert-link" id="resposta"></span> --}}
-                        </div>
-                    </div>
-
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <span>* <label>Data de Nascimento:</label></span>
-                            <input name="nascimento" id="nascimento" type="date" class="form-control" required>
-                            <span class="alert-danger">{{printErrorNascimento errors}}</span>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-4">
-                        <div class="form-group mt-3">
-                            <span>* <label>Email:</label></span>
-                            <input value="{{user.email}}" name="email" id="email" type="email" minlength="4"
-                                maxlength="254" class="form-control" placeholder="Digite seu email..." required>
-                            <span class="alert-danger">{{printErrorEmail errors 'email'}}</span>
-                        </div>
-                    </div>
-
-                    <div class="col-md-2">
-                        <div class="form-group mt-3">
-                            <label>Telefone celular:</label>
-                            <input value="{{user.telefone}}" name="telefone"
-                                onkeypress="$(this).mask('(00) 0000-00009')" id="telefone" minlength="15" maxlength="15"
-                                type="text" class="form-control">
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="form-group mt-3">
-                            <span>* <label>Senha:</label></span>
-                            <input name="senha" type="password" id="senha" minlength="8" class="form-control" required>
-                            <span class="alert-danger">{{printError errors 'senha'}}</span>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="form-group mt-3">
-                            <span>* <label>Confirmação de senha:</label></span>
-                            <input name="confSenha" minlength="8" id="confSenha" type="password" class="form-control"
-                                required>
-                        </div>
-                    </div>
-
-                    <div class="">
-                        <div class="form-group mt-3">
-                            <span>* <label>Tipo Sanguíneo:</label></span>
-                            <div class="row">
-                                <div class="col">
-                                    {{#each sangues}}
-
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="id_sangue" id="id_sangue"
-                                            value={{id}} required>
-                                        <label class="form-check-label">{{tipo}}</label>
-                                    </div>
-
-                                    {{/each}}
-                                </div>
-
+        <div class="card shadow-sm mt-5">
+            <div class="card-body p-4">
+                <h4>Cadastre-se</h4>
+                <div class="form-control mt-3 p-4">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <span>* <label>Nome</label></span>
+                                <input value="{{user.nome}}" name="nome" id="nome" type="text" class="form-control"
+                                    placeholder="Digite seu nome..." minlength="2" maxlength="50" required>
+                                <span class="alert-danger">{{printError errors 'nome'}}</span>
                             </div>
                         </div>
-                        <span class="alert-danger">{{printError errors 'id_sangue'}}</span>
-                        <div class="form-group mt-3">
-                            <p>Os campos marcados com (*) são de preenchimento obrigatório.</p>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <span>* <label>Sobrenome:</label></span>
+                                <input value="{{user.sobrenome}}" name="sobrenome" id="sobrenome" type="text"
+                                    class="form-control" minlength="2" maxlength="50"
+                                    placeholder="Digite seu sobrenome..." required>
+                                <span class="alert-danger">{{printError errors 'sobrenome'}}</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <span>* <label>CPF:</label></span>
+                                <input value="{{user.cpf}}" name="cpf" onkeypress="$(this).mask('000.000.000-00');"
+                                    id="cpf" type="text" class="form-control" maxlength="11" minlength="11"
+                                    placeholder="Não utilize pontos e traços" required>
+                                <span class="alert-danger">{{printErrorCPF errors 'cpf'}}</span>
+                                {{!--<span class="alert-link" id="resposta"></span> --}}
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <span>* <label>Data de Nascimento:</label></span>
+                                <input name="nascimento" id="nascimento" type="date" class="form-control" required>
+                                <span class="alert-danger">{{printErrorNascimento errors}}</span>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <div class="form-group mt-3">
+                                <span>* <label>Email:</label></span>
+                                <input value="{{user.email}}" name="email" id="email" type="email" minlength="4"
+                                    maxlength="254" class="form-control" placeholder="Digite seu email..." required>
+                                <span class="alert-danger">{{printErrorEmail errors 'email'}}</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group mt-3">
+                                <label>Telefone celular:</label>
+                                <input value="{{user.telefone}}" name="telefone"
+                                    onkeypress="$(this).mask('(00) 0000-00009')" id="telefone" minlength="15"
+                                    maxlength="15" type="text" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group mt-3">
+                                <span>* <label>Senha:</label></span>
+                                <input name="senha" type="password" id="senha" minlength="8" class="form-control"
+                                    required>
+                                <span class="alert-danger">{{printError errors 'senha'}}</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group mt-3">
+                                <span>* <label>Confirmação de senha:</label></span>
+                                <input name="confSenha" minlength="8" id="confSenha" type="password"
+                                    class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <div class="form-group mt-3">
+                                <span>* <label>Tipo Sanguíneo:</label></span>
+                                <div class="row">
+                                    <div class="col">
+                                        {{#each sangues}}
+
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="id_sangue" id="id_sangue"
+                                                value={{id}} required>
+                                            <label class="form-check-label">{{tipo}}</label>
+                                        </div>
+
+                                        {{/each}}
+                                    </div>
+
+                                </div>
+                            </div>
+                            <span class="alert-danger">{{printError errors 'id_sangue'}}</span>
+                            <div class="form-group mt-3">
+                                <p>Os campos marcados com (*) são de preenchimento obrigatório.</p>
+                            </div>
                         </div>
                     </div>
+                    <br />
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
+                        <button class="btn btn-outline-primary me-md-2" type="submit">Cadastrar</button>
+                        <a href="/" class="btn btn-outline-secondary">Cancelar</a>
+                    </div>
                 </div>
-                <br/>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                    <button class="btn btn-outline-success me-md-2" type="submit">Cadastrar</button>
-                    <a href="/" class="btn btn-outline-danger">Cancelar</a>
-                </div>
+
             </div>
         </div>
     </form>

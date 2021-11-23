@@ -1,25 +1,30 @@
 <title>{{titulo}}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<div class="container">
-    <br />
-    <h3 class="text-center">{{nome_centro}}</h3>
-    <hr>
-
-    <img class="img-centro" src="/img/centros/{{nome_centro}}.png" alt="{{nome_centro}}">
-    <br />
-    <h4 class="text-center">Estoque de Sangue:</h4>
-    <hr>
-    <br />
-    <div class="row">
-        {{#each estoques}}
-
-        <div class="col-sm-3">
-            <strong><p class="text-estoque">Tipo: {{getNomeSangue id_sangue @root.sanguineos}}</p></strong>
-            <div class="col-sm">
-                <img class="img-estoque" src="/img/estoque/{{quantidade}}.png">
-            </div>
-            <p class="text-center" class="text-center">Nível: {{quantidade}}</p>
+<div>
+    <div class="imagem-container">
+        <img src="/img/centros/{{nome_centro}}.png" class="w-100" alt="Snow"
+            style="height:500px; width:100%; filter:brightness(60%); object-fit: cover;">
+        <div class="centered" style="color: white;">
+            <h1 style="color: white;" class="text-center text-bold">Estoque de sangue de:<br> <span
+                    class="text-bold">{{nome_centro}}</span>
+            </h1>
         </div>
-        {{/each}}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            {{#each estoques}}
+
+            <div class="col-sm-3">
+                <strong>
+                    <p class="text-estoque">Tipo: {{getNomeSangue id_sangue @root.sanguineos}}</p>
+                </strong>
+                <div class="col-sm">
+                    <img class="img-estoque" src="/img/estoque/{{quantidade}}.png">
+                </div>
+                <p class="text-center" class="text-center">Nível: {{quantidade}}</p>
+            </div>
+            {{/each}}
+        </div>
     </div>
 </div>

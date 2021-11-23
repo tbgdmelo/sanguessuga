@@ -1,46 +1,47 @@
 <title>Update de estoque</title>
-<div class="container">
-    <br />
-    <h3 class="text-center">{{nome_centro}}</h3>
-    <hr>
+<div>
+    <div class="imagem-container">
+        <img src="/img/centros/{{nome_centro}}.png" class="w-100" alt="Snow"
+            style="height:500px; width:100%; filter:brightness(60%); object-fit: cover;">
+        <div class="centered" style="color: white;">
+            <h1 style="color: white;" class="text-center text-bold">Atualizar estoque de sangue de: <span
+                    class="text-bold">{{nome_centro}}</span>
+            </h1>
+        </div>
+    </div>
 
-    <img class="img-centro" src="/img/centros/{{nome_centro}}.png" alt="{{nome_centro}}">
-    <br />
-    <h4 class="text-center">Atualizar estoque de sangue</h4>
-    <hr>
-    <br />
     <form action='{{id}}' method="post">
         <input hidden="true" value={{id_centro}} name="id_centro">
-        <div class="row">
-            {{#each estoques}}
-            <input hidden="true" value={{id}} name="id">
-            <div class="col-sm-3">
-                <strong>
-                    <p class="text-estoque">Tipo: {{getNomeSangue id_sangue @root.sanguineos}}</p>
-                    <input hidden="true" value={{id_sangue}} name="id_sangue">
-                </strong>
-                <div class="col-sm">
-                    <img class="img-estoque" src="/img/estoque/{{quantidade}}.png">
+        <div class="container mt-5">
+            <div class="row">
+                {{#each estoques}}
+                <input hidden="true" value={{id}} name="id">
+                <div class="col-sm-3">
+                    <strong>
+                        <p class="text-estoque">Tipo: {{getNomeSangue id_sangue @root.sanguineos}}</p>
+                        <input hidden="true" value={{id_sangue}} name="id_sangue">
+                    </strong>
+                    <div class="col-sm">
+                        <img class="img-estoque" src="/img/estoque/{{quantidade}}.png">
+                    </div>
+                    <div class="text-center">
+                        <div>O nível atual é: <strong>{{quantidade}}</strong></div>
+                        <div>Selecione o nível abaixo</div>
+                        <select name="quantidade" class="form-select" required>
+                            <option value="" selected>Selecione um nível...</option>
+                            <option value="Crítico">Crítico</option>
+                            <option value="Alerta">Alerta</option>
+                            <option value="Normal">Normal</option>
+                            <option value="Ótimo">Ótimo</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="text-center">
-                    <div>O nível atual é: <strong>{{quantidade}}</strong></div>
-                    <div>Selecione o nível abaixo</div>
-                    <select name="quantidade" class="form-select" required>
-                        <option value="" selected>Selecione um nível...</option>
-                        <option value="Crítico">Crítico</option>
-                        <option value="Alerta">Alerta</option>
-                        <option value="Normal">Normal</option>
-                        <option value="Ótimo">Ótimo</option>
-                    </select>
-                </div>
+                {{/each}}
             </div>
-            {{/each}}
-        </div>
-        <br />
-        <br />
-        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-            <button class="btn btn-outline-success me-md-2" type="submit">Atualizar</button>
-            <a href="../index" class="btn btn-outline-danger">Cancelar</a>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-5">
+                <button class="btn btn-outline-primary me-md-2" type="submit">Atualizar</button>
+                <a href="../index" class="btn btn-outline-secondary">Cancelar</a>
+            </div>
         </div>
         <br />
     </form>
