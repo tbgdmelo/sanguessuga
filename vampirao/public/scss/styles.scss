@@ -5,9 +5,7 @@ body{
   font-family: 'Roboto', sans-serif;
   background-color: $corbackGround;
 }
-.navbarRed{
-  background-color: $corBackNavbar;
-}
+
 .propaganda{
   display: inline;
   float: right;
@@ -52,6 +50,7 @@ body{
 }
 
 .imgheader{
+  width: 80px;
   height: 30px;
   width: 80px;
 }
