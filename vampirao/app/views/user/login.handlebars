@@ -3,6 +3,10 @@
   function ClickBotao() {
     document.getElementById("mybutton").click();
   }
+  function myFunction() {
+    var pathname = window.location.pathname;
+    window.location.pathname = "/login"
+  }
 </script>
 
 <body onload={{modal}}>
@@ -10,7 +14,7 @@
     <section>
       {{!-- style="padding: 30px 100px 20px 100px;" --}}
       <div style="margin: 0 auto;">
-        <div  class="container">
+        <div class="container">
           <img src="/img/logo.png" alt="Be the Hero" width="410" />
           <h6 class="alerta">{{message}}</h6>
           <form action='/login' method="post">
@@ -37,7 +41,7 @@
         </div>
       </div>
     </section>
-    <img src="/img/login.png" alt="Heroes" class="logo-login"/>
+    <img src="/img/login.png" alt="Heroes" class="logo-login" />
   </div>
 </body>
 
@@ -59,7 +63,7 @@
         Realize o login com sua nova senha.
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary" onclick="myFunction()" data-dismiss="modal">Fechar</button>
       </div>
     </div>
   </div>
