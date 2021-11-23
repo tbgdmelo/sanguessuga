@@ -61,28 +61,22 @@ function printErrorEmail(errors, campo) {
     return message;
 }
 
-function printErrorCPF(errors) {
+function printErrorCPF(errors, campo) {
     let message;
-    if (typeof (errors) !== 'undefined') {
+    if (typeof errors !== "undefined" && typeof (errors.original) !== 'undefined' && errors.original.parameters[7] !== 'Invalid date') {
         errors.errors.forEach(error => {
-            if (error.validatorKey === "not_unique") {
+            var path = error.path;
+            var pathreplace = "."
+            var path = path.substring(path.indexOf(pathreplace) + pathreplace.length);
+            
+            if (path === campo) {
+                
                 message = "CPF já está em uso.";
             }
         });
-        return message;
     }
-}
-
-function printErrorEmail2(errors) {
-    let message;
-    if (typeof (errors) !== 'undefined') {
-        errors.errors.forEach(error => {
-            if (error.path === "not_unique") {
-                message = "CPF já está em uso.";
-            }
-        });
-        return message;
-    }
+    
+    return message;
 }
 
 
@@ -181,5 +175,5 @@ function formatarData(data) {
 module.exports = {
     toLower, toUpper, checked, printError, printErrorEmail, printErrorCPF,
     printErrorNascimento, printErrorEsqueciSenha, printErrorSangue, verificaLogin, getNomeSangue,
-    nivelSangue, nomeRecomp, nomeCentro, formatarData, printErrorEmail2
+    nivelSangue, nomeRecomp, nomeCentro, formatarData
 };
