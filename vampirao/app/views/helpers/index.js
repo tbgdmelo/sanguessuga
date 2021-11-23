@@ -65,7 +65,7 @@ function printErrorCPF(errors) {
     let message;
     if (typeof (errors) !== 'undefined') {
         errors.errors.forEach(error => {
-            if (error.path === "Users.cpf") {
+            if (error.validatorKey === "not_unique") {
                 message = "CPF já está em uso.";
             }
         });
