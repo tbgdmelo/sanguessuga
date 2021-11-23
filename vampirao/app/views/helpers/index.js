@@ -77,8 +77,8 @@ function printErrorEmail2(errors) {
     let message;
     if (typeof (errors) !== 'undefined') {
         errors.errors.forEach(error => {
-            if (error.path === "Users.cpf") {
-                message = error.message;
+            if (error.path === "not_unique") {
+                message = "CPF já está em uso.";
             }
         });
         return message;
