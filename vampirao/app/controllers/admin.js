@@ -185,6 +185,25 @@ async function uploadDeclaracao(req, res) {
                         }, { where: { id: req.body.id_declaracao } });
 
                         const doacoes = await Doacao.findAll({ where: { cpf_user: user.cpf } });
+
+                        //com 3 doações vira prata
+                        if(doacoes.length==3){
+                            await User.update({
+                                nivel: "Prata"
+                            }, { where: { cpf: req.body.cpf } });
+                        }
+                        //com 6 doações vira ouro
+                        else if(doacoes.length==6){
+                            await User.update({
+                                nivel: "Ouro"
+                            }, { where: { cpf: req.body.cpf } });
+                        }
+                        //com 9 doações vira diamante
+                        else if(doacoes.length==9){
+                            await User.update({
+                                nivel: "Diamante"
+                            }, { where: { cpf: req.body.cpf } });
+                        }
                     }
                     catch (e) {
                         console.log("falhou no banco");
