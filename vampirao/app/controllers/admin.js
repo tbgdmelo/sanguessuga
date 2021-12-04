@@ -115,9 +115,16 @@ async function updateEstoque(req, res) {
 
 function calculaPontos(nivel) {
     if (nivel === 'Ótimo') return 50
-    else if (nivel === 'Normal') return 100
-    else if (nivel === 'Alerta') return 150
-    else if (nivel === 'Crítico') return 250
+    else if (nivel === 'Normal') return 75
+    else if (nivel === 'Alerta') return 100
+    else if (nivel === 'Crítico') return 200
+}
+
+function pontosPorNivel(nivel, pontos){
+    if(nivel=="Bronze") return pontos
+    else if (nivel=="Prata") return pontos*2
+    else if (nivel=="Ouro") return pontos*3
+    else if (nivel=="Diamante") return pontos*4
 }
 
 async function uploadDeclaracao(req, res) {
@@ -156,6 +163,8 @@ async function uploadDeclaracao(req, res) {
                         });
 
                         const pontos = calculaPontos(nivel.quantidade);
+                        
+                        pontos = pontosPorNivel(user.nivel, pontos);
 
                         await User.update({
                             pontuacao: user.pontuacao + pontos
