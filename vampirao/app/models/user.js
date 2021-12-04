@@ -91,7 +91,9 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    isAdmin: DataTypes.BOOLEAN, 
+    isAdmin: DataTypes.BOOLEAN,
+    nivel: DataTypes.STRING,
+    centro: DataTypes.STRING, 
   }, {
     sequelize,
     modelName: 'User',
