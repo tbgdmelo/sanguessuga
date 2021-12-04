@@ -162,10 +162,12 @@ async function uploadDeclaracao(req, res) {
                             }
                         });
 
-                        const pontos = calculaPontos(nivel.quantidade);
-                        
+                        let pontos = calculaPontos(nivel.quantidade);
+                        console.log(pontos);
+
                         pontos = pontosPorNivel(user.nivel, pontos);
 
+                        console.log(pontos);
                         await User.update({
                             pontuacao: user.pontuacao + pontos
                         }, { where: { cpf: req.body.cpf } });
@@ -182,7 +184,7 @@ async function uploadDeclaracao(req, res) {
                             agendado: false
                         }, { where: { id: req.body.id_declaracao } });
 
-
+                        const doacoes = await Doacao.findAll({ where: { cpf_user: user.cpf } });
                     }
                     catch (e) {
                         console.log("falhou no banco");
