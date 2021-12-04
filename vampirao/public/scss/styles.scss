@@ -658,6 +658,9 @@ text-decoration: none;
 }
 @media (max-width: 991px) {
   .logo-login{
-    width: 50px;
+    display: none ;
+  }
+  .logoLogin{
+    width: 400px;
   }
 }

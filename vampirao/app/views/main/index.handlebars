@@ -2,7 +2,11 @@
 
 <script>
   function ClickBotao() {
-    document.getElementById("mybutton").click();
+    document.getElementById("mybutton").click(); 
+  }
+  function myFunction(){
+    var pathname = window.location.pathname;
+    window.location.pathname = "/"
   }
 </script>
 
@@ -175,7 +179,7 @@
           Obrigado por se cadastrar! Realize o seu login e comece a doar.
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary" onclick="myFunction()" data-dismiss="modal">Fechar</button>
         </div>
       </div>
     </div>
