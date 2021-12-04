@@ -120,19 +120,19 @@ function calculaPontos(nivel) {
     else if (nivel === 'Crítico') return 200
 }
 
-function pontosPorNivel(nivel, pontos){
-    if(nivel=="Bronze") return pontos
-    else if (nivel=="Prata") return pontos*2
-    else if (nivel=="Ouro") return pontos*3
-    else if (nivel=="Diamante") return pontos*4
+function pontosPorNivel(nivel, pontos) {
+    if (nivel == "Bronze") return pontos
+    else if (nivel == "Prata") return pontos * 2
+    else if (nivel == "Ouro") return pontos * 3
+    else if (nivel == "Diamante") return pontos * 4
 }
 
 async function uploadDeclaracao(req, res) {
     try {
         const centros = await Centro.findAll({ where: { vampirao: 0 } });
         if (req.route.methods.get && typeof (req.session.user) !== 'undefined' && req.session.user.isAdmin) { //se esta logado
-            res.render("admin/document",{
-                centros : centros.map(centro=>centro.toJSON()),
+            res.render("admin/document", {
+                centros: centros.map(centro => centro.toJSON()),
             });
         }
         else if (req.route.methods.post && typeof (req.session.user) !== 'undefined' && req.session.user.isAdmin) {
@@ -187,22 +187,86 @@ async function uploadDeclaracao(req, res) {
                         const doacoes = await Doacao.findAll({ where: { cpf_user: user.cpf } });
 
                         //com 3 doações vira prata
-                        if(doacoes.length==3){
+                        if (doacoes.length == 3) {
                             await User.update({
                                 nivel: "Prata"
                             }, { where: { cpf: req.body.cpf } });
+                            try {
+                                await mailer.sendMail({
+                                    to: req.session.user.email,
+                                    from: 'sangcorpsenha@gmail.com',
+                                    template: 'auth/esqueci_senha',
+                                    context: {
+                                        nome: req.session.user.nome,
+                                        sobrenome: req.session.user.sobrenome,
+                                        recuperacao: false,
+                                        resgate: false,
+                                        nivel: "Prata",
+                                        subiu_nivel: true
+                                    },
+                                    subject: 'Você subiu de nível!',
+
+                                })
+                            } catch (error) {
+                                console.log(error)
+                                if (error)
+                                    return res.status(400).send({ error: 'Cannot send forgot password email' })
+                            }
                         }
                         //com 6 doações vira ouro
-                        else if(doacoes.length==6){
+                        else if (doacoes.length == 6) {
                             await User.update({
                                 nivel: "Ouro"
                             }, { where: { cpf: req.body.cpf } });
+                            try {
+                                await mailer.sendMail({
+                                    to: req.session.user.email,
+                                    from: 'sangcorpsenha@gmail.com',
+                                    template: 'auth/esqueci_senha',
+                                    context: {
+                                        nome: req.session.user.nome,
+                                        sobrenome: req.session.user.sobrenome,
+                                        recuperacao: false,
+                                        nivel: "Ouro",
+                                        resgate: false,
+                                        subiu_nivel: true
+                                    },
+                                    subject: 'Você subiu de nível!',
+
+                                })
+                            } catch (error) {
+                                console.log(error)
+                                if (error)
+                                    return res.status(400).send({ error: 'Cannot send forgot password email' })
+                            }
                         }
                         //com 9 doações vira diamante
-                        else if(doacoes.length==9){
+                        else if (doacoes.length == 9) {
                             await User.update({
                                 nivel: "Diamante"
                             }, { where: { cpf: req.body.cpf } });
+
+                            try {
+                                await mailer.sendMail({
+                                    to: req.session.user.email,
+                                    from: 'sangcorpsenha@gmail.com',
+                                    template: 'auth/esqueci_senha',
+                                    context: {
+                                        nome: req.session.user.nome,
+                                        sobrenome: req.session.user.sobrenome,
+                                        recuperacao: false,
+                                        nivel: "Diamante",
+                                        resgate: false,
+                                        subiu_nivel: true
+                                    },
+                                    subject: 'Você subiu de nível!',
+
+                                })
+                            } catch (error) {
+                                console.log(error)
+                                if (error)
+                                    return res.status(400).send({ error: 'Cannot send forgot password email' })
+                            }
                         }
                     }
                     catch (e) {

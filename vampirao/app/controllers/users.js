@@ -117,7 +117,7 @@ async function esqueciSenha(req, res) {
                                 to: req.body.email,
                                 from: 'sng.resetpass@gmail.com',
                                 template: 'auth/esqueci_senha',
-                                context: { token, email, nome, sobrenome, recuperacao: true },
+                                context: { token, email, nome, sobrenome, recuperacao: true, subiu_nivel:false, resgate:false },
                                 subject: 'Link para reset de senha'
                             })
                         } catch (error) {
@@ -418,7 +418,9 @@ async function resgatar(req, res) {
                                 sobrenome: req.session.user.sobrenome,
                                 recuperacao: false,
                                 codigo: rec_codigo,
-                                nome_recomp: rec_nome
+                                nome_recomp: rec_nome,
+                                subiu_nivel:false,
+                                resgate:false
                             },
                             subject: 'Código de recompensa',
 
