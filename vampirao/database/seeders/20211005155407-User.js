@@ -17,6 +17,8 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
         isAdmin: true,
+        nivel: "Administrador",
+        centro: "Administrador"
       },
       ], {});
   },

@@ -60,6 +60,12 @@ module.exports = {
       },
       isAdmin:{
         type: Sequelize.BOOLEAN
+      },
+      nivel:{
+        type: Sequelize.STRING
+      },
+      centro:{
+        type: Sequelize.STRING
       }
     });
   },
