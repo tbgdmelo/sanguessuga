@@ -41,6 +41,8 @@ router.post("/atualizar/:id",usersController.atualizar);
 
 router.get("/centros/index", centrosController.index);
 router.get("/centros/:id", centrosController.estoque);
+router.get("/admin/centros/cadastroCentros",centrosController.cadastrarCentro);
+router.post("/centros/cadastroCentros",centrosController.cadastrarCentro);
 
 //Rotas do admin
 router.get("/admin/index", adminController.index);
@@ -51,6 +53,12 @@ router.get("/admin/vampiroes/update/:id", vampiraoController.update);
 router.post("/admin/vampiroes/update/:id", vampiraoController.update);
 router.get("/admin/vampiroes/remove/:id", vampiraoController.remove);
 router.post("/admin/vampiroes/remove/:id", vampiraoController.remove);
+
+router.post("/admin/centros/remove/:id", centrosController.remove);
+router.get("/admin/centros/remove/:id", centrosController.remove);
+router.get("/admin/centros/lista", centrosController.lista);
+router.get("/admin/centros/update/:id", centrosController.update);
+router.post("/admin/centros/update/:id", centrosController.update);
 
 router.get("/admin/recompensas/index", recompensaController.index);
 router.get("/admin/recompensas/add", recompensaController.addRecompensa);

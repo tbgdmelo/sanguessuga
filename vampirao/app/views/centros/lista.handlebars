@@ -1,0 +1,81 @@
+<title>Centros</title>
+
+<script>
+    function ClickBotao() {
+        document.getElementById("mybutton").click();
+    }
+</script>
+
+<body onload={{modal}}>
+    <div class="container mt-5">
+        <div class="row justify-content-between">
+            <div class="col-md-8">
+                <h4>Centros de Doação</h4>
+            </div>
+            <div class="col-md-1">
+                <a href="/admin/index" class="btn btn-outline-secondary">voltar</a>
+            </div>
+        </div>
+        {{#if vampiroes}}
+        <div class="table-responsive mt-3">
+            <table class="table shadow-sm table-red">
+                <thead class="thead-red">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Endereço</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {{#each vampiroes}}
+                        <th scope="row">{{id}}</th>
+                        <td>{{nome}}</td>
+                        <td>{{endereco}}</td>
+                        <td class="options">
+                            <a href="/admin/centros/update/{{id}}"><i class="fas fa-edit"
+                                    style="color: #006625;"></i></a>
+                            <a href="/admin/centros/remove/{{id}}"><i class="fas fa-trash-alt"
+                                    style="color: #8f0000;"></i></a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        {{else}}
+        <div class="alert alert-danger mt-3" role="alert">
+            Não há vampirões cadastrados no momento!
+        </div>
+        {{/if}}
+    </div>
+
+
+    <!-- Button trigger modal -->
+    <button hidden="true" id="mybutton" type="button" class="btn btn-primary" data-toggle="modal"
+        data-target="#exampleModal">
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tem certeza que deseja deletar o item #{{id}}?</h5>
+                </div>
+                <div class="modal-body">
+                    Selecione uma opção abaixo.
+                </div>
+                <div class="modal-footer">
+                    <form action='/admin/centros/remove/{{id}}' method="post">
+                        <button type="submit" href="/admin/vampiroes/remove/{{id}}" class="btn btn-success">Sim</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Não</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

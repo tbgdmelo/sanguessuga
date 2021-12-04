@@ -7,6 +7,74 @@ const Sangue = models.Sangue;
 const Doacao = models.Doacao;
 const User = models.User;
 
+async function cadastrarCentro(req, res) {
+    try {
+        if (req.route.methods.get && typeof (req.session.user) !== 'undefined' && req.session.user.isAdmin) { //se esta logado e como admin
+            res.render("centros/cadastroCentros", {
+                titulo: "Adicionar Centro de doação",
+            });
+        }
+        else if (req.route.methods.post && typeof (req.session.user) !== 'undefined' && req.session.user.isAdmin) {
+            console.log(req.body)
+            try {
+                await Centro.create({
+                    nome: req.body.nome,
+                    telefone: req.body.telefone,
+                    endereco: req.body.endereco,
+                    vampirao: 0
+                });
+            }
+            catch (error) {
+                res.render("centros/cadastroCentros", {
+                    errors: error,
+                    vampirao: {
+                        nome: req.body.nome,
+                        telefone: req.body.telefone,
+                        endereco: req.body.endereco,
+                        vampirao: 0
+                    },
+                    titulo: "Adicionar Centro de doação",
+                })
+            }
+            const usersAmount = await User.count();
+            const centrosAmount = await Centro.count({
+                where: {
+                    vampirao: 0
+                }
+            });
+            res.redirect("/admin/centros/lista");
+        }
+        else {
+            res.redirect("/notfound");
+        }
+    }
+    catch (error) {
+        res.redirect("/notfound");
+    }
+}
+
+async function lista(req, res) {
+    try {
+        if (req.route.methods.get && typeof (req.session.user) !== 'undefined' && req.session.user.isAdmin) { //se esta logado e como admin
+            const centros = await Centro.findAll({
+                where: {
+                    vampirao: 0
+                }
+            });
+            res.render("centros/lista", {
+                vampiroes: centros.map(centro => centro.toJSON()),
+            });
+        }
+        else {
+            res.redirect("/notfound");
+        }
+    }
+    catch (error) {
+        res.redirect("/notfound");
+    }
+
+}
+
 async function index(req, res) {
     try {
         if (req.route.methods.get && typeof (req.session.user) !== 'undefined') { //se esta logado
@@ -137,4 +205,88 @@ async function agendar(req, res) {
     }
 }
 
-module.exports = { index, estoque, agendar };
+async function update(req, res) {
+    try {
+        if (req.route.methods.get && typeof (req.session.user) !== 'undefined' && req.session.user.isAdmin) { //se esta logado e como admin
+            const vampirao = await Centro.findOne({ where: { id: req.params.id, vampirao: 0 } });
+            if (!vampirao) {
+                res.redirect("/notfound");
+            }
+            res.render("centros/updateCentros", {
+                nome_vampirao: vampirao.nome,
+                tel_vampirao: vampirao.telefone,
+                end_vampirao: vampirao.endereco,
+                id_vampirao: vampirao.id,
+            });
+        }
+        else if (req.route.methods.post && typeof (req.session.user) !== 'undefined' && req.session.user.isAdmin) {
+            try {
+                await Centro.update({
+                    id: req.body.id,
+                    nome: req.body.nome,
+                    endereco: req.body.endereco,
+                    telefone: req.body.telefone,
+                    vampirao: 0,
+                }, { where: { id: req.params.id, vampirao: 0 } });
+                res.redirect("../lista");
+            }
+            catch (error) {
+                res.render("centros/updateCentros", {
+                    id_vampirao: req.body.id,
+                    nome_vampirao: req.body.nome,
+                    end_vampirao: req.body.endereco,
+                    tel_vampirao: req.body.telefone,
+                    errors: error
+                });
+            }
+        }
+        else {
+            res.redirect("/notfound");
+        }
+    }
+    catch (error) {
+        res.redirect("/notfound");
+    }
+
+}
+
+async function remove(req, res) {
+    try {
+        if (req.route.methods.get && typeof (req.session.user) !== 'undefined' && req.session.user.isAdmin) { //se esta logado e como admin
+            const vampiroes = await Centro.findAll({
+                where: {
+                    vampirao: 0
+                }
+            });
+            res.render("centros/lista", {
+                modal: "ClickBotao()",
+                vampiroes: vampiroes.map(centro => centro.toJSON()),
+                id: req.params.id,
+            });
+        }
+        else if (req.route.methods.post && typeof (req.session.user) !== 'undefined' && req.session.user.isAdmin) {
+            try {
+                const vampirao = await Centro.findOne({where: {id:req.params.id, vampirao:0}});
+                
+                if(vampirao){
+                    await vampirao.destroy();
+                }
+                else{
+                    res.redirect("/notfound");
+                }
+                res.redirect("/admin/centros/lista");
+            }
+            catch (error) {
+                console.log(error)
+            }
+        }
+        else {
+            res.redirect("/notfound");
+        }
+    }
+    catch (error) {
+        res.redirect("/notfound");
+    }
+}
+
+module.exports = {cadastrarCentro, lista, index, estoque, agendar,remove, update };
