@@ -11,6 +11,8 @@ const Declaracao = models.declaracao;
 const Doacao = models.Doacao;
 
 
+const mailer = require("../modules/mailer");
+
 async function index(req, res) {
     try {
         if (req.route.methods.get && typeof (req.session.user) !== 'undefined' && req.session.user.isAdmin) { //se esta logado
@@ -163,11 +165,9 @@ async function uploadDeclaracao(req, res) {
                         });
 
                         let pontos = calculaPontos(nivel.quantidade);
-                        console.log(pontos);
 
                         pontos = pontosPorNivel(user.nivel, pontos);
 
-                        console.log(pontos);
                         await User.update({
                             pontuacao: user.pontuacao + pontos
                         }, { where: { cpf: req.body.cpf } });
@@ -193,12 +193,12 @@ async function uploadDeclaracao(req, res) {
                             }, { where: { cpf: req.body.cpf } });
                             try {
                                 await mailer.sendMail({
-                                    to: req.session.user.email,
-                                    from: 'sangcorpsenha@gmail.com',
+                                    to: user.email,
+                                    from: 'sng.resetpass@gmail.com',
                                     template: 'auth/esqueci_senha',
                                     context: {
-                                        nome: req.session.user.nome,
-                                        sobrenome: req.session.user.sobrenome,
+                                        nome: user.nome,
+                                        sobrenome: user.sobrenome,
                                         recuperacao: false,
                                         resgate: false,
                                         nivel: "Prata",
@@ -220,12 +220,12 @@ async function uploadDeclaracao(req, res) {
                             }, { where: { cpf: req.body.cpf } });
                             try {
                                 await mailer.sendMail({
-                                    to: req.session.user.email,
-                                    from: 'sangcorpsenha@gmail.com',
+                                    to: user.email,
+                                    from: 'sng.resetpass@gmail.com',
                                     template: 'auth/esqueci_senha',
                                     context: {
-                                        nome: req.session.user.nome,
-                                        sobrenome: req.session.user.sobrenome,
+                                        nome: user.nome,
+                                        sobrenome: user.sobrenome,
                                         recuperacao: false,
                                         nivel: "Ouro",
                                         resgate: false,
@@ -248,12 +248,12 @@ async function uploadDeclaracao(req, res) {
 
                             try {
                                 await mailer.sendMail({
-                                    to: req.session.user.email,
-                                    from: 'sangcorpsenha@gmail.com',
+                                    to: user.email,
+                                    from: 'sng.resetpass@gmail.com',
                                     template: 'auth/esqueci_senha',
                                     context: {
-                                        nome: req.session.user.nome,
-                                        sobrenome: req.session.user.sobrenome,
+                                        nome: user.nome,
+                                        sobrenome: user.sobrenome,
                                         recuperacao: false,
                                         nivel: "Diamante",
                                         resgate: false,
