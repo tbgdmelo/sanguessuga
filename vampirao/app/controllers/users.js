@@ -40,7 +40,9 @@ async function cadastro(req, res) {
                 pontuacao: 0,
                 telefone: req.body.telefone,
                 id_sangue: req.body.id_sangue,
-                isAdmin: false
+                isAdmin: false,
+                nivel: "Bronze",
+                centro: "Nenhum"
             })
             res.render("main/index", {
                 titulo: "Home Page",
