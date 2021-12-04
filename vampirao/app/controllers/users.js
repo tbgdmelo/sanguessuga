@@ -215,7 +215,8 @@ async function perfil(req, res) {
                     sobrenome: user.sobrenome,
                     tipoSanguineo: sanguineo.tipo,
                     pontuacao: user.pontuacao,
-                    meuperfil: "active"
+                    meuperfil: "active",
+                    nivel: user.nivel
                 });
             }
             else {

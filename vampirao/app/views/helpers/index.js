@@ -172,8 +172,23 @@ function formatarData(data) {
     return data.slice(-2) + "/" + data.slice(5, 7) + "/" + data.slice(0, 4);
 }
 
+function colorMedal(nivel){
+    if(nivel=="Bronze"){
+        return "goldenrod";
+    }
+    else if(nivel=="Prata"){
+        return "silver";
+    }
+    else if(nivel=="Ouro"){
+        return "gold"
+    }
+    else if(nivel=="Diamante"){
+        return "slateblue"
+    }
+}
+
 module.exports = {
     toLower, toUpper, checked, printError, printErrorEmail, printErrorCPF,
     printErrorNascimento, printErrorEsqueciSenha, printErrorSangue, verificaLogin, getNomeSangue,
-    nivelSangue, nomeRecomp, nomeCentro, formatarData
+    nivelSangue, nomeRecomp, nomeCentro, formatarData, colorMedal
 };
