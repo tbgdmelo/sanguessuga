@@ -293,4 +293,13 @@ async function uploadDeclaracao(req, res) {
         res.redirect("/notfound");
     }
 }
-module.exports = { index, indexEstoque, updateEstoque, uploadDeclaracao };
+
+async function dashboardCentro (req, res){
+    if (req.route.methods.get && typeof (req.session.user) !== 'undefined' && req.session.user.isAdmin && req.session.centro!="Administrador") {
+        res.render("admin/dashcentro");
+    }
+    else{
+        res.redirect("/notfound");
+    }
+}
+module.exports = { index, indexEstoque, updateEstoque, uploadDeclaracao, dashboardCentro };

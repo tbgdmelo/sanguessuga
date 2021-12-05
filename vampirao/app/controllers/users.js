@@ -260,6 +260,9 @@ async function login(req, res) {
             if (!user.isAdmin) {
                 res.redirect("perfil/" + user.id);
             }
+            else if(user.centro!="Administrador"){
+                res.redirect("admin/dashcentro");
+            }
             else {
                 res.redirect("admin/index");
             }
