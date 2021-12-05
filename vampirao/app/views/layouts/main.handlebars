@@ -35,8 +35,13 @@
                     </li>
                     {{else}}
                     {{#if session.user.isAdmin}}
-                    <li class="nav-item">
-                        <a class="nav-link {{consoleadmin}}" href="/admin/index">Console Admin</a>
+                        {{#if (verificaAdmin session.user)}}
+                        <li class="nav-item">
+                            <a class="nav-link {{consoleadmin}}" href="/admin/index">Console Admin</a>
+                        {{else}}
+                        <li class="nav-item">
+                            <a class="nav-link {{consoleadmin}}" href="/admin/dashcentro">Console Admin</a>
+                        {{/if}}
                     </li>
                     {{else}}
                     <a href="/perfil/{{session.user.id}}" class="nav-link {{meuperfil}}">Meu Perfil <i class="fas fa-user"></i></a>
