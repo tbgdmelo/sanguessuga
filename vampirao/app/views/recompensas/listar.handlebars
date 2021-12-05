@@ -7,15 +7,24 @@
 
 <body onload={{modal}}>
   <div class="container mt-5">
-    <h3>Recompensas para resgatar</h3>
+    <div class="row justify-content-between">
+      <div class="col-md-8">
+        <h4>Recompensas para resgatar</h4>
+      </div>
+      <div class="col-md-1">
+        <a href="javascript:history.back()" class="btn btn-outline-secondary">voltar</a>
+      </div>
+    </div>
+
+    {{#if recompensas}}
     <div class="row">
       {{#each recompensas}}
       <div class="col-md-4">
         <form action='/resgatar/{{id}}' method="post">
           <div class="card" style="width: 18rem; margin-top: 15px;">
-          
+
             <div class="card-body">
-                <img class="card-img-top img-centro" src="/img/recompensas/{{nome}}.png" alt="Imagem recompensa">
+              <img class="card-img-top img-centro" src="/img/recompensas/{{nome}}.png" alt="Imagem recompensa">
               <h4 class="card-title">{{nomeRecomp nome}}</h4>
               <p class="card-text">Pontos para resgatar: {{valor}}</p>
               <div class="d-flex justify-content-center">
@@ -27,6 +36,11 @@
       </div>
       {{/each}}
     </div>
+    {{else}}
+    <div class="alert alert-danger mt-3" role="alert">
+      Não há recompensas disponíveis no momento!
+    </div>
+    {{/if}}
   </div>
 
   <!-- Button trigger modal -->

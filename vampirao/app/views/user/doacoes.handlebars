@@ -1,8 +1,15 @@
 <title>Minhas Doações</title>
 
 <div class="container mt-5">
-    <h4>Doações Aguardando Declaração</h4>
-
+    <div class="row justify-content-between">
+      <div class="col-md-8">
+        <h4>Doações Aguardando Declaração</h4>
+      </div>
+      <div class="col-md-1">
+        <a href="javascript:history.back()" class="btn btn-outline-secondary">voltar</a>
+      </div>
+    </div>
+    <br/>
     {{#if doacoes}}
     <div class="table-responsive">
         <table class="table shadow-sm table-red">
