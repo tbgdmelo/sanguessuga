@@ -187,8 +187,17 @@ function colorMedal(nivel){
     }
 }
 
+function verificaAdmin(user){
+    if(user.centro=="Administrador"){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 module.exports = {
     toLower, toUpper, checked, printError, printErrorEmail, printErrorCPF,
     printErrorNascimento, printErrorEsqueciSenha, printErrorSangue, verificaLogin, getNomeSangue,
-    nivelSangue, nomeRecomp, nomeCentro, formatarData, colorMedal
+    nivelSangue, nomeRecomp, nomeCentro, formatarData, colorMedal, verificaAdmin
 };
