@@ -66,6 +66,9 @@ router.post("/admin/estoques/update/:id", adminController.updateEstoque);
 
 router.get("/admin/declaracao/upload", adminController.uploadDeclaracao);
 
+//administrador de centro especifico
+router.get("/admin/dashcentro", adminController.dashboardCentro);
+
 const multer = require('multer');
 const upload = multer({ storage: multer.memoryStorage() });
 router.post("/admin/declaracao/upload", upload.single('documento'), adminController.uploadDeclaracao);
